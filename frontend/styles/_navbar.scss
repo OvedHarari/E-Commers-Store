@@ -1,0 +1,30 @@
+nav {
+    opacity: 1 !important;
+    background-color: #dbdbdb29;
+    z-index: 10;
+
+    form {
+        // opacity: .5 !important;
+        background-color: #dbdbdb29;
+
+    }
+}
+
+.profileImg {
+    cursor: pointer;
+
+    :hover {
+        opacity: 0.3;
+    }
+}
+
+.items-counter {
+    color: var(--text);
+    background: rgba(255, 174, 0, 0.527);
+    font-size: 0.7rem;
+    width: 0.7rem;
+    height: 1rem;
+    top: -35px;
+    right: -12px;
+    border-radius: 50%;
+}

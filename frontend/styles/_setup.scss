@@ -1,0 +1,26 @@
+:root {
+    --color-primary: #ededed;
+    --color-secondary: #c2caca88;
+    --color-modal: #ededed;
+    --color-title: #212529;
+    --color-blue: #bdd8eb;
+}
+
+.dark {
+    --color-primary: #212529;
+    --color-secondary: #586573;
+    --color-modal: #414952;
+    --color-title: #bfd0e6;
+    --color-blue: #8eb3d099;
+
+}
+
+.App {
+    text-align: center;
+    background-color: var(--color-primary);
+    color: var(--color-title);
+    height: 100%;
+    min-height: 100vh;
+    padding-bottom: 3rem;
+    font-family: "Signika Negative", sans-serif;
+}

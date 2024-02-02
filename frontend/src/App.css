@@ -1,0 +1,290 @@
+:root {
+  --color-primary: #ededed;
+  --color-secondary: #c2caca88;
+  --color-modal: #ededed;
+  --color-title: #212529;
+  --color-blue: #bdd8eb;
+}
+
+.dark {
+  --color-primary: #212529;
+  --color-secondary: #586573;
+  --color-modal: #414952;
+  --color-title: #bfd0e6;
+  --color-blue: #8eb3d099;
+}
+
+.App {
+  text-align: center;
+  background-color: var(--color-primary);
+  color: var(--color-title);
+  height: 100%;
+  min-height: 100vh;
+  padding-bottom: 3rem;
+  font-family: "Signika Negative", sans-serif;
+}
+
+.register,
+.login {
+  background-color: var(--color-primary);
+  color: var(--color-title);
+}
+
+.accordion,
+.accordion-button,
+.accordion-button:not(.collapsed),
+.accordion-button.collapsed {
+  background-color: var(--color-modal);
+  color: var(--color-title);
+}
+
+.set-modal .modal-content,
+form {
+  background-color: var(--color-modal);
+  color: var(--color-title);
+}
+.set-modal .modal-content .form-control,
+.set-modal .modal-content .form-select,
+form .form-control,
+form .form-select {
+  background-color: var(--color-modal);
+  color: var(--color-title);
+}
+.set-modal .modal-content .form-control:not(:-moz-placeholder-shown) ~ label::after, form .form-control:not(:-moz-placeholder-shown) ~ label::after {
+  background-color: var(--color-secondary);
+}
+.set-modal .modal-content .form-control:not(:placeholder-shown) ~ label::after,
+.set-modal .modal-content .form-control ~ label::after,
+form .form-control:not(:placeholder-shown) ~ label::after,
+form .form-control ~ label::after {
+  background-color: var(--color-secondary);
+}
+.set-modal .modal-content .form-control:not(:-moz-placeholder-shown) ~ label, .set-modal .modal-content .form-control:-moz-placeholder-shown ~ label, form .form-control:not(:-moz-placeholder-shown) ~ label, form .form-control:-moz-placeholder-shown ~ label {
+  color: var(--color-title);
+}
+.set-modal .modal-content .form-control:not(:placeholder-shown) ~ label,
+.set-modal .modal-content .form-control:placeholder-shown ~ label,
+form .form-control:not(:placeholder-shown) ~ label,
+form .form-control:placeholder-shown ~ label {
+  color: var(--color-title);
+}
+.set-modal .modal-content .form-select:not(:-moz-placeholder-shown) ~ label::after, form .form-select:not(:-moz-placeholder-shown) ~ label::after {
+  background-color: var(--color-secondary);
+}
+.set-modal .modal-content .form-select:not(:placeholder-shown) ~ label::after,
+.set-modal .modal-content .form-select ~ label::after,
+form .form-select:not(:placeholder-shown) ~ label::after,
+form .form-select ~ label::after {
+  background-color: var(--color-secondary);
+}
+.set-modal .modal-content .form-select:not(:-moz-placeholder-shown) ~ label, .set-modal .modal-content .form-select:-moz-placeholder-shown ~ label, form .form-select:not(:-moz-placeholder-shown) ~ label, form .form-select:-moz-placeholder-shown ~ label {
+  color: var(--color-title);
+}
+.set-modal .modal-content .form-select:not(:placeholder-shown) ~ label,
+.set-modal .modal-content .form-select:placeholder-shown ~ label,
+form .form-select:not(:placeholder-shown) ~ label,
+form .form-select:placeholder-shown ~ label {
+  color: var(--color-title);
+}
+
+.elementry {
+  background-color: #FEE8CE;
+  color: black;
+}
+
+.middle {
+  background-color: #D3F9D7;
+  color: black;
+}
+
+.high {
+  background-color: #D7E0F1;
+  color: black;
+}
+
+.passIcon {
+  position: absolute;
+  right: 10px;
+  bottom: 4px;
+  top: 12px;
+}
+
+.google_btn {
+  width: 200px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 20px 0;
+  color: #2c444e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.google_btn > img {
+  width: 30px;
+  height: 30px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.google_btn > span {
+  margin-left: 10px;
+}
+
+.container-carousel {
+  position: relative;
+  top: -30px;
+  z-index: 1;
+}
+.container-carousel .carousel {
+  max-height: 860px;
+}
+.container-carousel .carousel .carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 10px;
+}
+.container-carousel .carousel-img {
+  width: 100%;
+  max-height: 860px;
+  filter: brightness(80%);
+}
+.container-carousel .carousel-caption {
+  margin-bottom: 10%;
+  max-width: 40em;
+  left: 50px;
+}
+.container-carousel .carousel-caption h1 {
+  position: absolute;
+  font-size: 60px;
+}
+.container-carousel p {
+  font-size: 20px;
+}
+
+.caption {
+  position: absolute;
+  text-align: left;
+  margin-bottom: 10%;
+  max-width: 40em;
+  color: white;
+  left: 100px;
+  top: 200px;
+  z-index: 2;
+}
+.caption h1 {
+  font-size: 60px;
+}
+.caption p {
+  font-size: 20px;
+}
+
+nav {
+  opacity: 1 !important;
+  background-color: rgba(219, 219, 219, 0.1607843137);
+  z-index: 10;
+}
+nav form {
+  background-color: rgba(219, 219, 219, 0.1607843137);
+}
+
+.profileImg {
+  cursor: pointer;
+}
+.profileImg :hover {
+  opacity: 0.3;
+}
+
+.items-counter {
+  color: var(--text);
+  background: rgba(255, 174, 0, 0.527);
+  font-size: 0.7rem;
+  width: 0.7rem;
+  height: 1rem;
+  top: -35px;
+  right: -12px;
+  border-radius: 50%;
+}
+
+.product-card {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.product-card .btn {
+  transform: scale(1);
+  transition: 0.3s ease-in-out;
+}
+.product-card .btn:hover {
+  transform: scale(1.1);
+}
+
+.card {
+  filter: drop-shadow(10px 7px 9px #838282);
+  transform: scale(1);
+  transition: 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.cardImgDiv {
+  overflow: hidden;
+}
+.cardImgDiv .cardImg {
+  transform: scale(1);
+  transition: 0.3s ease-in-out;
+}
+.cardImgDiv .cardImg:hover {
+  transform: scale(1.1);
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card-title {
+  font-family: var(--text-font);
+  font-weight: bold;
+  text-align: center;
+}
+
+.price {
+  font-weight: bold;
+  text-align: start;
+}
+
+.category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.category img {
+  cursor: pointer;
+  filter: drop-shadow(10px 7px 9px #838282);
+}
+
+.categoryTransfer {
+  font-weight: bold;
+  font-family: var(--small-title);
+  font-size: 1.2rem;
+  letter-spacing: 1.5px;
+  border-radius: 120px 120px/120px 120px;
+  border: 3px solid;
+  border-color: var(--button-hover);
+  width: 50%;
+}/*# sourceMappingURL=App.css.map */

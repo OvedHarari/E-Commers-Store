@@ -1,0 +1,97 @@
+.register,
+.login {
+    background-color: var(--color-primary);
+    color: var(--color-title);
+}
+
+.accordion,
+.accordion-button,
+.accordion-button:not(.collapsed),
+.accordion-button.collapsed {
+    background-color: var(--color-modal);
+    color: var(--color-title);
+}
+
+
+.set-modal .modal-content,
+form {
+    background-color: var(--color-modal);
+    color: var(--color-title);
+
+    .form-control,
+    .form-select {
+        background-color: var(--color-modal);
+        color: var(--color-title);
+    }
+
+    .form-control:not(:placeholder-shown)~label::after,
+    .form-control~label::after {
+        background-color: var(--color-secondary);
+    }
+
+    .form-control:not(:placeholder-shown)~label,
+    .form-control:placeholder-shown~label {
+        color: var(--color-title);
+    }
+
+    .form-select:not(:placeholder-shown)~label::after,
+    .form-select~label::after {
+        background-color: var(--color-secondary);
+    }
+
+    .form-select:not(:placeholder-shown)~label,
+    .form-select:placeholder-shown~label {
+        color: var(--color-title);
+    }
+}
+
+.elementry {
+    background-color: #FEE8CE;
+    color: black;
+}
+
+.middle {
+    background-color: #D3F9D7;
+    color: black;
+}
+
+.high {
+    background-color: #D7E0F1;
+    color: black;
+}
+
+.passIcon {
+    position: absolute;
+    right: 10px;
+    bottom: 4px;
+    top: 12px;
+}
+
+.google_btn {
+    width: 200px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 20px 0;
+    color: #2c444e;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.google_btn>img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.google_btn>span {
+    margin-left: 10px;
+}

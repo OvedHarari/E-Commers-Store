@@ -1,0 +1,125 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    // height: 100vh;
+}
+
+// .card {
+//     display: flex;
+//     flex-direction: column;
+//     height: 100%;
+//     // box-shadow: var(--cards-shadow);
+//     filter: drop-shadow(10px 7px 9px #838282);
+//     color: var(--text);
+//     background-color: var(--card-background);
+//     border: 1.5px solid var(--card-border);
+// }
+
+// .card-body {
+//     flex: 1;
+//     display: flex;
+//     flex-direction: column;
+//     font-family: var(--text-font);
+// }
+
+.card-title {
+    font-family: var(--text-font);
+    font-weight: bold;
+    text-align: center;
+}
+
+.price {
+    font-weight: bold;
+    text-align: start;
+}
+
+.category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.category img {
+    cursor: pointer;
+    filter: drop-shadow(10px 7px 9px #838282)
+}
+
+// .category .product-img {
+//     filter: var(--product-shadow);
+//     transition: transform 0.4s ease-in-out
+// }
+
+// .product-img:hover {
+//     transform: scale(1.2);
+// }
+// *******************************************************
+// .addToCart-container {
+//     display: flex;
+//     // justify-content: space-between;
+//     // justify-content: space-around;
+//     align-items: center;
+//     margin-top: auto;
+// }
+
+// .addToCart-btn {
+//     margin-right: auto;
+// }
+
+
+// .heart-icon {
+//     color: crimson;
+//     cursor: pointer;
+//     margin-left: auto;
+//     transition: transform 0.4s ease-in-out;
+//     font-size: 1.2rem;
+// }
+
+// .heart-icon:hover {
+//     transform: scale(1.5);
+// }
+
+// .addToCart-btn,
+// .categoryTransfer {
+//     color: var(--text);
+//     background-color: var(--button);
+//     border-color: var(--button);
+//     font-family: var(--text-font);
+//     // margin-top: auto;
+//     // align-self: flex-start;
+//     width: 60%;
+
+// }
+
+// .addToCart-btn:hover,
+// .categoryTransfer:hover {
+//     background-color: var(--button-hover);
+//     border-color: var(--button-hover);
+//     color: var(--text);
+// }
+
+// .addToCart-btn:focus,
+// .addToCart-btn:active,
+// .categoryTransfer:focus,
+// .categoryTransfer:active {
+//     outline: none;
+//     // box-shadow: none;
+//     background-color: var(--button-hover) !important;
+//     border-color: var(--button-hover) !important;
+//     color: var(--text);
+// }
+
+.categoryTransfer {
+    font-weight: bold;
+    font-family: var(--small-title);
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    border-radius: 120px 120px/120px 120px;
+    border: 3px solid;
+    border-color: var(--button-hover);
+    width: 50%;
+}
+
+.categoryTitle {}

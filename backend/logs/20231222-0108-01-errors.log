@@ -1,0 +1,13 @@
+::1 - - [21/Dec/2023:05:44:58 +0000] "POST /api/users/login HTTP/1.1" 401 23
+::1 - - [21/Dec/2023:06:26:01 +0000] "POST /api/users/login HTTP/1.1" 401 23
+::1 - - [21/Dec/2023:06:26:03 +0000] "POST /api/users/login HTTP/1.1" 401 41
+::1 - - [21/Dec/2023:06:28:55 +0000] "POST /api/users/login HTTP/1.1" 401 41
+::1 - - [21/Dec/2023:06:29:36 +0000] "POST /api/users/login HTTP/1.1" 401 23
+::1 - - [21/Dec/2023:06:36:56 +0000] "POST /api/users HTTP/1.1" 400 862
+::1 - - [21/Dec/2023:06:37:50 +0000] "POST /api/users HTTP/1.1" 400 862
+::1 - - [21/Dec/2023:06:39:11 +0000] "POST /api/users HTTP/1.1" 400 789
+::1 - - [21/Dec/2023:06:39:38 +0000] "POST /api/users HTTP/1.1" 400 2
+::1 - - [21/Dec/2023:06:47:51 +0000] "POST /api/users HTTP/1.1" 400 18
+::1 - - [21/Dec/2023:06:50:05 +0000] "GET /api/users/6583dfd41d1fd3997fb1aabd HTTP/1.1" 400 2
+::1 - - [21/Dec/2023:07:41:58 +0000] "GET /api/users/6583dfd41d1fd3997fb1aabd HTTP/1.1" 400 2
+::1 - - [21/Dec/2023:07:41:58 +0000] "GET /api/users/6583dfd41d1fd3997fb1aabd HTTP/1.1" 400 2

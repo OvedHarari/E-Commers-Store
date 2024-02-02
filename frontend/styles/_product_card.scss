@@ -1,0 +1,62 @@
+.product-card {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+
+
+    .btn {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+    }
+
+    .btn:hover {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+}
+
+// .teacherDescription {
+//     max-width: 40ch;
+//     max-height: 19ch;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     margin-bottom: 0;
+// }
+
+// .dots {
+//     margin: 0;
+// }
+
+.card {
+    // background-color: var(--card-background);
+    filter: drop-shadow(10px 7px 9px #838282);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+
+}
+
+.card:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.cardImgDiv {
+    overflow: hidden;
+
+    .cardImg {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+
+    }
+
+    .cardImg:hover {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+}

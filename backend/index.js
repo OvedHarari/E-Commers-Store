@@ -9,6 +9,7 @@ const users = require("./routes/users");
 const products = require("./routes/products");
 const category = require("./routes/category");
 const carts = require("./routes/carts")
+const wish_list = require("./routes/wish_list")
 const google_auth = require("./routes/google_auth");
 
 
@@ -53,6 +54,7 @@ app.use("/api/users", users);
 app.use("/api/google-auth", google_auth);
 app.use("/api/products", products);
 app.use("/api/carts", carts);
+app.use("/api/wishlist", wish_list);
 app.use("/api/categories", category);
 // app.use("/api/profile", profile);
 app.get("*", (req, res) => {

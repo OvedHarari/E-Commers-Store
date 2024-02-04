@@ -2,9 +2,9 @@
 
 
 import { FunctionComponent, useContext, useEffect, useState } from "react";
-import { SiteTheme } from "../App";
+import { QuantityContext, SiteTheme } from "../App";
 import { Link, useNavigate } from "react-router-dom";
-import { addRemoveFavorites, getFavorites } from "../services/favoritesService";
+import { addRemoveWishList, getWishList } from "../services/wishListService";
 import { getAllProducts, getProductByCategory, getTopProducts } from "../services/productsService";
 import Product from "../interfaces/Product";
 import { successMsg } from "../services/feedbacksService";
@@ -13,112 +13,145 @@ import { getAllCategories } from "../services/categoryService";
 import ProductCard from "./ProductCard";
 import Loading from "./Loading";
 import Category from "../interfaces/Category";
+import { number } from "yup";
 
 interface HomeProps {
     userInfo: any;
     loading: any;
     setLoading: Function;
-}
+    categories: Category[];
+    setCategories: Function;
+    productsInCart: any;
+    setProductsInCart: Function
+    setCartData: Function;
+    render: Function;
+    setQuantity: Function;
 
-const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading }) => {
-    let theme = useContext(SiteTheme);
+}
+type Quantity = { [key: string]: number };
+
+const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, categories, setCategories, productsInCart, setProductsInCart, setCartData, render, setQuantity }) => {
+    // let theme = useContext(SiteTheme);
     let navigate = useNavigate();
     let [products, setProducts] = useState<Product[]>([]);
     let [dataUpdated, setDataUpdated] = useState<boolean>(false);
-    let [favorites, setFavorites] = useState<string[]>([]);
+    let [wishList, setWishlist] = useState<string[]>([]);
     let [productName, setProductName] = useState<string>("");
 
-    let [categories, setCategories] = useState<Category[]>([]);
-
+    // let [categories, setCategories] = useState<Category[]>([]);
+    let [productsChanged, setProductsChanged] = useState<boolean>(false);
     let [productId, setProductId] = useState<string>("");
     let [openNewProductModal, setOpenNewProductModal] = useState<boolean>(false);
     let [openUpdateProductModal, setOpenUpdateProductModal] =
         useState<boolean>(false);
     let [openDeleteProductModal, setOpenDeleteProductModal] =
         useState<boolean>(false);
-    const render = () => setDataUpdated(!dataUpdated);
+    // const render = () => setDataUpdated(!dataUpdated);
 
-    let handleAddToFavorites = (product: Product) => {
-        if (favorites.includes(product._id as string)) {
-            addRemoveFavorites(product._id as string)
+    let handleaddToWishList = (product: Product) => {
+        if (wishList.includes(product._id as string)) {
+            addRemoveWishList(product)
                 .then((res) => {
-                    setFavorites(favorites.filter((id) => id !== product._id));
-                    successMsg(`${product.title} business card was removed from favorites!`);
+                    setWishlist(wishList.filter((id) => id !== product._id));
+                    successMsg(`${product.title} business card was removed from wishList!`);
                 })
                 .catch((err) => { console.log(err); });
         } else {
-            addRemoveFavorites(product._id as string)
+            addRemoveWishList(product)
                 .then((res) => {
-                    setFavorites([...favorites, product._id as string]);
-                    successMsg(`${product.title} business card was added to favorites!`);
+                    setWishlist([...wishList, product._id as string]);
+                    successMsg(`${product.title} business card was added to wishList!`);
                 })
                 .catch((err) => { console.log(err); });
         }
     };
+    let handleRegister = () => {
 
+    }
     let handleAddToCart = (product: Product) => {
         addToCart(product)
-            .then((res) => successMsg(` ${product.title} added to cart`))
-            .catch((err) => console.log(err))
+            .then((res) => { successMsg(` ${product.title} added to cart`) }).catch((err) => console.log(err))
+
+        // getCart().then((res) => {
+        //     setCartData(res.data);
+        //     setProductsInCart(res.data.products);
+        //     // *****
+        //     let quantites: Quantity = {};
+        //     productsInCart.forEach((product: Product) => {
+        //         if (product._id) { quantites[product._id] = product.quantity || 0; }
+        //         setQuantity(quantites)
+        //     });
+
+        // }).catch((err) => {
+        //     console.log(err)
+        // });
     }
-    // let handleAddToCart = (product: Product
-    //     // , quantity: number
-    // ) => {
-
-    //     getCart().then((res) => {
-    //         // console.log(res.data)
-    //         // let inCart = res.data.find((id: any) => id._id = product._id);
-    //         // if (!inCart) {
-    //         addToCart({
-    //             ...product
-    //             // , quantity: quantity
-    //         }).then((res) =>
-    //             successMsg(`The product: ${productName} was added to cart`)
-    //         )
-    //             .catch((err) => console.log(err));
-    //         // } else {
-    //         //   console.log(inCart);
-    //         //   inCart.quantity++
-
-    //         //   addToCart({
-    //         //     ...product
-    //         //     // , quantity: quantity
-    //         //   }).then((res) =>
-    //         //     successMsg(`The product: ${productName} was added to cart`)
-    //         //   )
-    //         //     .catch((err) => console.log(err)
-
-
-    //     }).catch((err) => console.log((err)))
-    // };
-
+    let quantityContext = useContext(QuantityContext);
+    let quantity = quantityContext ? quantityContext.quantity : {}
+    let totalQuantity = Object.values(quantity).reduce((total: number, currentQuantity: any) => total + currentQuantity, 0);
+    // let setQuantity = quantityContext.setQuantity
 
     useEffect(() => {
         setLoading(true)
         if (userInfo.userId) {
-            getFavorites(userInfo.userId)
+            getWishList(userInfo.userId)
                 .then((res) => {
                     let defaultProductIds: string[] = res.data.products?.map((product: any) => product._id) || [];
-                    setFavorites(defaultProductIds);
+                    setWishlist(defaultProductIds);
+
                 })
                 .catch((err) => console.log(err));
         }
-        // getAllProducts().then((res) => setProducts(res.data)).catch((err) => console.log(err));
-        getAllCategories().then((res) => setCategories(res.data)).catch((err) => console.log(err)
-        )
         getAllProducts().then((res) => {
             setProducts(res.data);
-            //  console.log(res.data);
         }).catch((err) => console.log(err)).finally(() => { setLoading(false); })
 
 
+    }, [dataUpdated, setLoading, userInfo.userId]);
+    // useEffect(() => {
+    //     if (userInfo.userId) {
+    //         getCart()
+    //             .then((res) => {
+    //                 setCartData(res.data);
+    //                 setProductsInCart(res.data);
+    //                 // *****
+    //                 let quantites: Quantity = {};
+    //                 productsInCart.forEach((product: Product) => {
+    //                     if (product._id) {
+    //                         quantites[product._id] = product.quantity || 0;
+    //                     }
+    //                     setQuantity(quantites)
+    //                 });
+    //                 // ****
 
-    }, [dataUpdated, userInfo.userId]);
+    //                 setLoading(false);
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err); setLoading(false);
+    //             });
+
+
+    //     }
+
+
+    // }, [productsInCart, setLoading, setProductsInCart, setQuantity, userInfo.userId])
+
 
     const getFirstThreeProducts = (categoryId: string): Product[] => {
         const filteredProducts = products.filter((product) => product.category._id === categoryId);
         return filteredProducts.slice(0, 3);
     };
+
+
+    // useEffect(() => {
+    //     let quantites: Quantity = {};
+    //     productsInCart.forEach((product: Product) => {
+    //         if (product._id) {
+    //             quantites[product._id] = product.quantity || 0;
+    //         }
+    //     });
+    //     setQuantity(quantites);
+    // }, [productsInCart, setQuantity])
     return (
 
         <>
@@ -150,24 +183,50 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading }) =
                                             <h5 className="card-title">{product.title}</h5>
                                             <hr className="mt-0" />
                                             <p className="card-text price">Price: {product.price} &#8362;</p>
-
-                                            {userInfo.isAdmin === false && (
-                                                <div className="addToCart-container">
-                                                    <button className="btn addToCart-btn align-items-center" onClick={() => handleAddToCart(product)}>Add to cart</button>
-                                                    <div className="heart-icon"> <i className="fa-solid fa-heart-circle-plus"></i></div>
-                                                    <div className="heart-icon">
-                                                        {/* {addToFavorites} */}
+                                            <div className="cardIcons">
+                                                {userInfo.email === false && (
+                                                    <div className="row">
+                                                        <div className="col left-icons text-start">
+                                                            <button className="btn addToCart-btn-admin " onClick={() => handleAddToCart(product)} ><i className="fa-solid fa-cart-shopping icon"></i></button>
+                                                        </div>
+                                                        <div className="col right-icons text-end">
+                                                            {(wishList.includes(product._id as string) ? (
+                                                                <button className="btn col text-danger icon" onClick={() => {
+                                                                    handleaddToWishList(product);
+                                                                }}    >
+                                                                    <i className="fa-solid fa-heart icon"></i>
+                                                                </button>
+                                                            ) : (
+                                                                <button className="btn col" onClick={() => { handleaddToWishList(product); }}    >
+                                                                    <i className="fa-solid fa-heart icon"></i>
+                                                                </button>)
+                                                            )}
+                                                        </div>
                                                     </div>
-                                                </div>)}
-                                            {userInfo.isAdmin && (
-                                                <div className="products-addToCart-container">
-                                                    <button className="btn addToCart-btn-admin" disabled>Add to cart</button>
-                                                    <button className="btn addToFavorites heart-icon" disabled >
-                                                        <i className="fa-solid fa-heart-circle-plus"></i>
-                                                        {/* {addToFavorites} */}
-                                                    </button>
-                                                </div>
-                                            )}
+                                                )}
+
+                                                {userInfo.email && (
+
+                                                    <div className="row">
+                                                        <div className="col left-icons text-start">
+                                                            <button className="btn addToCart-btn-admin" onClick={() => handleAddToCart(product)} ><i className="fa-solid fa-cart-shopping"></i></button>
+                                                        </div>
+                                                        <div className="col right-icons text-end">
+                                                            {userInfo.email && (wishList.includes(product._id as string) ? (
+                                                                <button className="btn col text-danger" onClick={() => {
+                                                                    handleaddToWishList(product);
+                                                                }}    >
+                                                                    <i className="fa-solid fa-heart"></i>
+                                                                </button>
+                                                            ) : (
+                                                                <button className="btn col" onClick={() => { handleaddToWishList(product); }}    >
+                                                                    <i className="fa-solid fa-heart"></i>
+                                                                </button>)
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
@@ -190,3 +249,4 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading }) =
 }
 
 export default Home;
+

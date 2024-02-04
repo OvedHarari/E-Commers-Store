@@ -278,6 +278,20 @@ nav form {
   filter: drop-shadow(10px 7px 9px #838282);
 }
 
+.cardIcons {
+  position: absolute;
+  right: 10%;
+  width: 80%;
+  bottom: 10px;
+}
+.cardIcons i {
+  transition: transform 0.2s ease-in-out;
+  font-size: 1.2rem;
+}
+.cardIcons i:hover {
+  transform: scale(1.5);
+}
+
 .categoryTransfer {
   font-weight: bold;
   font-family: var(--small-title);
@@ -287,4 +301,9 @@ nav form {
   border: 3px solid;
   border-color: var(--button-hover);
   width: 50%;
+}
+
+table td,
+table th {
+  background-color: var(--color-primary) !important;
 }/*# sourceMappingURL=App.css.map */

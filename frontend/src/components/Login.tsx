@@ -4,20 +4,21 @@ import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { getTokenDetailes, userValidation } from "../services/usersService";
 import { errorMsg, successMsg } from "../services/feedbacksService";
+import Product from "../interfaces/Product";
 
 interface LoginProps {
     setUserInfo: Function;
     passwordShown: boolean;
     togglePassword: Function;
-
+    quantity: any;
+    setQuantity: Function;
+    productsInCart: any;
 }
+type Quantity = { [key: string]: number };
 
-const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togglePassword }) => {
+const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togglePassword, quantity, productsInCart, setQuantity }) => {
     let navigate = useNavigate();
-
-    const handleLogin = () => {
-        window.location.href = `${process.env.REACT_APP_API}/google-auth/auth/google`
-    };
+    const handleGoogleLogin = () => { window.location.href = `${process.env.REACT_APP_API}/google-auth/auth/google` };
 
     let formik = useFormik({
         initialValues: { email: "", password: "" },
@@ -28,9 +29,7 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togg
         onSubmit: (values) => {
             userValidation(values)
                 .then((res) => {
-                    sessionStorage.setItem("token", JSON.stringify({
-                        token: res.data
-                    }))
+                    sessionStorage.setItem("token", JSON.stringify({ token: res.data }))
                     sessionStorage.setItem("userInfo", JSON.stringify({
                         email: (getTokenDetailes() as any).email,
                         userId: (getTokenDetailes() as any)._id,
@@ -38,8 +37,15 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togg
                         gender: (getTokenDetailes() as any).gender
                     }))
                     setUserInfo(JSON.parse(sessionStorage.getItem("userInfo") as string));
+                    // let quantites: Quantity = {};
+                    // productsInCart.forEach((product: Product) => {
+                    //     if (product._id) {
+                    //         quantites[product._id] = product.quantity || 0;
+                    //     }
+                    // });
+                    // setQuantity(quantites);
                     successMsg(`You're logged in as ${values.email}`);
-                    navigate("/home");
+                    navigate("/");
                 })
                 .catch((err) => {
                     errorMsg(err.response.data);
@@ -92,7 +98,7 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togg
                 </form>
                 <div>
                     <div className="d-flex justify-content-center mt-5">
-                        <button type="button" className="google_btn" onClick={handleLogin}>
+                        <button type="button" className="google_btn" onClick={handleGoogleLogin}>
                             <img src="images/google.png" alt="google icon" />
                             <span>Login with Google</span>
                         </button>

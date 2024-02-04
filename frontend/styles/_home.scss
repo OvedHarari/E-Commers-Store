@@ -47,6 +47,24 @@
     filter: drop-shadow(10px 7px 9px #838282)
 }
 
+.cardIcons {
+    position: absolute;
+    right: 10%;
+    width: 80%;
+    bottom: 10px;
+
+    i {
+        transition: transform 0.2s ease-in-out;
+        font-size: 1.2rem;
+    }
+
+    i:hover {
+        transform: scale(1.5);
+    }
+}
+
+
+
 // .category .product-img {
 //     filter: var(--product-shadow);
 //     transition: transform 0.4s ease-in-out

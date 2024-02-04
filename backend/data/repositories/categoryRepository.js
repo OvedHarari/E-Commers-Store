@@ -23,7 +23,7 @@ class CategoryRepository {
         return await Category.findOneAndUpdate({ _id: categoryId }, newCategory);
     }
     // delete Category
-    async deleteCategoryById(categorytId) {
+    async deleteCategoryById(categoryId) {
         return await Category.findOneAndDelete({ _id: categoryId });
     }
     //save Category

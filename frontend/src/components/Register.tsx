@@ -54,7 +54,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
     return (
         <div className="container mt-5">
             <form className="form-floating register mb-3 mt-3" onSubmit={formik.handleSubmit}>
-                <p className="display-3">Register !</p>
+                <p className="display-3">Registeration</p>
                 <h6 className=" mt-4 text-start">General</h6>
                 <div className="row g-2 border rounded-4 border-secondary mt-1">
                     <div className="form-floating col-6 mb-3 mt-3">
@@ -205,10 +205,10 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
                             onChange={formik.handleChange}
                             value={formik.values.address.zipcode}
                             onBlur={formik.handleBlur} ></input>
-                        <label htmlFor="floatingZipCode">Zip Code *</label>
+                        <label htmlFor="floatingZipCode">Zip Code</label>
                         {formik.touched.address?.zipcode && formik.errors.address?.zipcode && (<p className="text-danger">{formik.errors.address.zipcode}</p>)}
                     </div>
-                    <div className="form-check ms-3 text-start fw-bold">
+                    {/* <div className="form-check ms-3 text-start fw-bold">
                         <input className="form-check-input" type="checkbox" id="roleCheckbox" name="role"
                             checked={formik.values.role === "business"}
                             onChange={(e) => { formik.setFieldValue("role", e.target.checked ? "business" : "user"); }}
@@ -217,7 +217,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
                             Register as Business !!!
                         </label>
                         {formik.touched.role && formik.errors.role && (<p className="text-danger">{formik.errors.role}</p>)}
-                    </div>
+                    </div> */}
                 </div>
                 <button className="btn btn-secondary w-100 mt-3" type="submit" disabled={!formik.isValid || !formik.dirty}>Register</button>
             </form>

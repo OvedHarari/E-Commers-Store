@@ -13,14 +13,15 @@ export function getCart() {
 }
 
 export function addToCart(productToAdd: Product) {
-  let product = _.pick(productToAdd, [
-    "_id", "name", "category", "price", "image"
+  const product = _.pick(productToAdd, [
+    "_id", "title", "category", "price", "thumbnail"
   ]);
   return axios.post(api, product, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
 }
+
 export function reduceFromCart(productToReduce: Product) {
   let product = _.pick(productToReduce, [
-    "_id", "name", "category", "price", "image"
+    "_id", "title", "category", "price", "thumbnail"
   ]);
   return axios.put(`${api}/${product._id}`, product, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
 }
@@ -29,7 +30,7 @@ export function updateCart(cartId: string, updatedProducts: Product[]) {
   return axios.patch(`${api}/${cartId}`, { products: updatedProducts }, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
 }
 
-export function removeProductFromCart(productId: string) {
+export function removeProductFromCart(productId: any) {
   return axios.delete(`${api}/${productId}`, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
 
 }

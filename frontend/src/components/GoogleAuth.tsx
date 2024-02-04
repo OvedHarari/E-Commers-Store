@@ -24,7 +24,7 @@ const GoogleAuth: FunctionComponent<GoogleAuthProps> = ({ setUserInfo }) => {
                         picture: res.data.user._json.picture
                     }))
                     setUserInfo(JSON.parse(sessionStorage.getItem("userInfo") as string));
-                    navigate("/home")
+                    navigate("/")
                 }
             }
             ).catch((err) => console.log((err))

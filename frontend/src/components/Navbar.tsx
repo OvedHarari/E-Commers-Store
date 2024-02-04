@@ -1,10 +1,14 @@
-import { FunctionComponent, useContext, useState } from "react";
+import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SiteTheme, QuantityContext } from "../App";
 import { successMsg } from "../services/feedbacksService";
 import UserProfileModal from "./UserProfileModal";
 import { getGooglSignOut, getUserProfile } from "../services/usersService";
 import { Nav, NavDropdown } from "react-bootstrap";
+import Category from "../interfaces/Category";
+import { getCart } from "../services/cartService";
+import Product from "../interfaces/Product";
+import { number } from "yup";
 
 interface NavbarProps {
     darkMode: boolean;
@@ -16,8 +20,16 @@ interface NavbarProps {
     render: Function;
     passwordShown: boolean;
     togglePassword: Function;
+    categories: Category[];
+    setCategories: Function;
+    productsInCart: any;
+    setProductsInCart: Function;
+    loading: any;
+    setLoading: Function;
+    totalProducts: number;
+    dataUpdated: boolean;
 }
-
+// type Quantity = { [key: string]: number };
 const Navbar: FunctionComponent<NavbarProps> = ({
     setDarkMode,
     darkMode,
@@ -27,7 +39,9 @@ const Navbar: FunctionComponent<NavbarProps> = ({
     setUserProfile,
     render,
     passwordShown,
-    togglePassword
+    togglePassword,
+    categories,
+    setCategories, productsInCart, setProductsInCart, loading, setLoading, totalProducts, dataUpdated
 }) => {
     let theme = useContext(SiteTheme);
     let [userProfileModal, setOpenUserProfileModal] = useState<boolean>(false)
@@ -36,8 +50,10 @@ const Navbar: FunctionComponent<NavbarProps> = ({
 
     let Logout = async () => {
         setUserInfo({ email: false, role: false, });
+        // localStorage.removeItem("quantity");
         sessionStorage.removeItem("userInfo");
         sessionStorage.removeItem("token");
+
         navigate("/");
         getGooglSignOut().then((res) => { }).catch((err) => console.log(err));
         successMsg("See you soon 😉");
@@ -57,9 +73,36 @@ const Navbar: FunctionComponent<NavbarProps> = ({
                 }
             } return "images/users_img/user_male.webp";
     };
-    let quantityContext = useContext(QuantityContext);
-    let quantity = quantityContext ? quantityContext.quantity : {}
-    let totalQuantity = Object.values(quantity).reduce((total: number, currentQuantity: any) => total + currentQuantity, 0);
+    // let quantityContext = useContext(QuantityContext);
+    // let quantity = quantityContext ? quantityContext.quantity : {}
+    // let totalQuantity = Object.values(quantity).reduce((total: number, currentQuantity: any) => total + currentQuantity, 0);
+    // let setQuantity = quantityContext.setQuantity
+    // useEffect(() => {
+    //     if (userInfo.userId) {
+    //         getCart()
+    //             .then((res) => {
+    //                 // setCartData(res.data);
+    //                 setProductsInCart(res.data);
+    //                 setLoading(false);
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err); setLoading(false);
+    //             });
+    //     }
+    //     let quantites: Quantity = {};
+    //     productsInCart.forEach((product: Product) => {
+    //         if (product._id) {
+    //             quantites[product._id] = product.quantity || 0;
+    //         }
+    //         setQuantity(quantites)
+    //     });
+
+    // }, [productsInCart, setLoading, setProductsInCart, setQuantity, userInfo.userId])
+    useEffect(() => {
+
+
+    }, [totalProducts]);
+
     return (
         <>
             <div>
@@ -84,13 +127,17 @@ const Navbar: FunctionComponent<NavbarProps> = ({
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
                                     <NavDropdown id="basic-nav-dropdown" title="Shop" className="nav-link" aria-current="page" >
-                                        Products
+                                        {categories.map(category => (
+                                            <NavDropdown.Item key={category._id} href={`/${category.name}Page`} className="btn btn-outline mt-1">
+                                                {category.name}
+                                            </NavDropdown.Item>
+                                        ))}
                                     </NavDropdown>
                                 </li>
                                 {userInfo.email && (
                                     <>
                                         <li className="nav-item">
-                                            <Nav.Link className="nav-link mt-2" href="/favorites">
+                                            <Nav.Link className="nav-link mt-2" href="/wishList">
                                                 Wish List
                                             </Nav.Link>
                                         </li>
@@ -135,19 +182,30 @@ const Navbar: FunctionComponent<NavbarProps> = ({
                                             }}></img>
                                     </>
                                 )} */}
+
                                 <Nav.Link
                                     href="#"
                                     className="mt-2" id="basic-nav-dropdown">
-                                    <button className="btn shopping-cart-btn" onClick={() => { userInfo.userId ? (navigate("/cart")) : (navigate("/register")) }}>
-                                        <i className="fa-solid fa-cart-shopping"></i>
-                                        <div className="position-relative">
-                                            <div className="items-counter rounded-circle w-100 d-flex justify-content-center align-items-center position-absolute">
-                                                {totalQuantity}
+                                    {userInfo.email ? (
+                                        <button className="btn shopping-cart-btn" onClick={() => { userInfo.userId ? (navigate("/cart")) : (navigate("/register")) }}>
+                                            <i className="fa-solid fa-cart-shopping"></i>
+                                            <div className="position-relative">
+                                                <div className="items-counter rounded-circle w-100 d-flex justify-content-center align-items-center position-absolute">
+                                                    {/* {totalQuantity} */}{totalProducts}
+                                                </div>
                                             </div>
-                                            {/* )} */}
-                                        </div>
+                                        </button>)
+                                        : (
+                                            <button className="btn shopping-cart-btn" onClick={() => { userInfo.userId ? (navigate("/cart")) : (navigate("/register")) }}>
+                                                <i className="fa-solid fa-cart-shopping"></i>
+                                                <div className="position-relative">
+                                                    <div className="items-counter rounded-circle w-100 d-flex justify-content-center align-items-center position-absolute">
+                                                        {0}
+                                                    </div>
+                                                </div>
+                                            </button>)
+                                    }
 
-                                    </button>
                                 </Nav.Link>
                                 <NavDropdown className="mt-1 me-2 ms-3" id="basic-nav-dropdown"
                                     title={userInfo.email ? (<img src={userProfile.userImgURL ? (`${userProfile.userImgURL}`) : (defaultProfileImage())}

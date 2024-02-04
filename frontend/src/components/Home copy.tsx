@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { SiteTheme } from "../App";
 import { Link, useNavigate } from "react-router-dom";
-import { addRemoveFavorites, getFavorites } from "../services/favoritesService";
+import { addRemoveWishList, getWishList } from "../services/wishListService";
 import { getAllProducts, getProductByCategory, getTopProducts } from "../services/productsService";
 import Product from "../interfaces/Product";
 import { successMsg } from "../services/feedbacksService";
@@ -22,7 +22,7 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading }) =
     let navigate = useNavigate();
     let [products, setProducts] = useState<Product[]>([]);
     let [dataUpdated, setDataUpdated] = useState<boolean>(false);
-    let [favorites, setFavorites] = useState<string[]>([]);
+    let [wishList, setWishlist] = useState<string[]>([]);
     let [productName, setProductName] = useState<string>("");
 
     let [categories, setCategories] = useState<Category[]>([]);
@@ -35,19 +35,19 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading }) =
         useState<boolean>(false);
     const render = () => setDataUpdated(!dataUpdated);
 
-    let handleAddToFavorites = (product: Product) => {
-        if (favorites.includes(product._id as string)) {
-            addRemoveFavorites(product._id as string)
+    let handleaddToWishList = (product: Product) => {
+        if (wishList.includes(product._id as string)) {
+            addRemoveWishList(product)
                 .then((res) => {
-                    setFavorites(favorites.filter((id) => id !== product._id));
-                    successMsg(`${product.title} business card was removed from favorites!`);
+                    setWishlist(wishList.filter((id) => id !== product._id));
+                    successMsg(`${product.title} business card was removed from wishList!`);
                 })
                 .catch((err) => { console.log(err); });
         } else {
-            addRemoveFavorites(product._id as string)
+            addRemoveWishList(product)
                 .then((res) => {
-                    setFavorites([...favorites, product._id as string]);
-                    successMsg(`${product.title} business card was added to favorites!`);
+                    setWishlist([...wishList, product._id as string]);
+                    successMsg(`${product.title} business card was added to wishList!`);
                 })
                 .catch((err) => { console.log(err); });
         }
@@ -93,10 +93,10 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading }) =
     useEffect(() => {
         setLoading(true)
         if (userInfo.userId) {
-            getFavorites(userInfo.userId)
+            getWishList(userInfo.userId)
                 .then((res) => {
                     let defaultProductIds: string[] = res.data?.cards.map((card: any) => card._id) || [];
-                    setFavorites(defaultProductIds);
+                    setWishlist(defaultProductIds);
                 })
                 .catch((err) => console.log(err));
         }
@@ -201,14 +201,14 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading }) =
         //                                         <div className="addToCart-container">
         //                                             <button className="btn addToCart-btn align-items-center" onClick={() => handleAddToCart(product)}>Add to cart</button>
         //                                             <div className="heart-icon"> <i className="fa-solid fa-heart-circle-plus"></i></div>
-        //                                             {/* <div className="heart-icon">{addToFavorites}</div> */}
+        //                                             {/* <div className="heart-icon">{addToWishList}</div> */}
         //                                         </div>)}
         //                                     {userInfo.isAdmin && (
         //                                         <div className="products-addToCart-container">
         //                                             <button className="btn addToCart-btn-admin" disabled>Add to cart</button>
-        //                                             <button className="btn addToFavorites heart-icon" disabled >
+        //                                             <button className="btn addToWishList heart-icon" disabled >
         //                                                 <i className="fa-solid fa-heart-circle-plus"></i>
-        //                                                 {/* {addToFavorites} */}
+        //                                                 {/* {addToWishList} */}
         //                                             </button>
         //                                         </div>
         //                                     )}

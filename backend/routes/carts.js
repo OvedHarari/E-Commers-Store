@@ -47,9 +47,10 @@ router.post("/", auth, async (req, res) => {
         cart.totalProducts = (cart.totalProducts || 0) + 1;
 
         // Use findOneAndUpdate to handle versioning
-        await cartService.updateCart(req.payload._id, cart.products, cart.totalProducts);
+        cert = await cartService.updateCart(req.payload._id, cart.products, cart.totalProducts);
 
-        res.status(201).send("Product added successfully to the cart");
+        // res.status(201).send("Product added successfully to the cart");
+        res.status(201).send(cart);
     } catch (error) {
         console.error("Error:", error);
         res.status(400).send(error);
@@ -190,9 +191,10 @@ router.put("/:id", auth, async (req, res) => {
             cart.totalProducts = (cart.totalProducts || 0) - 1;
 
             // Use findOneAndUpdate to handle versioning
-            await cartService.updateCart(req.payload._id, cart.products, cart.totalProducts);
+            cart = await cartService.updateCart(req.payload._id, cart.products, cart.totalProducts);
 
-            res.status(200).send("Product quantity updated successfully");
+            res.status(200).send(cart);
+            // res.status(200).send("Product quantity updated successfully");
         } else {
             res.status(404).send("Product not found in the cart");
         }

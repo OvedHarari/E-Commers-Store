@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
     name: {
         firstName: {
             type: String,
@@ -20,48 +25,13 @@ const userSchema = new mongoose.Schema({
 
         },
     },
-
-    phone: {
-        type: String,
-        required: false,
-        minlength: 2
-
-    },
     email: {
         type: String,
-        required: true,
-
+        required: true
     },
-    password: {
+    phone: {
         type: String,
-        required: false,
-
-    },
-
-    image: {
-        url: {
-            type: String,
-            required: false,
-            minlength: 0,
-        },
-        alt: {
-            type: String,
-            required: false,
-            minlength: 0,
-        },
-    },
-    gender: {
-        type: String,
-        required: false,
-        minlength: 2
-
-    },
-    role: {
-        type: String,
-        required: false,
-        minlength: 2
-
-
+        required: true
     },
     address: {
         country: {
@@ -111,22 +81,13 @@ const userSchema = new mongoose.Schema({
         },
     },
 
-    isActive: {
-        type: Boolean,
-        required: true,
-    },
-    loginAttempts: {
-        type: Number,
-        default: 0,
-        required: false
-    },
-    lastFailedLogin: {
-        type: Date,
-        default: null,
-        required: false
+    deliveryInstructions: {
+        type: String,
+        default: ""
     },
 
-})
+},
+    { timeStamps: true })
 
-const User = mongoose.model("users", userSchema);
-module.exports = User;
+const Order = mongoose.model("orders", orderSchema);
+module.exports = Order;

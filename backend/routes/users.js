@@ -31,11 +31,36 @@ const userSchema = joi.object({
         city: joi.string().required().min(2),
         street: joi.string().required().min(2),
         houseNumber: joi.string().required().min(1),
+        floor: joi.number().required().min(1),
+        apartment: joi.number().required().min(1),
         zipcode: joi.string().min(0),
     }),
     isActive: joi.boolean().required(),
 });
-
+// Update user property by params _id 
+const userPropsSchema = joi.object({
+    name: joi.object({
+        firstName: joi.string().min(2),
+        middleName: joi.string().min(0),
+        lastName: joi.string().min(2),
+    }),
+    phone: joi.string().min(8),
+    email: joi.string().email(),
+    image: joi.object({ url: joi.string().min(0), alt: joi.string().min(0) }),
+    gender: joi.string().min(2),
+    role: joi.string().min(2),
+    address: joi.object({
+        country: joi.string().min(2),
+        state: joi.string().min(0),
+        city: joi.string().min(2),
+        street: joi.string().min(2),
+        houseNumber: joi.string().min(1),
+        floor: joi.number().min(1),
+        apartment: joi.number().min(1),
+        zipcode: joi.string().min(2)
+    }),
+    isActive: joi.boolean(),
+});
 // // Register
 // router.post("/", async (req, res) => {
 //     try {
@@ -233,7 +258,7 @@ router.put("/:_id", auth, async (req, res) => {
             return res.status(400).send("Only Admin or logged in users are alloud to update user profile")
 
         //1. joi validation
-        const { error } = userSchema.validate(req.body);
+        const { error } = userPropsSchema.validate(req.body);
         if (error) return res.status(400).send(error);
         //2. Verify&Update user by req _id
         const user = await userService.updateUserById(req.params._id, req.body);
@@ -247,24 +272,7 @@ router.put("/:_id", auth, async (req, res) => {
     }
 });
 
-// Update user property by params _id 
-const userPropsSchema = joi.object({
-    firstName: joi.string().min(2),
-    middleName: joi.string().min(0),
-    lastName: joi.string().min(2),
-    phone: joi.string().min(8),
-    email: joi.string().email(),
-    userImgURL: joi.string().min(0),
-    gender: joi.string().min(2),
-    role: joi.string().min(2),
-    country: joi.string().min(2),
-    state: joi.string().min(0),
-    city: joi.string().min(2),
-    street: joi.string().min(2),
-    houseNumber: joi.string().min(1),
-    zipcode: joi.string().min(2),
-    isActive: joi.boolean(),
-});
+
 router.patch("/:_id", auth, async (req, res) => {
     try {
         if (req.payload.role != "admin")

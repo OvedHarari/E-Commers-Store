@@ -4,19 +4,9 @@ import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { getTokenDetailes, userValidation } from "../services/usersService";
 import { errorMsg, successMsg } from "../services/feedbacksService";
-import Product from "../interfaces/Product";
 
-interface LoginProps {
-    setUserInfo: Function;
-    passwordShown: boolean;
-    togglePassword: Function;
-    quantity: any;
-    setQuantity: Function;
-    productsInCart: any;
-}
-type Quantity = { [key: string]: number };
-
-const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togglePassword, quantity, productsInCart, setQuantity }) => {
+interface LoginProps { setUserInfo: Function; passwordShown: boolean; togglePassword: Function; }
+const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togglePassword }) => {
     let navigate = useNavigate();
     const handleGoogleLogin = () => { window.location.href = `${process.env.REACT_APP_API}/google-auth/auth/google` };
 
@@ -37,13 +27,6 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togg
                         gender: (getTokenDetailes() as any).gender
                     }))
                     setUserInfo(JSON.parse(sessionStorage.getItem("userInfo") as string));
-                    // let quantites: Quantity = {};
-                    // productsInCart.forEach((product: Product) => {
-                    //     if (product._id) {
-                    //         quantites[product._id] = product.quantity || 0;
-                    //     }
-                    // });
-                    // setQuantity(quantites);
                     successMsg(`You're logged in as ${values.email}`);
                     navigate("/");
                 })

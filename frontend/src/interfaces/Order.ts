@@ -1,5 +1,13 @@
-export default interface User {
+import Cart from "./Cart";
+
+export default interface Order {
+    products?: Cart[];
+    totalPrice?: number;
+}
+
+export default interface ShippingInfo {
     _id?: string;
+    userId?: string;
     name: {
         firstName?: string;
         middleName?: string;
@@ -7,13 +15,6 @@ export default interface User {
     };
     phone?: string;
     email: string;
-    password?: string;
-    image: {
-        url?: string;
-        alt?: string;
-    }
-    gender?: string;
-    role?: string;
     address: {
         country?: string;
         state?: string;
@@ -24,8 +25,5 @@ export default interface User {
         apartment?: number;
         zipcode?: string;
     };
-    deliveryComments?: string;
-    isActive?: boolean;
+    deliveryComments: string;
 }
-
-export interface ShippingInfo extends Omit<User, 'password,image'> { }

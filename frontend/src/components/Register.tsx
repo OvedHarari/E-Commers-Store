@@ -17,7 +17,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
     let formik = useFormik({
         initialValues: {
             name: { firstName: "", middleName: "", lastName: "", }, phone: "", email: "", password: "", gender: "", image: { url: "", alt: "" },
-            address: { country: "", state: "", city: "", street: "", houseNumber: "", zipcode: "", },
+            address: { country: "", state: "", city: "", street: "", houseNumber: "0", floor: 0, apartment: 0, zipcode: "", },
             role: "casual", isActive: true
         },
         validationSchema: yup.object({

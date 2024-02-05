@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { SiteTheme, QuantityContext } from "../App";
+import { SiteTheme } from "../App";
 import { successMsg } from "../services/feedbacksService";
 import UserProfileModal from "./UserProfileModal";
 import { getGooglSignOut, getUserProfile } from "../services/usersService";
@@ -29,7 +29,7 @@ interface NavbarProps {
     totalProducts: number;
     dataUpdated: boolean;
 }
-// type Quantity = { [key: string]: number };
+
 const Navbar: FunctionComponent<NavbarProps> = ({
     setDarkMode,
     darkMode,

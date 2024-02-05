@@ -2,7 +2,7 @@
 
 
 import { FunctionComponent, useContext, useEffect, useState } from "react";
-import { QuantityContext, SiteTheme } from "../App";
+import { SiteTheme } from "../App";
 import { Link, useNavigate } from "react-router-dom";
 import { addRemoveWishList, getWishList } from "../services/wishListService";
 import { getAllProducts, getProductByCategory, getTopProducts } from "../services/productsService";
@@ -25,12 +25,12 @@ interface HomeProps {
     setProductsInCart: Function
     setCartData: Function;
     render: Function;
-    setQuantity: Function;
+    setTotalProducts: Function;
 
 }
-type Quantity = { [key: string]: number };
 
-const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, categories, setCategories, productsInCart, setProductsInCart, setCartData, render, setQuantity }) => {
+
+const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, categories, setTotalProducts, setCategories, productsInCart, setProductsInCart, setCartData, render }) => {
     // let theme = useContext(SiteTheme);
     let navigate = useNavigate();
     let [products, setProducts] = useState<Product[]>([]);
@@ -46,7 +46,10 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
         useState<boolean>(false);
     let [openDeleteProductModal, setOpenDeleteProductModal] =
         useState<boolean>(false);
-    // const render = () => setDataUpdated(!dataUpdated);
+    const getFirstThreeProducts = (categoryId: string): Product[] => {
+        const filteredProducts = products.filter((product) => product.category._id === categoryId);
+        return filteredProducts.slice(0, 3);
+    };
 
     let handleaddToWishList = (product: Product) => {
         if (wishList.includes(product._id as string)) {
@@ -70,26 +73,8 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
     }
     let handleAddToCart = (product: Product) => {
         addToCart(product)
-            .then((res) => { successMsg(` ${product.title} added to cart`) }).catch((err) => console.log(err))
-
-        // getCart().then((res) => {
-        //     setCartData(res.data);
-        //     setProductsInCart(res.data.products);
-        //     // *****
-        //     let quantites: Quantity = {};
-        //     productsInCart.forEach((product: Product) => {
-        //         if (product._id) { quantites[product._id] = product.quantity || 0; }
-        //         setQuantity(quantites)
-        //     });
-
-        // }).catch((err) => {
-        //     console.log(err)
-        // });
-    }
-    let quantityContext = useContext(QuantityContext);
-    let quantity = quantityContext ? quantityContext.quantity : {}
-    let totalQuantity = Object.values(quantity).reduce((total: number, currentQuantity: any) => total + currentQuantity, 0);
-    // let setQuantity = quantityContext.setQuantity
+            .then((res) => { setTotalProducts(res.data.totalProducts); successMsg(` ${product.title} added to cart`) }).catch((err) => console.log(err))
+    };
 
     useEffect(() => {
         setLoading(true)
@@ -97,61 +82,15 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
             getWishList(userInfo.userId)
                 .then((res) => {
                     let defaultProductIds: string[] = res.data.products?.map((product: any) => product._id) || [];
-                    setWishlist(defaultProductIds);
-
+                    setWishlist(defaultProductIds)
                 })
                 .catch((err) => console.log(err));
         }
         getAllProducts().then((res) => {
             setProducts(res.data);
         }).catch((err) => console.log(err)).finally(() => { setLoading(false); })
-
-
     }, [dataUpdated, setLoading, userInfo.userId]);
-    // useEffect(() => {
-    //     if (userInfo.userId) {
-    //         getCart()
-    //             .then((res) => {
-    //                 setCartData(res.data);
-    //                 setProductsInCart(res.data);
-    //                 // *****
-    //                 let quantites: Quantity = {};
-    //                 productsInCart.forEach((product: Product) => {
-    //                     if (product._id) {
-    //                         quantites[product._id] = product.quantity || 0;
-    //                     }
-    //                     setQuantity(quantites)
-    //                 });
-    //                 // ****
 
-    //                 setLoading(false);
-    //             })
-    //             .catch((err) => {
-    //                 console.log(err); setLoading(false);
-    //             });
-
-
-    //     }
-
-
-    // }, [productsInCart, setLoading, setProductsInCart, setQuantity, userInfo.userId])
-
-
-    const getFirstThreeProducts = (categoryId: string): Product[] => {
-        const filteredProducts = products.filter((product) => product.category._id === categoryId);
-        return filteredProducts.slice(0, 3);
-    };
-
-
-    // useEffect(() => {
-    //     let quantites: Quantity = {};
-    //     productsInCart.forEach((product: Product) => {
-    //         if (product._id) {
-    //             quantites[product._id] = product.quantity || 0;
-    //         }
-    //     });
-    //     setQuantity(quantites);
-    // }, [productsInCart, setQuantity])
     return (
 
         <>

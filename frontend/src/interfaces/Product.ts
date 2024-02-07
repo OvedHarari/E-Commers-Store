@@ -12,4 +12,5 @@ export default interface Product {
   images: [string];
   rating: number;
   quantity?: number;
+  stock?: number;
 }

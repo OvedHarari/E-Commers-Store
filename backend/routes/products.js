@@ -41,10 +41,9 @@ router.get("/top/:limit", async (req, res) => {
 });
 
 //GET product by _id
-router.get("/:_id", auth, async (req, res) => {
+router.get("/:productId", async (req, res) => {
     try {
-        const product = await productService.getProductById(req.params._id);
-        console.log(product);
+        const product = await productService.getProductById(req.params.productId);
         res.status(200).send(product)
     } catch (error) {
         res.status(400).send(error);
@@ -54,7 +53,7 @@ router.get("/:_id", auth, async (req, res) => {
 // Get all products from the same category
 router.get("/categories/:category", async (req, res) => {
     try {
-        const products = await Product.find({ category: req.params.category.name });
+        const products = await Product.find({ 'category.name': req.params.category });
         if (!products) return res.status(404).send("No products found");
         res.status(200).send(products);
     } catch (error) {

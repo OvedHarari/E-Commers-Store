@@ -8,14 +8,15 @@ import { currencyFormat } from "../services/currencyFormater";
 // import DeliveryDetails from "./DeliveryDetails";
 // import { userInfo } from "os";
 import { SiteTheme } from "../App";
+import ShippingInfo from "./ShippingInfo";
 // import Delivery from "./Delivery";
 // import { createOrder } from "../services/ordersService";
 
 interface CartProps {
     loading: any;
     setLoading: Function
-    openPaymentModal: boolean;
-    setOpenPaymentModal: Function;
+    // openPaymentModal: boolean;
+    // setOpenCreditModal: Function;
     userInfo: any;
     cartData: any;
     setCartData: Function;
@@ -26,13 +27,14 @@ interface CartProps {
     totalPrice: number;
     setTotalPrice: Function;
     productQuantity: any;
-    setProductQuantity: Function
+    setProductQuantity: Function;
+    // openCreditModal: boolean;
 
 
 }
 type Quantity = { [key: string]: number };
 
-const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, openPaymentModal, setOpenPaymentModal, userInfo, cartData, setCartData, productsInCart, setProductsInCart, totalProducts, setTotalProducts, totalPrice, setTotalPrice, productQuantity, setProductQuantity }) => {
+const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, userInfo, cartData, setCartData, productsInCart, setProductsInCart, totalProducts, setTotalProducts, totalPrice, setTotalPrice, productQuantity, setProductQuantity }) => {
     let navigate = useNavigate();
     let theme = useContext(SiteTheme);
     // let [productQuantity, setProductQuantity] = useState<Quantity>({});
@@ -87,6 +89,7 @@ const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, openPaymentMo
     let handleQuatities = () => {
         let quantites: { [key: string]: number } = {};
         productsInCart.forEach((product: Product) => {
+            // if (product._id) { quantites[product._id] = product.stock || 0; }
             if (product._id) { quantites[product._id] = product.quantity || 0; }
             setProductQuantity(quantites);
         });
@@ -113,9 +116,10 @@ const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, openPaymentMo
     }, [productsInCart])
 
     return (
-        <div className="container ">
-            <h3>Cart</h3>
-            <div className="row">
+        <div className={`container-full ms-5 ${theme}`}>
+            <h3 className="mt-3">Cart</h3>
+            <hr className="mx-5" />
+            <div className="row mt-5">
                 <div className="col-md-8 ">
                     {loading ? (<Loading />) : (productsInCart.length ? (
                         <table className={`table table-${theme} table-hover cart`}>
@@ -129,21 +133,22 @@ const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, openPaymentMo
                                     <th>Remove</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody >
                                 {productsInCart.map((product: Product) => (
                                     <tr
                                         key={product._id}>
                                         <td><img src={`${product.thumbnail}`} alt={`${product.title}`} style={{ width: "13rem", height: "8rem" }} /></td>
-                                        <td>{product.title}</td>
+                                        <td className="text-start mt-0">{product.title}</td>
                                         <td>{product.price} &#8362;</td>
                                         <td>
-                                            <button className="btn" onClick={() => handleReduceFromCart(product)}>-</button>
+                                            <button className="btn" onClick={() => handleReduceFromCart(product)}><i className="fa-solid fa-circle-minus"></i></button>
 
                                             <span>{productQuantity[product._id as string]}</span>
 
-                                            <button className="btn" onClick={() => handleAddToCart(product)}>+</button>
+                                            <button className="btn" onClick={() => handleAddToCart(product)}><i className="fa-solid fa-circle-plus"></i></button>
                                         </td>
                                         <td>{product.price * (productQuantity[product._id as string] || 0)} &#8362;</td>
+                                        <td><button className="btn" onClick={() => handleRemoveFromCart(product._id as string)}><i className="fa-solid fa-trash-can "></i> </button></td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -161,17 +166,18 @@ const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, openPaymentMo
                     </b></h4>
                     <hr />
                     <h4 className="text-start"><b>Total Price: {totalPrice}</b></h4>
-                    <button className="btn checkout-btn btn-info mt-2" onClick={() => navigate("/shipping")}>Proceed to checkout</button>
+                    <hr />
+                    <button className="btn checkout-btn btn-info mt-5" onClick={() => navigate("/shipping")}>Proceed to checkout</button>
 
                 </div>
             </div>
 
-            {/* <DeliveryDetails
-                openPaymentModal={openPaymentModal}
-                setOpenPaymentModal={setOpenPaymentModal}
+            {/* <ShippingInfo
+                openCreditModal={openPaymentModal}
+                setOpenCreditModal={setOpenCreditModal}
                 userInfo={userInfo}
-                cartData={cartData} /> */}
-            {/* <Delivery totalPrice={totalPrice} /> */}
+            cartData={cartData} 
+            /> */}
         </div>
     )
 }

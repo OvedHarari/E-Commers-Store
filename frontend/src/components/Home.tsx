@@ -26,11 +26,12 @@ interface HomeProps {
     setCartData: Function;
     render: Function;
     setTotalProducts: Function;
+    setAllProducts: Function;
 
 }
 
 
-const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, categories, setTotalProducts, setCategories, productsInCart, setProductsInCart, setCartData, render }) => {
+const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, categories, setTotalProducts, setCategories, productsInCart, setProductsInCart, setCartData, render, setAllProducts }) => {
     // let theme = useContext(SiteTheme);
     let navigate = useNavigate();
     let [products, setProducts] = useState<Product[]>([]);
@@ -101,11 +102,13 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
                     <div
                         key={category._id}
                         className="category">
-                        <h1 className="categoryTitle mt-2 mb-2">{category.name}</h1> <br />
-                        <hr className="mx-5" />
+                        <h1 className="categoryTitle mt-2 mb-2">{category.name}</h1>
+
+
 
                         <div className="container home-container ">
                             <div className=" row justify-content-center">
+                                <hr className="mx-5" />
 
 
                                 {getFirstThreeProducts(category._id as string).map((product: Product) => (
@@ -117,7 +120,7 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
                                             alt={product.title}
                                             style={{ width: "15rem", height: "13rem" }}
                                             className="mt-2 rounded product-img"
-                                            onClick={() => navigate(`/products/${product.category}/${product._id}`)} />
+                                            onClick={() => navigate(`/products/${product._id}`)} />
                                         <div className="card-body">
                                             <h5 className="card-title">{product.title}</h5>
                                             <hr className="mt-0" />
@@ -173,7 +176,7 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
                             </div>
                         </div>
 
-                        <button className="btn categoryTransfer mt-5 my-4" onClick={() => navigate('/products/smartphonesProducts')}>Find more products</button>
+                        <button className="btn categoryTransfer mt-5 my-4" onClick={() => navigate(`/product/${category.name}`)}>Find more products</button>
 
 
                     </div>

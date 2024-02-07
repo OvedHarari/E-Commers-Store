@@ -34,3 +34,7 @@ export function removeProductFromCart(productId: any) {
   return axios.delete(`${api}/${productId}`, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
 
 }
+
+export function deactivateCart() {
+  return axios.get(`${api}/deactivate`, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
+}

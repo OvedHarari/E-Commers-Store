@@ -60,3 +60,33 @@
         transform: scale(1.1);
     }
 }
+
+.paging-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.paging-container .pagination .page-link {
+    color: var(--text);
+    background-color: var(--color-secondary);
+}
+
+.paging-container .pagination .page-item.active .page-link {
+    background-color: var(--color-btnInfo);
+    border-color: gainsboro;
+    color: var(--text);
+
+}
+
+.filter,
+.sort,
+.view {
+    color: var(--color-title);
+}
+
+.filter:hover,
+.sort:hover,
+.view:hover {
+    color: var(--color-blue);
+}

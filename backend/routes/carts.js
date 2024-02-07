@@ -1,5 +1,5 @@
 const express = require("express");
-const Cart = require("../models/Cart");
+// const Cart = require("../models/Cart");
 const auth = require("../middlewares/auth");
 const joi = require("joi");
 const _ = require("lodash");
@@ -58,42 +58,30 @@ router.post("/", auth, async (req, res) => {
 });
 
 
-// router.post("/", auth, async (req, res) => {
-//     try {
-//         const { error } = productSchema.validate(req.body);
-//         if (error) return res.status(400).send(error);
-
-//         if (!req.body._id) {
-//             return res.status(400).send("Product ID is missing in the request body");
-//         }
-
-//         let cart = await cartService.getCartByUserId(req.payload._id);
-//         if (!cart) return res.status(404).send("No active cart found for this user");
-
-//         // check if the product already exists and increase the quantity
-//         let productToFind = cart.products.find((p) => p._id == (req.body._id));
-//         if (productToFind) {
-//             let indexToUpdate = cart.products.findIndex((p) => p._id == (req.body._id));
-//             cart.products[indexToUpdate].quantity++;
-//             cart.markModified("products");
-
-//             // Use findOneAndUpdate to handle versioning
-//             await cartService.updateCart(req.payload._id, cart.products);
-
-//         } else {
-//             cart.products.push({ ...req.body, quantity: 1 });
-//             // Use findOneAndUpdate to handle versioning
-//             await cartService.updateCart(req.payload._id, cart.products);
-//         }
-
-//         res.status(201).send("Product added successfully to the cart");
-//     } catch (error) {
-//         console.error("Error:", error);
-//         res.status(400).send(error);
-//     }
-// });
 
 
+// deactivate order
+router.get("/deactivate", auth, async (req, res) => {
+    try {
+
+        // console.log(req.payload);
+        let existingCart = await cartService.getCartByUserId(req.payload._id);
+        if (!existingCart)
+            return res.status(401).send("The Cart doesn't exist");
+
+        const updatedCart = await cartService.deactivateCart({ _id: existingCart._id });
+
+        // create empty cart
+        let cart = { userId: req.payload._id, products: [], active: true };
+        await cartService.saveCart(cart);
+
+        res.status(201).send(updatedCart);
+
+    } catch (error) {
+        res.status(400).send(error);
+
+    }
+});
 
 
 router.get("/", auth, async (req, res) => {
@@ -204,36 +192,5 @@ router.put("/:id", auth, async (req, res) => {
 });
 
 
-// router.put("/:id", auth, async (req, res) => {
-//     try {
-//         const { id: userId } = req.payload;
-//         const { id: productId } = req.params;
-
-//         // Find the cart where the product exists
-//         // const cart = await Cart.findOne({ userId, active: true, "products._id": productId });
-//         let cart = await cartService.getCartByUserId(req.payload._id);
-
-//         if (!cart) return res.status(404).send("Cart not found");
-
-//         // Update the quantity of the specific product
-//         const productIndex = cart.products.findIndex(product => product._id === productId);
-//         if (productIndex !== -1) {
-//             // Decrement the quantity by 1
-//             cart.products[productIndex].quantity -= 1;
-//             cart.markModified("products")
-
-//             // Save the updated cart
-//             await cartService.updateCart(req.payload._id, cart.products);
-
-//             console.log("After" + cart.products[productIndex].quantity);
-
-//             res.status(200).send("Product quantity updated successfully");
-//         } else {
-//             res.status(404).send("Product not found in the cart");
-//         }
-//     } catch (error) {
-//         res.status(400).send(error);
-//     }
-// });
 
 module.exports = router;

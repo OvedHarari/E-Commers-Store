@@ -53,7 +53,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
 
     return (
         <div className="container mt-5">
-            <form className="form-floating register mb-3 mt-3" onSubmit={formik.handleSubmit}>
+            <form className="form-floating register mb-3 mt-3 modalForm" onSubmit={formik.handleSubmit}>
                 <p className="display-3">Registeration</p>
                 <h6 className=" mt-4 text-start">General</h6>
                 <div className="row g-2 border rounded-4 border-secondary mt-1">

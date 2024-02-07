@@ -2,6 +2,7 @@ const express = require("express");
 const auth = require("../middlewares/auth");
 const Order = require("../models/Order");
 const joi = require("joi");
+const orderService = require("../services/orderService");
 
 const router = express.Router()
 
@@ -31,27 +32,58 @@ const orderSchema = joi.object({
 })
 
 
-// Create new order
+//Create new order
 router.post("/", auth, async (req, res) => {
     try {
         const { error } = orderSchema.validate(req.body);
         if (error) return res.status(400).send(error);
 
-        const existingOrder = await Order.findOne({ userId: req.payload._id, email: req.body.email });
+        const existingOrder = await orderService.getOrderByUserId(req.payload._id);
 
-        if (existingOrder) return res.status(404).send("This order already exists");
 
-        const newOrder = new Order(req.body);
+        if (existingOrder) {
+            const updatedOrder = await orderService.updateOrder(existingOrder._id, req.body)
+            // console.log(existingOrder.floor);
 
-        await newOrder.save();
+            res.status(201).send("Your Order was updated successfuly");
 
-        res.status(201).send("Order placed successfully");
+        } else {
+
+            // const newOrder = new Order(req.body);
+
+            newOrder = await orderService.saveOrder(req.body);
+
+            res.status(201).send(newOrder);
+        }
+
 
     } catch (error) {
         res.status(400).send(error);
 
     }
 });
+
+// deactivate order
+router.get("/deactivate", auth, async (req, res) => {
+    try {
+
+        // console.log(req.payload);
+        const existingOrder = await orderService.getOrderByUserId(req.payload._id);
+        // console.log(existingOrder);
+        if (!existingOrder)
+            return res.status(401).send("The Order doesn't exist");
+
+
+        const updatedOrder = await orderService.deactivateOrder(existingOrder._id);
+
+        res.status(201).send(updatedOrder);
+
+    } catch (error) {
+        res.status(400).send(error);
+
+    }
+});
+
 
 
 

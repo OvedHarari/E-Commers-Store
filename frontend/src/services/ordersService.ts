@@ -14,6 +14,10 @@ export function getOrders() {
     return axios.get<Order[]>(`${api}`, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
 }
 
+export function deactivateOrder() {
+    return axios.get(`${api}/deactivate`, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
+}
+
 export function addOrder(orderToAdd: Order) {
     return axios.post(api, orderToAdd, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
 }

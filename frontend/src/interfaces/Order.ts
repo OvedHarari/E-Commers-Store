@@ -26,4 +26,5 @@ export default interface ShippingInfo {
         zipcode?: string;
     };
     deliveryComments: string;
+    active?: boolean;
 }

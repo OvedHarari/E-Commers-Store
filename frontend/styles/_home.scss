@@ -64,7 +64,6 @@
 }
 
 
-
 // .category .product-img {
 //     filter: var(--product-shadow);
 //     transition: transform 0.4s ease-in-out
@@ -131,12 +130,11 @@
 
 .categoryTransfer {
     font-weight: bold;
-    font-family: var(--small-title);
+    color: var(--color-title);
     font-size: 1.2rem;
     letter-spacing: 1.5px;
     border-radius: 120px 120px/120px 120px;
     border: 3px solid;
-    border-color: var(--button-hover);
     width: 50%;
 }
 

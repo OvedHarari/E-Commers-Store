@@ -4,18 +4,27 @@
     --color-modal: #ededed;
     --color-title: #212529;
     --color-blue: #bdd8eb;
+    --color-dark: #25282d;
+    --color-btnInfo: #5e8fe6cc;
+
 }
 
 .dark {
     --color-primary: #212529;
-    --color-secondary: #586573;
+    --color-secondary: #c2caca88;
+    // --color-secondary: #586573;
     --color-modal: #414952;
     --color-title: #bfd0e6;
     --color-blue: #8eb3d099;
+    --color-dark: #25282d;
+    --color-btnInfo: #618edc;
 
 }
 
 .App {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     text-align: center;
     background-color: var(--color-primary);
     color: var(--color-title);
@@ -23,4 +32,14 @@
     min-height: 100vh;
     padding-bottom: 3rem;
     font-family: "Signika Negative", sans-serif;
+
+    .btn-info {
+        background-color: var(--color-btnInfo);
+    }
+}
+
+.container-full {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
 }

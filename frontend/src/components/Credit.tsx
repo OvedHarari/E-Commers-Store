@@ -1,12 +1,15 @@
 import { FunctionComponent, useContext, useState } from "react";
-// import Cards, { Focused } from 'react-credit-cards-2';
+import Cards, { Focused } from "react-credit-cards-2";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { errorMsg, successMsg } from "../services/feedbacksService";
 import { Modal } from "react-bootstrap";
 import { SiteTheme } from "../App";
+import { deactivateOrder } from "../services/ordersService";
+import { deactivateCart } from "../services/cartService";
+import { useNavigate } from "react-router-dom";
 
-interface PaymentProps {
+interface CreditProps {
     holderName: string;
     cardNumber: string;
     expiration: string;
@@ -14,12 +17,13 @@ interface PaymentProps {
     focus: string;
     show: boolean;
     onHide: Function;
+
 }
 
-const Payment: FunctionComponent<PaymentProps> = ({ show, onHide }) => {
+const Credit: FunctionComponent<CreditProps> = ({ show, onHide }) => {
     let theme = useContext(SiteTheme);
     const [focus, setFocus] = useState<Focused | undefined>(undefined)
-
+    const navigate = useNavigate()
     let formik = useFormik({
         initialValues: { holderName: "", cardNumber: "", expiration: "", cvc: "" },
         validationSchema: yup.object({
@@ -35,7 +39,11 @@ const Payment: FunctionComponent<PaymentProps> = ({ show, onHide }) => {
             focus: yup.string()
         }),
         onSubmit: (values) => {
-            errorMsg("Im sorry, I'm only student and this is my final project. I cant allow you to pay")
+            deactivateOrder();
+            deactivateCart();
+            navigate("/");
+            successMsg("This is a Demo, Imagen you got the goods 😉")
+            onHide();
         }
     })
 
@@ -132,7 +140,6 @@ const Payment: FunctionComponent<PaymentProps> = ({ show, onHide }) => {
 }
 
 
-export default Payment;
-
+export default Credit
 
 

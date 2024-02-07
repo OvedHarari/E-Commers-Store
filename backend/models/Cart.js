@@ -2,10 +2,10 @@ const { string } = require("joi");
 const mongoose = require("mongoose");
 
 const cartSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-        required: false
-    },
+    // _id: {
+    //     type: String,
+    //     required: false
+    // },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -22,6 +22,7 @@ const cartSchema = new mongoose.Schema({
     active: {
         type: Boolean,
         required: true,
+
     }
 });
 

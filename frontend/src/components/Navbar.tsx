@@ -1,14 +1,13 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SiteTheme } from "../App";
 import { successMsg } from "../services/feedbacksService";
 import UserProfileModal from "./UserProfileModal";
 import { getGooglSignOut, getUserProfile } from "../services/usersService";
 import { Nav, NavDropdown } from "react-bootstrap";
 import Category from "../interfaces/Category";
-import { getCart } from "../services/cartService";
 import Product from "../interfaces/Product";
-import { number } from "yup";
+import Search from "./Search";
 
 interface NavbarProps {
     darkMode: boolean;
@@ -28,6 +27,10 @@ interface NavbarProps {
     setLoading: Function;
     totalProducts: number;
     dataUpdated: boolean;
+    setSearchQuery: Function;
+    searchQuery: any;
+    updateCartData: Function;
+    allProducts: Product[];
 }
 
 const Navbar: FunctionComponent<NavbarProps> = ({
@@ -41,16 +44,16 @@ const Navbar: FunctionComponent<NavbarProps> = ({
     passwordShown,
     togglePassword,
     categories,
-    setCategories, productsInCart, setProductsInCart, loading, setLoading, totalProducts, dataUpdated
+    setCategories, productsInCart, setProductsInCart, loading, setLoading, totalProducts, dataUpdated, setSearchQuery,
+    searchQuery, updateCartData, allProducts
 }) => {
     let theme = useContext(SiteTheme);
     let [userProfileModal, setOpenUserProfileModal] = useState<boolean>(false)
     let navigate = useNavigate();
     let updateUserProfile = () => getUserProfile().then((res) => { setUserProfile(res.data); }).catch((err) => console.log(err))
-
+    let [searchBarOpen, setSearchBarOpen] = useState<boolean>(false);
     let Logout = async () => {
         setUserInfo({ email: false, role: false, });
-        // localStorage.removeItem("quantity");
         sessionStorage.removeItem("userInfo");
         sessionStorage.removeItem("token");
 
@@ -60,8 +63,8 @@ const Navbar: FunctionComponent<NavbarProps> = ({
     };
     const defaultProfileImage = () => {
         if (userInfo.picture) { return userInfo.picture } else
-            if (userProfile.gender) {
-                switch (userProfile.gender) {
+            if (userInfo.gender) {
+                switch (userInfo.gender) {
                     case "male":
                         return "images/users_img/user_male.webp";
                     case "female":
@@ -73,31 +76,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({
                 }
             } return "images/users_img/user_male.webp";
     };
-    // let quantityContext = useContext(QuantityContext);
-    // let quantity = quantityContext ? quantityContext.quantity : {}
-    // let totalQuantity = Object.values(quantity).reduce((total: number, currentQuantity: any) => total + currentQuantity, 0);
-    // let setQuantity = quantityContext.setQuantity
-    // useEffect(() => {
-    //     if (userInfo.userId) {
-    //         getCart()
-    //             .then((res) => {
-    //                 // setCartData(res.data);
-    //                 setProductsInCart(res.data);
-    //                 setLoading(false);
-    //             })
-    //             .catch((err) => {
-    //                 console.log(err); setLoading(false);
-    //             });
-    //     }
-    //     let quantites: Quantity = {};
-    //     productsInCart.forEach((product: Product) => {
-    //         if (product._id) {
-    //             quantites[product._id] = product.quantity || 0;
-    //         }
-    //         setQuantity(quantites)
-    //     });
 
-    // }, [productsInCart, setLoading, setProductsInCart, setQuantity, userInfo.userId])
     useEffect(() => {
 
 
@@ -113,6 +92,21 @@ const Navbar: FunctionComponent<NavbarProps> = ({
                         <Nav.Link className="navbar-brand fw-bold" href="/">
                             E-Store
                         </Nav.Link>
+                        <div className="search-bar-locator">
+                            {searchBarOpen ? (<Search allProducts={allProducts} setSearchQuery={setSearchQuery} updateCartData={updateCartData} userInfo={userInfo}/*updateCart={updateCart}*/ />) : (
+                                <button type="button" className="btn search-btn" onClick={() => {
+                                    if (setSearchBarOpen && searchQuery.trim() !== "") {
+                                        navigate(`/search/${searchQuery}`);
+                                        setSearchBarOpen(false);
+                                    } else { setSearchBarOpen(!searchBarOpen); }
+                                }
+                                }>
+                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                </button>
+
+                            )}
+
+                        </div>
                         <button
                             className="navbar-toggler"
                             type="button"
@@ -128,7 +122,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({
                                 <li className="nav-item">
                                     <NavDropdown id="basic-nav-dropdown" title="Shop" className="nav-link" aria-current="page" >
                                         {categories.map(category => (
-                                            <NavDropdown.Item key={category._id} href={`/${category.name}Page`} className="btn btn-outline mt-1">
+                                            <NavDropdown.Item key={category._id} href={`/product/${category.name}`} className="btn btn-outline mt-1">
                                                 {category.name}
                                             </NavDropdown.Item>
                                         ))}
@@ -161,7 +155,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({
                                     </>
                                 )}
                             </ul>
-                            <form className="d-flex">
+                            <form className="d-flex modalForm">
                                 <div className="mt-2 me-3 ms-3 fs-4" onClick={() => {
                                     setDarkMode(!darkMode);
                                     localStorage.setItem("darkMode", JSON.stringify(!darkMode));
@@ -191,7 +185,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({
                                             <i className="fa-solid fa-cart-shopping"></i>
                                             <div className="position-relative">
                                                 <div className="items-counter rounded-circle w-100 d-flex justify-content-center align-items-center position-absolute">
-                                                    {/* {totalQuantity} */}{totalProducts}
+                                                    {(totalProducts) ? totalProducts : 0}
                                                 </div>
                                             </div>
                                         </button>)

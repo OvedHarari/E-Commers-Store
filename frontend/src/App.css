@@ -4,17 +4,24 @@
   --color-modal: #ededed;
   --color-title: #212529;
   --color-blue: #bdd8eb;
+  --color-dark: #25282d;
+  --color-btnInfo: #5e8fe6cc;
 }
 
 .dark {
   --color-primary: #212529;
-  --color-secondary: #586573;
+  --color-secondary: #c2caca88;
   --color-modal: #414952;
   --color-title: #bfd0e6;
   --color-blue: #8eb3d099;
+  --color-dark: #25282d;
+  --color-btnInfo: #618edc;
 }
 
 .App {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   text-align: center;
   background-color: var(--color-primary);
   color: var(--color-title);
@@ -23,6 +30,15 @@
   padding-bottom: 3rem;
   font-family: "Signika Negative", sans-serif;
 }
+.App .btn-info {
+  background-color: var(--color-btnInfo);
+}
+
+.container-full {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
 
 .register,
 .login {
@@ -30,60 +46,52 @@
   color: var(--color-title);
 }
 
-.accordion,
-.accordion-button,
-.accordion-button:not(.collapsed),
-.accordion-button.collapsed {
-  background-color: var(--color-modal);
-  color: var(--color-title);
-}
-
 .set-modal .modal-content,
-form {
+.modalForm {
   background-color: var(--color-modal);
   color: var(--color-title);
 }
 .set-modal .modal-content .form-control,
 .set-modal .modal-content .form-select,
-form .form-control,
-form .form-select {
+.modalForm .form-control,
+.modalForm .form-select {
   background-color: var(--color-modal);
   color: var(--color-title);
 }
-.set-modal .modal-content .form-control:not(:-moz-placeholder-shown) ~ label::after, form .form-control:not(:-moz-placeholder-shown) ~ label::after {
+.set-modal .modal-content .form-control:not(:-moz-placeholder-shown) ~ label::after, .modalForm .form-control:not(:-moz-placeholder-shown) ~ label::after {
   background-color: var(--color-secondary);
 }
 .set-modal .modal-content .form-control:not(:placeholder-shown) ~ label::after,
 .set-modal .modal-content .form-control ~ label::after,
-form .form-control:not(:placeholder-shown) ~ label::after,
-form .form-control ~ label::after {
+.modalForm .form-control:not(:placeholder-shown) ~ label::after,
+.modalForm .form-control ~ label::after {
   background-color: var(--color-secondary);
 }
-.set-modal .modal-content .form-control:not(:-moz-placeholder-shown) ~ label, .set-modal .modal-content .form-control:-moz-placeholder-shown ~ label, form .form-control:not(:-moz-placeholder-shown) ~ label, form .form-control:-moz-placeholder-shown ~ label {
+.set-modal .modal-content .form-control:not(:-moz-placeholder-shown) ~ label, .set-modal .modal-content .form-control:-moz-placeholder-shown ~ label, .modalForm .form-control:not(:-moz-placeholder-shown) ~ label, .modalForm .form-control:-moz-placeholder-shown ~ label {
   color: var(--color-title);
 }
 .set-modal .modal-content .form-control:not(:placeholder-shown) ~ label,
 .set-modal .modal-content .form-control:placeholder-shown ~ label,
-form .form-control:not(:placeholder-shown) ~ label,
-form .form-control:placeholder-shown ~ label {
+.modalForm .form-control:not(:placeholder-shown) ~ label,
+.modalForm .form-control:placeholder-shown ~ label {
   color: var(--color-title);
 }
-.set-modal .modal-content .form-select:not(:-moz-placeholder-shown) ~ label::after, form .form-select:not(:-moz-placeholder-shown) ~ label::after {
+.set-modal .modal-content .form-select:not(:-moz-placeholder-shown) ~ label::after, .modalForm .form-select:not(:-moz-placeholder-shown) ~ label::after {
   background-color: var(--color-secondary);
 }
 .set-modal .modal-content .form-select:not(:placeholder-shown) ~ label::after,
 .set-modal .modal-content .form-select ~ label::after,
-form .form-select:not(:placeholder-shown) ~ label::after,
-form .form-select ~ label::after {
+.modalForm .form-select:not(:placeholder-shown) ~ label::after,
+.modalForm .form-select ~ label::after {
   background-color: var(--color-secondary);
 }
-.set-modal .modal-content .form-select:not(:-moz-placeholder-shown) ~ label, .set-modal .modal-content .form-select:-moz-placeholder-shown ~ label, form .form-select:not(:-moz-placeholder-shown) ~ label, form .form-select:-moz-placeholder-shown ~ label {
+.set-modal .modal-content .form-select:not(:-moz-placeholder-shown) ~ label, .set-modal .modal-content .form-select:-moz-placeholder-shown ~ label, .modalForm .form-select:not(:-moz-placeholder-shown) ~ label, .modalForm .form-select:-moz-placeholder-shown ~ label {
   color: var(--color-title);
 }
 .set-modal .modal-content .form-select:not(:placeholder-shown) ~ label,
 .set-modal .modal-content .form-select:placeholder-shown ~ label,
-form .form-select:not(:placeholder-shown) ~ label,
-form .form-select:placeholder-shown ~ label {
+.modalForm .form-select:not(:placeholder-shown) ~ label,
+.modalForm .form-select:placeholder-shown ~ label {
   color: var(--color-title);
 }
 
@@ -248,6 +256,35 @@ nav form {
   transform: scale(1.1);
 }
 
+.paging-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.paging-container .pagination .page-link {
+  color: var(--text);
+  background-color: var(--color-secondary);
+}
+
+.paging-container .pagination .page-item.active .page-link {
+  background-color: var(--color-btnInfo);
+  border-color: gainsboro;
+  color: var(--text);
+}
+
+.filter,
+.sort,
+.view {
+  color: var(--color-title);
+}
+
+.filter:hover,
+.sort:hover,
+.view:hover {
+  color: var(--color-blue);
+}
+
 .home-container {
   display: flex;
   justify-content: center;
@@ -294,16 +331,184 @@ nav form {
 
 .categoryTransfer {
   font-weight: bold;
-  font-family: var(--small-title);
+  color: var(--color-title);
   font-size: 1.2rem;
   letter-spacing: 1.5px;
   border-radius: 120px 120px/120px 120px;
   border: 3px solid;
-  border-color: var(--button-hover);
   width: 50%;
 }
 
 table td,
 table th {
   background-color: var(--color-primary) !important;
+}
+table .fa-trash-can {
+  font-size: 14px;
+}
+table i {
+  color: var(--color-title);
+}
+
+.ship {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.ship .form-floating {
+  color: var(--color-dark);
+}
+
+.search-result {
+  position: absolute;
+  top: 95px;
+  left: 5px;
+  right: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 10px;
+  margin-left: auto;
+  background: var(--color-secondary);
+  border: 1px solid var(--color-title);
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px;
+  z-index: 11;
+  padding: 10px;
+}
+.search-result .result-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid var(--color-title);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-modal);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+.search-result .result-item:hover {
+  transform: scale(1.1);
+}
+.search-result .result-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.search-result .img img {
+  height: 88px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-right: 15px;
+  margin-bottom: 5px;
+  border: 1px solid var(--color-title);
+  border-radius: 10px;
+  filter: var(--product-shadow);
+}
+.search-result .product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.search-result .product-info h5 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+}
+.search-result .btn-container {
+  margin-left: auto;
+}
+.search-result .search-addToCart-btn {
+  font-size: 0.7rem;
+  color: var(--text);
+  background-color: var(--button);
+  border-color: var(--button);
+  font-family: var(--text-font);
+  width: 100%;
+}
+.search-result .search-addToCart-btn:hover {
+  background-color: var(--button-hover);
+  border-color: var(--button-hover);
+  color: var(--text);
+}
+.search-result .search-addToCart-btn:focus,
+.search-result .search-addToCart-btn:active {
+  outline: none;
+  background-color: var(--button-hover) !important;
+  border-color: var(--button-hover) !important;
+  color: var(--text);
+}
+
+.second-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  margin-top: 15px;
+}
+
+.form-group {
+  position: relative;
+  display: inline-block;
+}
+
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.fa-magnifying-glass {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .search-result {
+    grid-template-columns: 1fr;
+    width: 100%;
+    margin-left: 0;
+  }
+  .form-control {
+    width: 100px;
+  }
+}
+.productImg {
+  width: 150px;
+  margin-top: 80px;
+}
+
+.productInfo {
+  margin-top: 100px;
+  line-height: 4;
+}
+
+.productContent {
+  margin-top: 40px;
+}
+
+.productDescription {
+  margin-top: 30px;
+  margin-left: 20px;
+  text-align: justify;
+  line-height: 2;
+}
+
+.productDescription p {
+  margin-right: 30px;
+}
+
+.productDescTitle {
+  font-weight: bold;
+}
+
+.backBtn {
+  margin-top: 20px;
+  margin-right: 20px;
 }/*# sourceMappingURL=App.css.map */

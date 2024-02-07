@@ -137,7 +137,7 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ userInfo, loading, s
                                         alt={product.title}
                                         style={{ height: "13rem" }}
                                         className="mt-2 product-img"
-                                        onClick={() => navigate(`/products/${product.category}/${product._id}`)} />
+                                        onClick={() => navigate(`/products/${product._id}`)} />
                                     <div className="card-body">
                                         <h5 className="card-title">{product.title}</h5>
                                         {/* <p className="card-text">Volume: {product.volume} ml</p> */}

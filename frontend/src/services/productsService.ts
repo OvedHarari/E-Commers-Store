@@ -10,11 +10,15 @@ export function getTopProducts(limit: number) {
   return axios.get(`${api}/top/${limit}`);
 }
 
-export function getProductById(id: string) {
-  return axios.get(`${api}/${id}`);
+export function getProductById(productId: string) {
+  return axios.get(`${api}/${productId}`);
 }
 export function getProductByCategory(category: string) {
   return axios.get(`${api}/categories/${category}`)
+  // return axios.get(`${api}/${category}`, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
+}
+export function getProductsByCategoryId(categoryId: string) {
+  return axios.get(`${api}/categories/${categoryId}`)
   // return axios.get(`${api}/${category}`, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
 }
 export function addNewProduct(newProduct: Product) {

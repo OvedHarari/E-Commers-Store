@@ -11,6 +11,9 @@ class CartService {
     async getCartByUserId(userId) {
         return await CartRepository.getCartByUserId(userId);
     }
+    async getCartById(userId) {
+        return await CartRepository.getCartById(userId);
+    }
 
     async updateCart(userId, cartProducts, totalProducts) {
         return await CartRepository.updateCart(userId, cartProducts, totalProducts);
@@ -18,6 +21,9 @@ class CartService {
 
     async removeFromCart(userId, productId) {
         return await CartRepository.removeFromCart(userId, productId);
+    }
+    async deactivateCart(cartId) {
+        return await CartRepository.deactivateCart(cartId);
     }
     async deleteCartById(cartId) {
         return await CartRepository.deleteCartById(cartId);

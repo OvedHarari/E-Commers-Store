@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 :root {
   --color-primary: #ededed;
   --color-secondary: #c2caca88;
@@ -482,11 +488,18 @@ table i {
 .productImg {
   width: 150px;
   margin-top: 80px;
+  border-color: var(--color-secondary);
 }
 
 .productInfo {
   margin-top: 100px;
   line-height: 4;
+}
+.productInfo i {
+  color: var(--color-title);
+}
+.productInfo .text-danger i {
+  color: #DC3545;
 }
 
 .productContent {
@@ -508,7 +521,27 @@ table i {
   font-weight: bold;
 }
 
-.backBtn {
-  margin-top: 20px;
-  margin-right: 20px;
+.productImages .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.productImages .left_1 {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+.productImages .img_wrap {
+  cursor: pointer;
+}
+.productImages .img_wrap img {
+  width: 70px;
+  height: 70px;
+}
+.productImages .left_2 img {
+  border: 2px solid var(--color-title);
+}
+.productImages .active {
+  border: 2px solid var(--color-title);
 }/*# sourceMappingURL=App.css.map */

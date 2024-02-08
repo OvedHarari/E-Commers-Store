@@ -10,24 +10,24 @@ interface RegisterProps {
     setUserInfo: Function;
     passwordShown: boolean;
     togglePassword: Function;
+    onHide: Function;
 }
-const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown, togglePassword }) => {
+const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown, togglePassword, onHide }) => {
     let navigate = useNavigate();
 
     let formik = useFormik({
         initialValues: {
             name: { firstName: "", middleName: "", lastName: "", }, phone: "", email: "", password: "", gender: "", image: { url: "", alt: "" },
-            address: { country: "", state: "", city: "", street: "", houseNumber: "0", floor: 0, apartment: 0, zipcode: "", },
+            address: { country: "", state: "", city: "", street: "", houseNumber: "", floor: 0, apartment: 0, zipcode: "", },
             role: "casual", isActive: true
         },
         validationSchema: yup.object({
             name: yup.object({ firstName: yup.string().required().min(2), middleName: yup.string().min(2), lastName: yup.string().required().min(2) }),
-            phone: yup.string().required().min(8), email: yup.string().required().email(), password: yup.string().required().min(8).matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%#^*?&]{8,}$/, "Password must contain at least 1 uppercase letter, lowercase letter, digit and special character (@$!%*?&#^)"), gender: yup.string().required(), image: yup.object({ url: yup.string().min(2), alt: yup.string().min(2) }), address: yup.object({ country: yup.string().required().min(2), state: yup.string().min(0), city: yup.string().required().min(2), street: yup.string().required().min(2), houseNumber: yup.string().required().min(1), zipcode: yup.string().min(2), }), role: yup.string().min(2),
+            phone: yup.string().required().min(8), email: yup.string().required().email(), password: yup.string().required().min(8).matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%#^*?&]{8,}$/, "Password must contain at least 1 uppercase letter, lowercase letter, digit and special character (@$!%*?&#^)"), gender: yup.string().required(), image: yup.object({ url: yup.string().min(2), alt: yup.string().min(2) }), address: yup.object({ country: yup.string().required().min(2), state: yup.string().min(0), city: yup.string().required().min(2), street: yup.string().required().min(2), houseNumber: yup.string().required().min(1), floor: yup.number().required().min(0), apartment: yup.number().required().min(0), zipcode: yup.string().min(2), }), role: yup.string().min(2),
         }),
         onSubmit: async (values: User) => {
             addUser(values)
                 .then((res) => {
-                    navigate("/");
                     sessionStorage.setItem("token", JSON.stringify({
                         token: res.data
                     }))
@@ -37,8 +37,10 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
                         role: (getTokenDetailes() as any).role,
                         gender: (getTokenDetailes() as any).gender
                     }))
+
                     setUserInfo(JSON.parse(sessionStorage.getItem("userInfo") as string));
                     successMsg(`${values.email} was registered and logged in`);
+                    onHide();
                 })
                 .catch((err) => {
                     if (err.response.data === "User already exist") {
@@ -54,7 +56,6 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
     return (
         <div className="container mt-5">
             <form className="form-floating register mb-3 mt-3 modalForm" onSubmit={formik.handleSubmit}>
-                <p className="display-3">Registeration</p>
                 <h6 className=" mt-4 text-start">General</h6>
                 <div className="row g-2 border rounded-4 border-secondary mt-1">
                     <div className="form-floating col-6 mb-3 mt-3">
@@ -187,7 +188,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
                         <label htmlFor="floatingStreet">Street *</label>
                         {formik.touched.address?.street && formik.errors.address?.street && (<p className="text-danger">{formik.errors.address.street}</p>)}
                     </div>
-                    <div className="form-floating col-6 mb-3">
+                    {/* <div className="form-floating col-6 mb-3">
                         <input
                             type="text" className="form-control border-secondary" id="floatingHouseNumber" placeholder="House Number"
                             name="address.houseNumber"
@@ -196,7 +197,40 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
                             onBlur={formik.handleBlur} ></input>
                         <label htmlFor="floatingHouseNumber">House Number *</label>
                         {formik.touched.address?.houseNumber && formik.errors.address?.houseNumber && (<p className="text-danger">{formik.errors.address.houseNumber}</p>)}
+                    </div> */}
+                    {/* </div> */}
+                    <div className="form-floating col mb-3 me-3">
+                        <input
+                            type="text" className="form-control border-secondary" id="floatingHouseNumber" placeholder="House Number"
+                            name="address.houseNumber"
+                            onChange={formik.handleChange}
+                            value={formik.values.address.houseNumber}
+                            onBlur={formik.handleBlur} ></input>
+                        <label htmlFor="floatingHouseNumber">House No. *</label>
+                        {formik.touched.address?.houseNumber && formik.errors.address?.houseNumber && (<p className="text-danger">{formik.errors.address.houseNumber}</p>)}
                     </div>
+                    <div className="form-floating col mb-3 me-3">
+                        <input
+                            type="number" className="form-control border-secondary" id="floatingFlor" placeholder="Floor"
+                            name="address.floor"
+                            onChange={formik.handleChange}
+                            value={formik.values.address.floor}
+                            onBlur={formik.handleBlur} ></input>
+                        <label htmlFor="floatingFloor">Floor *</label>
+                        {formik.touched.address?.floor && formik.errors.address?.floor && (<p className="text-danger">{formik.errors.address.floor}</p>)}
+                    </div>
+                    <div className="form-floating col mb-3">
+                        <input
+                            type="number" className="form-control border-secondary" id="floatingApartment" placeholder="Apartment"
+                            name="address.apartment"
+                            onChange={formik.handleChange}
+                            value={formik.values.address.apartment}
+                            onBlur={formik.handleBlur} ></input>
+                        <label htmlFor="floatingApartment">Apartment *</label>
+                        {formik.touched.address?.apartment && formik.errors.address?.apartment && (<p className="text-danger">{formik.errors.address.apartment}</p>)}
+                    </div>
+
+
                     <div className="form-floating col-6 mb-3">
                         <input
                             type="text"
@@ -220,12 +254,14 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
                     </div> */}
                 </div>
                 <button className="btn btn-secondary w-100 mt-3" type="submit" disabled={!formik.isValid || !formik.dirty}>Register</button>
-            </form>
-            <label className="form-check-label" htmlFor="form2Example3">
-                Already registered? <br />
-                <Link to={"/login"}>Click here to Login</Link>
-            </label>
-        </div>
+            </form >
+            <div className="text-center">
+                <label className="form-check-label text-center" htmlFor="form2Example3">
+                    Already registered? <br />
+                    <Link to={"/login"}>Click here to Login</Link>
+                </label>
+            </div>
+        </div >
     );
 };
 export default Register;

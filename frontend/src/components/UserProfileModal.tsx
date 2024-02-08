@@ -22,16 +22,16 @@ const UserProfileModal: FunctionComponent<UserProfileModalProps> = ({ show, onHi
             if (userProfile.gender) {
                 switch (userProfile.gender) {
                     case "male":
-                        return "images/users_img/user_male.webp";
+                        return "/images/users_img/user_male.webp";
                     case "female":
-                        return "images/users_img/user_female.webp";
+                        return "/images/users_img/user_female.webp";
                     case "other":
-                        return "images/users_img/user_other.jpg";
+                        return "/images/users_img/user_other.jpg";
                     default:
                         break;
                 }
             }
-        return "images/users_img/user_male.webp";
+        return "/images/users_img/user_male.webp";
     };
 
     return (<div

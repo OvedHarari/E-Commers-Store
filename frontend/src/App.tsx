@@ -12,7 +12,7 @@ import Cart from './components/Cart';
 import Category from './interfaces/Category';
 import { getAllCategories } from './services/categoryService';
 import Product from './interfaces/Product';
-import { getCart } from './services/cartService';
+import { addToCart, getCart } from './services/cartService';
 import ShippingInfo from './components/ShippingInfo';
 // import { currencyFormat } from './services/currencyFormater';
 import ProductsCategory from './components/ProductsCategory';
@@ -20,6 +20,10 @@ import Search from './components/Search';
 import { getAllProducts } from './services/productsService';
 import SearchResults from './components/SearchResults';
 import ProductPage from './components/ProductPage';
+import RegisterModal from './components/RegisterModal';
+import { addRemoveWishList } from './services/wishListService';
+import { successMsg } from './services/feedbacksService';
+import Wishlist from './components/Wishlist';
 const theme = { light: "light", dark: "dark", };
 export let SiteTheme = createContext(theme.dark);
 // export let QuantityContext = createContext<{ quantity: any; setQuantity: React.Dispatch<any> }>({ quantity: {}, setQuantity: () => { } });
@@ -59,6 +63,34 @@ function App() {
   let [show, setShow] = useState<boolean>(false)
   let [allProducts, setAllProducts] = useState<Product[]>([]);
   let [productQuantity, setProductQuantity] = useState<Quantity>({});
+  let [registerModal, setOpenRegisterModal] = useState<boolean>(false)
+  let handleRegister = () => {
+    setOpenRegisterModal(true)
+  };
+  let [wishList, setWishlist] = useState<string[]>([]);
+
+  let handleaddToWishList = (product: Product) => {
+    if (wishList.includes(product._id as string)) {
+      addRemoveWishList(product)
+        .then((res) => {
+          setWishlist(wishList.filter((id) => id !== product._id));
+          successMsg(`${product.title} business card was removed from wishList!`);
+        })
+        .catch((err) => { console.log(err); });
+    } else {
+      addRemoveWishList(product)
+        .then((res) => {
+          setWishlist([...wishList, product._id as string]);
+          successMsg(`${product.title} business card was added to wishList!`);
+        })
+        .catch((err) => { console.log(err); });
+    }
+  };
+
+  let handleAddToCart = (product: Product) => {
+    addToCart(product)
+      .then((res) => { setTotalProducts(res.data.totalProducts); successMsg(` ${product.title} added to cart`) }).catch((err) => console.log(err))
+  };
 
   useEffect(() => {
     getAllCategories().then((res) => setCategories(res.data)).catch((err) => console.log(err)
@@ -82,17 +114,19 @@ function App() {
       <div className={`App  ${darkMode && "dark"}`}>
         <Router>
 
-          <Navbar userInfo={userInfo} setUserInfo={setUserInfo} setDarkMode={setDarkMode} darkMode={darkMode} userProfile={userProfile} setUserProfile={setUserProfile} render={render} passwordShown={passwordShown} togglePassword={togglePassword} categories={categories} setCategories={setCategories} loading={loading} setLoading={setLoading} productsInCart={productsInCart} setProductsInCart={setProductsInCart} totalProducts={totalProducts} dataUpdated={dataUpdated} setSearchQuery={setSearchQuery} searchQuery={searchQuery} updateCartData={updateCartData} allProducts={allProducts} />
+          <Navbar userInfo={userInfo} setUserInfo={setUserInfo} setDarkMode={setDarkMode} darkMode={darkMode} userProfile={userProfile} setUserProfile={setUserProfile} render={render} passwordShown={passwordShown} togglePassword={togglePassword} categories={categories} setCategories={setCategories} loading={loading} setLoading={setLoading} productsInCart={productsInCart} setProductsInCart={setProductsInCart} totalProducts={totalProducts} dataUpdated={dataUpdated} setSearchQuery={setSearchQuery} searchQuery={searchQuery} updateCartData={updateCartData} allProducts={allProducts} registerModal={registerModal} setOpenRegisterModal={setOpenRegisterModal} />
           <Routes>
-            <Route path="/" element={<Home userInfo={userInfo} loading={loading} setLoading={setLoading} categories={categories} setCategories={setCategories} productsInCart={productsInCart} setProductsInCart={setProductsInCart} setCartData={setCartData} render={render} setTotalProducts={setTotalProducts} setAllProducts={setAllProducts} />} />
+            <Route path="/" element={<Home userInfo={userInfo} loading={loading} setLoading={setLoading} categories={categories} setCategories={setCategories} productsInCart={productsInCart} setProductsInCart={setProductsInCart} setCartData={setCartData} render={render} setTotalProducts={setTotalProducts} setAllProducts={setAllProducts} handleRegister={handleRegister} />} />
+            <Route path="/wishlist" element={<Wishlist userInfo={userInfo} loading={loading} setLoading={setLoading} categories={categories} setCategories={setCategories} productsInCart={productsInCart} setProductsInCart={setProductsInCart} setCartData={setCartData} render={render} setTotalProducts={setTotalProducts} setAllProducts={setAllProducts} handleRegister={handleRegister} />} />
             <Route path="/google/success" element={<GoogleAuth setUserInfo={setUserInfo} />} />
             <Route path='/login' element={<Login setUserInfo={setUserInfo} passwordShown={passwordShown} togglePassword={togglePassword} />} />
-            <Route path='/register' element={<Register setUserInfo={setUserInfo} passwordShown={passwordShown} togglePassword={togglePassword} />} />
+            {/* <Route path='/register' element={<RegisterModal setUserInfo={setUserInfo} passwordShown={passwordShown} togglePassword={togglePassword} show={show} />} /> */}
+            {/* <Route path='/register' element={<Register setUserInfo={setUserInfo} passwordShown={passwordShown} togglePassword={togglePassword} />} /> */}
             <Route element={<Search allProducts={allProducts} setSearchQuery={setSearchQuery} updateCartData={updateCartData} userInfo={userInfo} /*updateCart={updateCart}*/ />} />
             <Route path='/Search/:key' element={<SearchResults products={allProducts} setProducts={setAllProducts} />} />
             <Route path='/cart' element={<Cart loading={loading} setLoading={setLoading} userInfo={userInfo} cartData={cartData} setCartData={setCartData} productsInCart={productsInCart} setProductsInCart={setProductsInCart} totalProducts={totalProducts} setTotalProducts={setTotalProducts} totalPrice={totalPrice} setTotalPrice={setTotalPrice} productQuantity={productQuantity} setProductQuantity={setProductQuantity} />} />
             <Route path='/product/:category' element={<ProductsCategory loading={loading} setLoading={setLoading} userInfo={userInfo} productsInCart={productsInCart} setProductsInCart={setProductsInCart} totalProducts={totalProducts} setTotalProducts={setTotalProducts} totalPrice={totalPrice} setTotalPrice={setTotalPrice} productQuantity={productQuantity} setProductQuantity={setProductQuantity} categoryProducts={categoryProducts} setCategoryProducts={setCategoryProducts} setSearchQuery={setSearchQuery} searchQuery={searchQuery} show={show} setShow={setShow} categories={categories} />} />
-            <Route path='/products/:productId' element={<ProductPage setAllProducts={setCategoryProducts} userInfo={userInfo} allProducts={allProducts} />} />
+            <Route path='/products/:productId' element={<ProductPage setAllProducts={setCategoryProducts} userInfo={userInfo} allProducts={allProducts} handleRegister={handleRegister} handleaddToWishList={handleaddToWishList} handleAddToCart={handleAddToCart} wishList={wishList} setWishlist={setWishlist} setLoading={setLoading} />} />
             <Route path='/shipping' element={<ShippingInfo loading={loading} setLoading={setLoading} userInfo={userInfo} userProfile={userProfile} setUserProfile={setUserProfile} render={render} totalProducts={totalProducts} totalPrice={totalPrice} productsInCart={productsInCart} productQuantity={productQuantity} setProductQuantity={setProductQuantity} setTotalPrice={setTotalPrice} openCreditModal={openCreditModal} setOpenCreditModal={setOpenCreditModal} />} />
 
 

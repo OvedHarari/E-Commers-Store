@@ -18,13 +18,13 @@ const UserProfile: FunctionComponent<UserProfileProps> = ({ onHide, userProfile,
     let formik = useFormik({
         initialValues: {
             name: { firstName: userProfile.name.firstName, middleName: userProfile.name.middleName, lastName: userProfile.name.lastName }, phone: userProfile.phone, email: userProfile.email,
-            gender: userProfile.gender, image: { url: userProfile.image.url }, address: { country: userProfile.address.country, state: userProfile.address.state, city: userProfile.address.city, street: userProfile.address.street, houseNumber: userProfile.address.houseNumber, zipcode: userProfile.address.zipcode }, role: userProfile.role, isActive: userProfile.isActive
+            gender: userProfile.gender, image: { url: userProfile.image.url }, address: { country: userProfile.address.country, state: userProfile.address.state, city: userProfile.address.city, street: userProfile.address.street, houseNumber: userProfile.address.houseNumber, floor: userProfile.address.floor, apartment: userProfile.address.apartment, zipcode: userProfile.address.zipcode }, role: userProfile.role, isActive: userProfile.isActive
         },
         validationSchema: yup.object({
             name: yup.object({ firstName: yup.string().required().min(2), middleName: yup.string().min(2), lastName: yup.string().required().min(2) }),
             phone: yup.string().required().min(2), email: yup.string().required().email(),
 
-            gender: yup.string().required(), image: yup.object({ url: yup.string().min(2) }), address: yup.object({ country: yup.string().required().min(2), state: yup.string().min(2), city: yup.string().required().min(2), street: yup.string().required().min(2), houseNumber: yup.string().required().min(2), zipcode: yup.string().min(2) }), role: yup.string().min(2)
+            gender: yup.string().required(), image: yup.object({ url: yup.string().min(2) }), address: yup.object({ country: yup.string().required().min(2), state: yup.string().min(2), city: yup.string().required().min(2), street: yup.string().required().min(2), houseNumber: yup.string().required().min(2), floor: yup.number().required().min(1), apartment: yup.number().required().min(1), zipcode: yup.string().min(2) }), role: yup.string().min(2)
         }),
         enableReinitialize: true,
         onSubmit(values: User) {
@@ -159,7 +159,7 @@ const UserProfile: FunctionComponent<UserProfileProps> = ({ onHide, userProfile,
                             <label htmlFor="floatingStreet">Street *</label>
                             {formik.touched.address?.street && formik.errors.address?.street && (<p className="text-danger">{formik.errors.address.street}</p>)}
                         </div>
-                        <div className="form-floating col-6 mb-3">
+                        {/* <div className="form-floating col-6 mb-3">
                             <input
                                 type="text" className="form-control border-secondary" id="floatingHouseNumber" placeholder="House Number"
                                 name="address.houseNumber"
@@ -168,6 +168,36 @@ const UserProfile: FunctionComponent<UserProfileProps> = ({ onHide, userProfile,
                                 onBlur={formik.handleBlur} disabled={editForm}></input>
                             <label htmlFor="floatingHouseNumber">House Number *</label>
                             {formik.touched.address?.houseNumber && formik.errors.address?.houseNumber && (<p className="text-danger">{formik.errors.address.houseNumber}</p>)}
+                        </div> */}
+                        <div className="form-floating col mb-3 me-3">
+                            <input
+                                type="text" className="form-control border-secondary" id="floatingHouseNumber" placeholder="House Number"
+                                name="address.houseNumber"
+                                onChange={formik.handleChange}
+                                value={formik.values.address.houseNumber}
+                                onBlur={formik.handleBlur} ></input>
+                            <label htmlFor="floatingHouseNumber">House No. *</label>
+                            {formik.touched.address?.houseNumber && formik.errors.address?.houseNumber && (<p className="text-danger">{formik.errors.address.houseNumber}</p>)}
+                        </div>
+                        <div className="form-floating col mb-3 me-3">
+                            <input
+                                type="number" className="form-control border-secondary" id="floatingFlor" placeholder="Floor"
+                                name="address.floor"
+                                onChange={formik.handleChange}
+                                value={formik.values.address.floor}
+                                onBlur={formik.handleBlur} ></input>
+                            <label htmlFor="floatingFloor">Floor *</label>
+                            {formik.touched.address?.floor && formik.errors.address?.floor && (<p className="text-danger">{formik.errors.address.floor}</p>)}
+                        </div>
+                        <div className="form-floating col mb-3">
+                            <input
+                                type="number" className="form-control border-secondary" id="floatingApartment" placeholder="Apartment"
+                                name="address.apartment"
+                                onChange={formik.handleChange}
+                                value={formik.values.address.apartment}
+                                onBlur={formik.handleBlur} ></input>
+                            <label htmlFor="floatingApartment">Apartment *</label>
+                            {formik.touched.address?.apartment && formik.errors.address?.apartment && (<p className="text-danger">{formik.errors.address.apartment}</p>)}
                         </div>
                         <div className="form-floating col-6 mb-3">
                             <input

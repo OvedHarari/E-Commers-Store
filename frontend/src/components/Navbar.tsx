@@ -8,6 +8,7 @@ import { Nav, NavDropdown } from "react-bootstrap";
 import Category from "../interfaces/Category";
 import Product from "../interfaces/Product";
 import Search from "./Search";
+import RegisterModal from "./RegisterModal";
 
 interface NavbarProps {
     darkMode: boolean;
@@ -31,6 +32,8 @@ interface NavbarProps {
     searchQuery: any;
     updateCartData: Function;
     allProducts: Product[];
+    setOpenRegisterModal: Function;
+    registerModal: boolean;
 }
 
 const Navbar: FunctionComponent<NavbarProps> = ({
@@ -45,10 +48,11 @@ const Navbar: FunctionComponent<NavbarProps> = ({
     togglePassword,
     categories,
     setCategories, productsInCart, setProductsInCart, loading, setLoading, totalProducts, dataUpdated, setSearchQuery,
-    searchQuery, updateCartData, allProducts
+    searchQuery, updateCartData, allProducts, registerModal, setOpenRegisterModal
 }) => {
     let theme = useContext(SiteTheme);
     let [userProfileModal, setOpenUserProfileModal] = useState<boolean>(false)
+    // let [registerModal, setOpenRegisterModal] = useState<boolean>(false)
     let navigate = useNavigate();
     let updateUserProfile = () => getUserProfile().then((res) => { setUserProfile(res.data); }).catch((err) => console.log(err))
     let [searchBarOpen, setSearchBarOpen] = useState<boolean>(false);
@@ -66,15 +70,15 @@ const Navbar: FunctionComponent<NavbarProps> = ({
             if (userInfo.gender) {
                 switch (userInfo.gender) {
                     case "male":
-                        return "images/users_img/user_male.webp";
+                        return "/images/users_img/user_male.webp";
                     case "female":
-                        return "images/users_img/user_female.webp";
+                        return "/images/users_img/user_female.webp";
                     case "other":
-                        return "images/users_img/user_other.jpg";
+                        return "/images/users_img/user_other.jpg";
                     default:
                         break;
                 }
-            } return "images/users_img/user_male.webp";
+            } return "/images/users_img/user_male.webp";
     };
 
     useEffect(() => {
@@ -131,7 +135,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({
                                 {userInfo.email && (
                                     <>
                                         <li className="nav-item">
-                                            <Nav.Link className="nav-link mt-2" href="/wishList">
+                                            <Nav.Link className="nav-link mt-2" href="/wishlist">
                                                 Wish List
                                             </Nav.Link>
                                         </li>
@@ -202,13 +206,14 @@ const Navbar: FunctionComponent<NavbarProps> = ({
 
                                 </Nav.Link>
                                 <NavDropdown className="mt-1 me-2 ms-3" id="basic-nav-dropdown"
-                                    title={userInfo.email ? (<img src={userProfile.userImgURL ? (`${userProfile.userImgURL}`) : (defaultProfileImage())}
-                                        className="rounded-circle profileImg mt-2" width="25"
-                                        alt="user profile"
-                                        onClick={() => {
-                                            setOpenUserProfileModal(true)
-                                            updateUserProfile()
-                                        }}></img>) : (<i className="fa-solid fa-user me-2 mt-3"></i>)
+                                    title={userInfo.email ? (
+                                        <img src={userProfile.userImgURL ? (`${userProfile.userImgURL}`) : (defaultProfileImage())}
+                                            className="rounded-circle profileImg mt-2" width="25"
+                                            alt="user profile"
+                                            onClick={() => {
+                                                setOpenUserProfileModal(true)
+                                                updateUserProfile()
+                                            }}></img>) : (<i className="fa-solid fa-user me-2 mt-3"></i>)
 
 
                                     } >
@@ -221,7 +226,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({
                                     )}
                                     {!userInfo.email && (
                                         <>
-                                            <NavDropdown.Item href="/register" className="btn btn-outline mt-1">
+                                            <NavDropdown.Item className="btn btn-outline mt-1" onClick={() => setOpenRegisterModal(true)}>
                                                 Register
                                             </NavDropdown.Item>
                                             <NavDropdown.Item href="/login" className="btn btn-outline mt-1">
@@ -253,6 +258,12 @@ const Navbar: FunctionComponent<NavbarProps> = ({
                 userInfo={userInfo}
                 userProfile={userProfile}
                 setUserProfile={setUserProfile} />
+            <RegisterModal
+                show={registerModal}
+                onHide={() => setOpenRegisterModal(false)}
+                setUserInfo={setUserInfo}
+                passwordShown={passwordShown}
+                togglePassword={togglePassword} />
         </>
     );
 };

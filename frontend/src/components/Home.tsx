@@ -27,11 +27,12 @@ interface HomeProps {
     render: Function;
     setTotalProducts: Function;
     setAllProducts: Function;
+    handleRegister: Function;
 
 }
 
 
-const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, categories, setTotalProducts, setCategories, productsInCart, setProductsInCart, setCartData, render, setAllProducts }) => {
+const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, categories, setTotalProducts, setCategories, productsInCart, setProductsInCart, setCartData, render, setAllProducts, handleRegister }) => {
     // let theme = useContext(SiteTheme);
     let navigate = useNavigate();
     let [products, setProducts] = useState<Product[]>([]);
@@ -69,9 +70,7 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
                 .catch((err) => { console.log(err); });
         }
     };
-    let handleRegister = () => {
 
-    }
     let handleAddToCart = (product: Product) => {
         addToCart(product)
             .then((res) => { setTotalProducts(res.data.totalProducts); successMsg(` ${product.title} added to cart`) }).catch((err) => console.log(err))
@@ -126,7 +125,7 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
                                             <hr className="mt-0" />
                                             <p className="card-text price">Price: {product.price} &#8362;</p>
                                             <div className="cardIcons">
-                                                {userInfo.email === false && (
+                                                {/* {userInfo.email === false && (
                                                     <div className="row">
                                                         <div className="col left-icons text-start">
                                                             <button className="btn addToCart-btn-admin " onClick={() => handleAddToCart(product)} ><i className="fa-solid fa-cart-shopping icon"></i></button>
@@ -145,13 +144,52 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
                                                             )}
                                                         </div>
                                                     </div>
-                                                )}
+                                                )} */}
 
-                                                {userInfo.email && (
+                                                {userInfo.email !== false ? (
 
                                                     <div className="row">
                                                         <div className="col left-icons text-start">
                                                             <button className="btn addToCart-btn-admin" onClick={() => handleAddToCart(product)} ><i className="fa-solid fa-cart-shopping"></i></button>
+                                                        </div>
+                                                        <div className="col right-icons text-end">
+                                                            {userInfo.email !== false && (wishList.includes(product._id as string) ? (
+                                                                <button className="btn col text-danger" onClick={() => {
+                                                                    handleaddToWishList(product);
+                                                                }}    >
+                                                                    <i className="fa-solid fa-heart"></i>
+                                                                </button>
+                                                            ) : (
+                                                                <button className="btn col" onClick={() => { handleaddToWishList(product); }}    >
+                                                                    <i className="fa-solid fa-heart"></i>
+                                                                </button>)
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <div className="row">
+                                                        <div className="col left-icons text-start">
+                                                            <button className="btn addToCart-btn-admin" onClick={() => handleRegister()} ><i className="fa-solid fa-cart-shopping"></i></button>
+                                                        </div>
+                                                        <div className="col right-icons text-end">
+                                                            {(wishList.includes(product._id as string) ? (
+                                                                <button className="btn col text-danger" onClick={() => {
+                                                                    handleRegister();
+                                                                }}    >
+                                                                    <i className="fa-solid fa-heart"></i>
+                                                                </button>
+                                                            ) : (
+                                                                <button className="btn col" onClick={() => { handleRegister(); }}    >
+                                                                    <i className="fa-solid fa-heart"></i>
+                                                                </button>)
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                {/* {(userInfo.email)(
+                                                    <div className="row">
+                                                        <div className="col left-icons text-start">
+                                                            <button className="btn addToCart-btn-admin" onClick={() => handleRegister()} ><i className="fa-solid fa-cart-shopping"></i></button>
                                                         </div>
                                                         <div className="col right-icons text-end">
                                                             {userInfo.email && (wishList.includes(product._id as string) ? (
@@ -167,7 +205,8 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
                                                             )}
                                                         </div>
                                                     </div>
-                                                )}
+                                                )} */}
+
                                             </div>
                                         </div>
                                     </div>

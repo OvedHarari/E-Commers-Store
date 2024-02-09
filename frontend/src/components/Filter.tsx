@@ -135,8 +135,8 @@ const Filter: React.FC<FilterProps> = ({
                             </div>
                         </div>
                         <div className="filter-footer mt-2">
-                            <button className="btn btn-dark" onClick={handleFilterReset}>Reset</button>
-                            <button className="btn btn-dark ms-2 " onClick={handleFilterApply}>Apply</button>
+                            {/* <button className="btn btn-dark" onClick={handleFilterReset}>Reset</button> */}
+                            {/* <button className="btn btn-dark ms-2 " onClick={handleFilterApply}>Apply</button> */}
                         </div>
                     </div>
                 </div>

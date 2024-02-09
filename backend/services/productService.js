@@ -16,7 +16,7 @@ class ProductService {
         return await ProductRepository.getProductById(productId);
     }
     async getProductByName(productName) {
-        return await ProductRepository.getProductById(productName);
+        return await ProductRepository.getProductByName(productName);
     }
     async updateProductById(productId, newProduct) {
         return await ProductRepository.updateProductById(productId, newProduct);

@@ -9,8 +9,8 @@ export default interface Product {
   brand: string;
   description: string;
   thumbnail: string;
-  images: [string];
-  rating: number;
+  images: string[];
+  rating?: number;
   quantity?: number;
   stock?: number;
 }

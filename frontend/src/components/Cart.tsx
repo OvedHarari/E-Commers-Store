@@ -116,10 +116,10 @@ const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, userInfo, car
     }, [productsInCart])
 
     return (
-        <div className={`container-full ms-5 ${theme}`}>
+        <div className={`container-fluid  ${theme}`}>
             <h3 className="mt-3">Cart</h3>
-            <hr className="mx-5" />
-            <div className="row mt-5">
+            <hr className="ms-0 mx-5" />
+            <div className="container-fluid row mt-5">
                 <div className="col-md-8 ">
                     {loading ? (<Loading />) : (productsInCart.length ? (
                         <table className={`table table-${theme} table-hover cart`}>
@@ -153,7 +153,7 @@ const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, userInfo, car
                                 ))}
                             </tbody>
                         </table>
-                    ) : (<p>There are no products in the cart</p>))}
+                    ) : (<h4>No products were added to your shopping cart.</h4>))}
 
 
                 </div>
@@ -176,8 +176,11 @@ const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, userInfo, car
                 openCreditModal={openPaymentModal}
                 setOpenCreditModal={setOpenCreditModal}
                 userInfo={userInfo}
-            cartData={cartData} 
+                cartData={cartData} 
             /> */}
+            <a className="showInMobile" href="#top">
+                <i className="fa-solid fa-arrow-up-from-bracket"></i>
+            </a>
         </div>
     )
 }

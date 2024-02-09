@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const joi = require("joi");
+const _ = require("lodash")
 // const Category = require("../models/Category");
 const categoryService = require("../services/categoryService")
 const auth = require("../middlewares/auth");
@@ -18,6 +19,7 @@ router.get("/", async (req, res) => {
     try {
         const categories = await categoryService.getAllCategories();
         res.status(200).send(categories)
+        // res.status(200).send(_.pick(categories["_id", "name"]))
     } catch (error) {
         res.status(400).send(error);
     }

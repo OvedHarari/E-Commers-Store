@@ -3,7 +3,7 @@ const router = express.Router();
 const joi = require("joi");
 const auth = require("../middlewares/auth");
 // const User = require("../models/User");
-const _ = require("lodash")
+const _ = require("lodash");
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
 const Wish = require("../models/Wish");
@@ -310,7 +310,7 @@ router.get("/", auth, async (req, res) => {
 
 
         //2. check user
-        let users = await User.find();
+        let users = await userService.getAllUsers();
         if (!users) return res.status(400).send("No users")
 
         //3. map and pick

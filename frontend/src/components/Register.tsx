@@ -11,8 +11,9 @@ interface RegisterProps {
     passwordShown: boolean;
     togglePassword: Function;
     onHide: Function;
+    setOpenLoginModal: Function;
 }
-const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown, togglePassword, onHide }) => {
+const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown, togglePassword, onHide, setOpenLoginModal }) => {
     let navigate = useNavigate();
 
     let formik = useFormik({
@@ -258,7 +259,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
             <div className="text-center">
                 <label className="form-check-label text-center" htmlFor="form2Example3">
                     Already registered? <br />
-                    <Link to={"/login"}>Click here to Login</Link>
+                    <Link to="" onClick={() => { onHide(); setOpenLoginModal(true) }}>Click here to Login</Link>
                 </label>
             </div>
         </div >

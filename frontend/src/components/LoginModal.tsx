@@ -1,9 +1,9 @@
 import { FunctionComponent, useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import Register from "./Register";
+import Login from "./Login";
 import { SiteTheme } from "../App";
 
-interface RegisterModalProps {
+interface LoginModalProps {
     show: boolean;
     onHide: Function;
     // userInfo: any;
@@ -11,11 +11,11 @@ interface RegisterModalProps {
     // setUserProfile: Function;
     passwordShown: boolean;
     togglePassword: Function;
-    setOpenLoginModal: Function;
+    setOpenRegisterModal: Function;
     // render: Function;
 }
 
-const RegisterModal: FunctionComponent<RegisterModalProps> = ({ show, onHide, setUserInfo, passwordShown, togglePassword, setOpenLoginModal }) => {
+const LoginModal: FunctionComponent<LoginModalProps> = ({ show, onHide, setUserInfo, passwordShown, togglePassword, setOpenRegisterModal }) => {
     let theme = useContext(SiteTheme);
     let [editForm, setEditForm] = useState<boolean>(true)
     // const defaultProfileImage = () => {
@@ -46,7 +46,7 @@ const RegisterModal: FunctionComponent<RegisterModalProps> = ({ show, onHide, se
             show={show}
             onHide={() => { onHide(); setEditForm(true) }}
             keyboard={false}
-            size="xl"
+            size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered  >
             <Modal.Header closeButton>
@@ -57,7 +57,7 @@ const RegisterModal: FunctionComponent<RegisterModalProps> = ({ show, onHide, se
                             alt="user profile"
                             style={{ maxWidth: "200px" }} /> */}
                         <Modal.Title className="display-3">
-                            Register To Shop</Modal.Title>
+                            Login</Modal.Title>
                     </div>
                     {/* <div className="col-3 w-100 text-end ">
                         <Button variant={editForm ? "success" : "secondary"} onClick={() => setEditForm(false)}>
@@ -68,11 +68,12 @@ const RegisterModal: FunctionComponent<RegisterModalProps> = ({ show, onHide, se
             </Modal.Header>
 
             <Modal.Body>
-                <Register onHide={onHide}
+                <Login
+                    onHide={onHide}
                     setUserInfo={setUserInfo}
                     passwordShown={passwordShown}
                     togglePassword={togglePassword}
-                    setOpenLoginModal={setOpenLoginModal}
+                    setOpenRegisterModal={setOpenRegisterModal}
                 // userProfile={userProfile}
                 // setUserProfile={setUserProfile}
                 // editForm={editForm}
@@ -84,4 +85,4 @@ const RegisterModal: FunctionComponent<RegisterModalProps> = ({ show, onHide, se
     </div>);
 }
 
-export default RegisterModal;
+export default LoginModal;

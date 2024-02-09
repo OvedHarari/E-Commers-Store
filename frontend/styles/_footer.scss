@@ -18,11 +18,20 @@
 
 .reco-title {
     margin: 20px;
-    font-family: tangerine;
+    // font-family: tangerine;
     font-size: 70px;
 }
 
 .paymentOptions img {
     width: 50px;
     margin-right: 10px;
+}
+
+.footer-list {
+    list-style: none;
+}
+
+.fa-brands {
+    font-size: 30px;
+    color: var(--color-title);
 }

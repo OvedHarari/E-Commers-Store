@@ -5,8 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { getTokenDetailes, userValidation } from "../services/usersService";
 import { errorMsg, successMsg } from "../services/feedbacksService";
 
-interface LoginProps { setUserInfo: Function; passwordShown: boolean; togglePassword: Function; }
-const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togglePassword }) => {
+interface LoginProps { setUserInfo: Function; passwordShown: boolean; togglePassword: Function; onHide: Function; setOpenRegisterModal: Function; }
+const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togglePassword, onHide, setOpenRegisterModal }) => {
     let navigate = useNavigate();
     const handleGoogleLogin = () => { window.location.href = `${process.env.REACT_APP_API}/google-auth/auth/google` };
 
@@ -28,7 +28,8 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togg
                     }))
                     setUserInfo(JSON.parse(sessionStorage.getItem("userInfo") as string));
                     successMsg(`You're logged in as ${values.email}`);
-                    navigate("/");
+                    // navigate("/");
+                    onHide()
                 })
                 .catch((err) => {
                     errorMsg(err.response.data);
@@ -39,8 +40,8 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togg
 
     return (
         <div className="container mt-5">
-            <h3 className="display-3 mt-3">Login</h3>
-            <div className="container box-shadow col-md-3 mt-5 ">
+            {/* <h3 className="display-3 mt-3">Login</h3> */}
+            <div className="container box-shadow col-sm mt-5 ">
                 <form className="login" onSubmit={formik.handleSubmit}>
                     <div className="form-floating mb-3">
                         <input
@@ -82,14 +83,14 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togg
                 <div>
                     <div className="d-flex justify-content-center mt-5">
                         <button type="button" className="google_btn" onClick={handleGoogleLogin}>
-                            <img src="images/google.png" alt="google icon" />
+                            <img src="/images/google.png" alt="google login" />
                             <span>Login with Google</span>
                         </button>
                     </div>
                 </div>
-                <div className="mt-3">
+                <div className="mt-3 text-center">
                     <p>
-                        New User ? <br /> <Link to={"/register"}>Register here!</Link>
+                        New User ? <br /> <Link to="" onClick={() => { onHide(); setOpenRegisterModal(true) }}>Register here!</Link>
                     </p>
                 </div>
             </div>

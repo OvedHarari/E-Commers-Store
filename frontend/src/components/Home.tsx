@@ -27,12 +27,12 @@ interface HomeProps {
     render: Function;
     setTotalProducts: Function;
     setAllProducts: Function;
-    handleRegister: Function;
+    setOpenLoginModal: Function;
 
 }
 
 
-const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, categories, setTotalProducts, setCategories, productsInCart, setProductsInCart, setCartData, render, setAllProducts, handleRegister }) => {
+const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, categories, setTotalProducts, setCategories, productsInCart, setProductsInCart, setCartData, render, setAllProducts, setOpenLoginModal }) => {
     // let theme = useContext(SiteTheme);
     let navigate = useNavigate();
     let [products, setProducts] = useState<Product[]>([]);
@@ -40,7 +40,6 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
     let [wishList, setWishlist] = useState<string[]>([]);
     let [productName, setProductName] = useState<string>("");
 
-    // let [categories, setCategories] = useState<Category[]>([]);
     let [productsChanged, setProductsChanged] = useState<boolean>(false);
     let [productId, setProductId] = useState<string>("");
     let [openNewProductModal, setOpenNewProductModal] = useState<boolean>(false);
@@ -94,9 +93,7 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
     return (
 
         <>
-            {/* <ProductCard userInfo={userInfo} loading={loading} setLoading={setLoading} /> */}
             <div className="container">
-                {/* <img className="homeBanner img-fluid mt-3 mb-5" src="/images/homeBanner.png" alt="banner" /> */}
                 {loading ? (<Loading />) : (categories.map(category => (
                     <div
                         key={category._id}
@@ -125,26 +122,6 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
                                             <hr className="mt-0" />
                                             <p className="card-text price">Price: {product.price} &#8362;</p>
                                             <div className="cardIcons">
-                                                {/* {userInfo.email === false && (
-                                                    <div className="row">
-                                                        <div className="col left-icons text-start">
-                                                            <button className="btn addToCart-btn-admin " onClick={() => handleAddToCart(product)} ><i className="fa-solid fa-cart-shopping icon"></i></button>
-                                                        </div>
-                                                        <div className="col right-icons text-end">
-                                                            {(wishList.includes(product._id as string) ? (
-                                                                <button className="btn col text-danger icon" onClick={() => {
-                                                                    handleaddToWishList(product);
-                                                                }}    >
-                                                                    <i className="fa-solid fa-heart icon"></i>
-                                                                </button>
-                                                            ) : (
-                                                                <button className="btn col" onClick={() => { handleaddToWishList(product); }}    >
-                                                                    <i className="fa-solid fa-heart icon"></i>
-                                                                </button>)
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                )} */}
 
                                                 {userInfo.email !== false ? (
 
@@ -169,43 +146,24 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
                                                 ) : (
                                                     <div className="row">
                                                         <div className="col left-icons text-start">
-                                                            <button className="btn addToCart-btn-admin" onClick={() => handleRegister()} ><i className="fa-solid fa-cart-shopping"></i></button>
+                                                            <button className="btn addToCart-btn-admin" onClick={() => setOpenLoginModal(true)} ><i className="fa-solid fa-cart-shopping"></i></button>
                                                         </div>
                                                         <div className="col right-icons text-end">
                                                             {(wishList.includes(product._id as string) ? (
                                                                 <button className="btn col text-danger" onClick={() => {
-                                                                    handleRegister();
+                                                                    setOpenLoginModal(true);
                                                                 }}    >
                                                                     <i className="fa-solid fa-heart"></i>
                                                                 </button>
                                                             ) : (
-                                                                <button className="btn col" onClick={() => { handleRegister(); }}    >
+                                                                <button className="btn col" onClick={() => { setOpenLoginModal(true); }}    >
                                                                     <i className="fa-solid fa-heart"></i>
                                                                 </button>)
                                                             )}
                                                         </div>
                                                     </div>
                                                 )}
-                                                {/* {(userInfo.email)(
-                                                    <div className="row">
-                                                        <div className="col left-icons text-start">
-                                                            <button className="btn addToCart-btn-admin" onClick={() => handleRegister()} ><i className="fa-solid fa-cart-shopping"></i></button>
-                                                        </div>
-                                                        <div className="col right-icons text-end">
-                                                            {userInfo.email && (wishList.includes(product._id as string) ? (
-                                                                <button className="btn col text-danger" onClick={() => {
-                                                                    handleaddToWishList(product);
-                                                                }}    >
-                                                                    <i className="fa-solid fa-heart"></i>
-                                                                </button>
-                                                            ) : (
-                                                                <button className="btn col" onClick={() => { handleaddToWishList(product); }}    >
-                                                                    <i className="fa-solid fa-heart"></i>
-                                                                </button>)
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                )} */}
+
 
                                             </div>
                                         </div>
@@ -224,6 +182,10 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
 
 
             </div >
+
+            <a className="showInMobile" href="#top">
+                <i className="fa-solid fa-arrow-up-from-bracket"></i>
+            </a>
         </>
 
     );

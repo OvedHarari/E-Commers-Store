@@ -27,12 +27,11 @@ interface WishlistProps {
     render: Function;
     setTotalProducts: Function;
     setAllProducts: Function;
-    handleRegister: Function;
-
+    setOpenLoginModal: Function;
 }
 
 
-const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoading, categories, setTotalProducts, setCategories, productsInCart, setProductsInCart, setCartData, render, setAllProducts, handleRegister }) => {
+const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoading, categories, setTotalProducts, setCategories, productsInCart, setProductsInCart, setCartData, render, setAllProducts, setOpenLoginModal }) => {
     // let theme = useContext(SiteTheme);
     let navigate = useNavigate();
     let [products, setProducts] = useState<Product[]>([]);
@@ -97,15 +96,17 @@ const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoad
 
     return (
         <div className="container">
-            {loading ? (<Loading />) : (
-                <>
+            <h3 className="mt-3">Cart</h3>
 
-                    <div className="container home-container ">
-                        <div className=" row justify-content-center">
-                            <hr className="mx-5" />
+            <>
+
+                <div className="container home-container ">
+                    <div className=" row justify-content-center">
+                        <hr className="mx-5" />
+                        {loading ? (<Loading />) : (products.length ? (
 
 
-                            {products.map((product: Product) => (
+                            products.map((product: Product) => (
                                 <div
                                     key={product._id}
                                     className="card border rounded-3 col-md-3 mt-3 align-items-center m-2 ms-5"
@@ -144,17 +145,17 @@ const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoad
                                             ) : (
                                                 <div className="row">
                                                     <div className="col left-icons text-start">
-                                                        <button className="btn addToCart-btn-admin" onClick={() => handleRegister()} ><i className="fa-solid fa-cart-shopping"></i></button>
+                                                        <button className="btn addToCart-btn-admin" onClick={() => setOpenLoginModal(true)} ><i className="fa-solid fa-cart-shopping"></i></button>
                                                     </div>
                                                     <div className="col right-icons text-end">
                                                         {(wishList.includes(product._id as string) ? (
                                                             <button className="btn col text-danger" onClick={() => {
-                                                                handleRegister();
+                                                                setOpenLoginModal(true);
                                                             }}    >
                                                                 <i className="fa-solid fa-heart"></i>
                                                             </button>
                                                         ) : (
-                                                            <button className="btn col" onClick={() => { handleRegister(); }}    >
+                                                            <button className="btn col" onClick={() => { setOpenLoginModal(true); }}    >
                                                                 <i className="fa-solid fa-heart"></i>
                                                             </button>)
                                                         )}
@@ -165,16 +166,19 @@ const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoad
                                         </div>
                                     </div>
                                 </div>
-                            ))}
-
-                        </div>
+                            ))
+                        ) : (<h4>No products were added to your Wishlist yet.</h4>)
+                        )}
                     </div>
+                </div>
 
 
 
 
-                </>
-            )}
+            </>
+            <a className="showInMobile" href="#top">
+                <i className="fa-solid fa-arrow-up-from-bracket"></i>
+            </a>
         </div >
     );
 }

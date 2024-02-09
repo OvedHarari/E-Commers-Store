@@ -17,3 +17,47 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
+.container-register {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+
+
+
+
+/* .search-btn {
+  border-radius: 100px;
+} */
+
+
+/* 
+.homeBanner {
+  margin-top: 10px;
+ 
+  width: 90vw;
+  box-shadow: 5px 5px 5px #e1ded8;
+} */
+
+
+/* .category-btn {
+  width: 20vw;
+  margin-top: 20px;
+} */
+
+/* .categoriesBtns {
+  align-items: center;
+  justify-content: center;
+  justify-content: space-evenly;
+} */
+
+
+
+/* .warning {
+  font-size: 11px;
+  color: var(--text);
+} */
+
+/* hr {
+  color: var(--text);
+} */

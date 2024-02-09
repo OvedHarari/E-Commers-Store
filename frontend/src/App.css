@@ -40,7 +40,7 @@
   background-color: var(--color-btnInfo);
 }
 
-.container-full {
+.container-fluid {
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box !important;
@@ -48,7 +48,6 @@
 
 .register,
 .login {
-  background-color: var(--color-primary);
   color: var(--color-title);
 }
 
@@ -298,6 +297,18 @@ nav form {
   flex-wrap: wrap;
 }
 
+.showInMobile {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  bottom: 40px;
+  right: 5vw;
+  opacity: 0.7;
+  background-color: var(--color-secondary);
+  color: var(--color-title);
+  border-radius: 50px;
+}
+
 .card-title {
   font-family: var(--text-font);
   font-weight: bold;
@@ -361,6 +372,7 @@ table i {
   padding: 0;
   box-sizing: border-box;
 }
+
 .ship .form-floating {
   color: var(--color-dark);
 }
@@ -544,4 +556,54 @@ table i {
 }
 .productImages .active {
   border: 2px solid var(--color-title);
+}
+
+.footer-title {
+  text-transform: uppercase;
+  margin-left: 30px;
+  color: var(--text);
+}
+
+.footer-li {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.copyRights {
+  color: var(--text);
+  font-size: 11px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.reco-title {
+  margin: 20px;
+  font-size: 70px;
+}
+
+.paymentOptions img {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.footer-list {
+  list-style: none;
+}
+
+.fa-brands {
+  font-size: 30px;
+  color: var(--color-title);
+}
+
+.rangeLabels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact {
+  background-color: var(--color-primary);
+  color: var(--color-title);
+}
+.contact .btn-info {
+  background-color: var(--color-btnInfo);
 }/*# sourceMappingURL=App.css.map */

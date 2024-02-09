@@ -9,9 +9,16 @@ const auth = require("../middlewares/auth");
 const productSchema = joi.object({
     title: joi.string().required().min(2),
     price: joi.number().required(),
-    category: joi.string().required().min(2),
+    category: joi.object({
+        _id: joi.string().required()
+        , name: joi.string().required()
+    }).required().min(2),
     description: joi.string().required().min(2),
-    image: joi.string().required().min(2),
+    brand: joi.string().required().min(2),
+    thumbnail: joi.string().required().min(2),
+    images: joi.array().items(joi.string()),
+    discountPercentage: joi.number(),
+    stock: joi.number(),
 });
 
 
@@ -71,23 +78,25 @@ router.post("/", auth, async (req, res) => {
         //joi validation
         const { error } = productSchema.validate(req.body);
         if (error) return res.status(400).send(error);
-
         //check if product exist by name price and category
-        let product = await productService.getProductByName({ name: req.body.name });
+        let product = await productService.getProductByName(req.body.title);
         if (product) return res.status(400).send("Product already exist");
-
         //Add the new product and save
         // product = req.body;
         productService.saveProduct(req.body);
-        product = productService.getProductByName({ name: req.body.name });
+        product = productService.getProductByName(req.body.title);
 
         //return response
-        res.status(201).send(`Product "${product.name}" was added successfully.`);
+        res.status(201).send(`Product "${product.title}" was added successfully.`);
 
     } catch (error) {
         res.status(400).send(error)
     }
 })
+
+
+
+
 
 //Update product by _id if admin only
 router.put("/:_id", auth, async (req, res) => {
@@ -100,11 +109,11 @@ router.put("/:_id", auth, async (req, res) => {
         if (error) return res.status(400).send(error);
 
         //check if product exist by name price and category
-        let product = await productService.updateProductById({ _id: req.params._id }, req.body);
-        if (!product) return res.status(400).send(`Product: "${product.name}" does not exist !!`);
+        let product = await productService.updateProductById(req.params._id, req.body);
+        if (!product) return res.status(400).send(`Product: "${product.title}" does not exist !!`);
 
         //return response
-        res.status(200).send(`Product "${product.name}" was updated successfully.`);
+        res.status(200).send(`Product "${product.title}" was updated successfully.`);
     } catch (error) {
         res.status(400).send(error)
     }
@@ -122,7 +131,7 @@ router.delete("/:_id", auth, async (req, res) => {
         if (!product) return res.status(400).send("Product does not exist");
 
         //return response
-        res.status(200).send(`Product "${product.name}" was delete successfully.`);
+        res.status(200).send(`Product "${product.title}" was delete successfully.`);
     } catch (error) {
         res.status(400).send(error)
     }

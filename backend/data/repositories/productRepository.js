@@ -12,7 +12,7 @@ class ProductRepository {
     }
     // get Product by email
     async getProductByName(productName) {
-        return await Product.findOne({ name: productName });
+        return await Product.findOne({ title: productName });
     }
     // get Product by _id
     async getProductById(productId) {

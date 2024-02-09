@@ -13,17 +13,17 @@ interface ProductPageProps {
     allProducts: any;
     setAllProducts: Function;
     userInfo: any;
-    handleRegister: Function;
     handleaddToWishList: Function;
     handleAddToCart: Function;
     wishList: string[];
     setWishlist: Function;
     setLoading: Function;
+    setOpenLoginModal: Function;
 
 }
 
 
-const ProductPage: FunctionComponent<ProductPageProps> = ({ allProducts, setAllProducts, userInfo, handleRegister, handleaddToWishList, handleAddToCart, wishList, setWishlist, setLoading }) => {
+const ProductPage: FunctionComponent<ProductPageProps> = ({ allProducts, setAllProducts, userInfo, handleaddToWishList, handleAddToCart, wishList, setWishlist, setLoading, setOpenLoginModal }) => {
     let navigate = useNavigate();
     let { productId } = useParams();
     let [product, setProduct] = useState<Product>()
@@ -53,7 +53,6 @@ const ProductPage: FunctionComponent<ProductPageProps> = ({ allProducts, setAllP
 
     const refs = useRef<any[]>([]);
     refs.current = [];
-    // const addRefs = () => {
     const addRefs = (el: any) => {
         if (el && !refs.current.includes(el)) {
             refs.current.push(el);
@@ -63,21 +62,24 @@ const ProductPage: FunctionComponent<ProductPageProps> = ({ allProducts, setAllP
 
 
 
-
     useEffect(() => {
         if (productId) {
-            getProductById(productId)
+            getProductById(productId as string)
                 .then((res) => {
                     setProduct(res.data)
                     setImages(res.data.images)
-                    if (!img) { (setImg(images[images.length - 1])) }
 
                 })
 
                 .catch((err) => { console.log(err); }
                 );
         }
-    }, [setAllProducts, productId, images])
+    }, [setAllProducts, productId])
+    useEffect(() => {
+
+        setImg(images[images.length - 1])
+
+    }, [images]);
 
     useEffect(() => {
         setLoading(true)
@@ -90,6 +92,7 @@ const ProductPage: FunctionComponent<ProductPageProps> = ({ allProducts, setAllP
                 .catch((err) => console.log(err));
         }
     }, [setLoading, setWishlist, userInfo.userId]);
+
 
     // let handleAddToCart = (product: Product) => {
     //     addToCart(product)
@@ -159,17 +162,17 @@ const ProductPage: FunctionComponent<ProductPageProps> = ({ allProducts, setAllP
 
                                 <>
                                     <div className="col-4 left-icons text-center">
-                                        <button className="btn addToCart-btn-admin" onClick={() => { handleRegister() }} ><i className="fa-solid fa-cart-shopping"></i></button>
+                                        <button className="btn addToCart-btn-admin" onClick={() => { setOpenLoginModal(true) }} ><i className="fa-solid fa-cart-shopping"></i></button>
                                     </div>
                                     <div className="col-4 right-icons text-center">
                                         {(wishList.includes(product._id as string) ? (
                                             <button className="btn col-4 ddToCart-btn-admin text-danger" onClick={() => {
-                                                handleRegister();
+                                                setOpenLoginModal(true);
                                             }}    >
                                                 <i className="fa-solid fa-heart"></i>
                                             </button>
                                         ) : (
-                                            <button className="btn col-4 ddToCart-btn-admin text-center" onClick={() => { handleRegister(); }}    >
+                                            <button className="btn col-4 ddToCart-btn-admin text-center" onClick={() => { setOpenLoginModal(true); }}    >
                                                 <i className="fa-solid fa-heart"></i>
                                             </button>)
                                         )}
@@ -178,7 +181,7 @@ const ProductPage: FunctionComponent<ProductPageProps> = ({ allProducts, setAllP
 
                             )}
                         </div>
-                        <div className="productDescription container-full ">
+                        <div className="productDescription container ">
                             <h6 className="productDescTitle mt-5">Description:</h6>
                             <p >{`${product.description}`} </p>
 

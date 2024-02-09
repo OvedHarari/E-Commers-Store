@@ -1,16 +1,10 @@
 import { FunctionComponent, useContext } from "react";
 import { SiteTheme } from "../App";
 import { Link } from "react-router-dom";
-import { userInfo } from "os";
 import Contact from "./Contact";
-// import LoginModal from "./LoginModal";
-// import Contact from "./Contact";
-// import { Button } from "react-bootstrap";
-// import User from "../interfaces/User";
 
 interface FooterProps {
     userInfo: any;
-    setUserInfo: Function;
     setOpenRegisterModal: Function;
     setOpenUserProfileModal: Function;
     setOpenLoginModal: Function;
@@ -19,7 +13,7 @@ interface FooterProps {
 
 }
 
-const Footer: FunctionComponent<FooterProps> = ({ userInfo, setUserInfo, setOpenRegisterModal, setOpenUserProfileModal, setOpenLoginModal, openContactModal, setOpenContactModal
+const Footer: FunctionComponent<FooterProps> = ({ userInfo, setOpenRegisterModal, setOpenUserProfileModal, setOpenLoginModal, openContactModal, setOpenContactModal
 }) => {
     let theme = useContext(SiteTheme);
     return (
@@ -27,7 +21,6 @@ const Footer: FunctionComponent<FooterProps> = ({ userInfo, setUserInfo, setOpen
             <div className="container">
                 <footer className="d flex flex-wrap justify-content-between py-3 my-4 border-top" data-bs-theme={`${theme}`}>
                     <div className="row">
-
                         <div className="col-sm-3">
                             <h5 className="footer-title">About</h5>
                             <ul className="footer-list">
@@ -35,8 +28,6 @@ const Footer: FunctionComponent<FooterProps> = ({ userInfo, setUserInfo, setOpen
                                 <li ><button
                                     onClick={() => setOpenContactModal(true)}
                                     className=" btn footer-li">Contact Us</button></li>
-
-
                             </ul>
                         </div>
                         <div className="col-sm-3">
@@ -54,13 +45,10 @@ const Footer: FunctionComponent<FooterProps> = ({ userInfo, setUserInfo, setOpen
                                     <li
                                     ><Link to="#" onClick={() => setOpenUserProfileModal(true)}
                                         className="footer-li">My Profile</Link></li>
-                                    {/* <li
-                                    ><Link to="#" className="footer-li">My Orders</Link></li> */}
                                     <li
                                     ><Link to="/wishlist" className="footer-li">My Wishlist</Link></li>
                                 </ul>
                             </>)}
-
                         </div>
                         <div className="col-sm-3">
                             <h5 className="footer-title">Categories</h5>
@@ -69,7 +57,6 @@ const Footer: FunctionComponent<FooterProps> = ({ userInfo, setUserInfo, setOpen
                                 <li><Link to="/product/laptops" className="footer-li">Laptops</Link></li>
                                 <li><Link to="/product/fragrances" className="footer-li">Fragrances</Link></li>
                                 <li><Link to="/" className="footer-li">All Categories</Link></li>
-
                             </ul>
                         </div>
                         <div className="col-sm-3 text-start">
@@ -96,17 +83,8 @@ const Footer: FunctionComponent<FooterProps> = ({ userInfo, setUserInfo, setOpen
                     <p className="warning text-danger"><b>NOTE:</b> This site is a DEMO ONLY ! ! ! </p>
                     <hr />
                     <h6 className="copyRights">&copy; 2024 Oved Hatari</h6>
-
-
                 </footer>
             </div>
-
-            {/* <LoginModal
-                show={openLoginModal}
-                onHide={() => setOpenLoginModal(false)}
-                setUserInfo={setUserInfo}
-            // userId={openUserModal}
-            /> */}
             <Contact
                 show={openContactModal}
                 onHide={() => setOpenContactModal(false)} />

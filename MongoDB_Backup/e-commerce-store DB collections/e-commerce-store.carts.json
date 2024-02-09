@@ -1,0 +1,250 @@
+[{
+  "_id": {
+    "$oid": "65be9101e71d425b51e3419d"
+  },
+  "userId": {
+    "$oid": "65be9101e71d425b51e34199"
+  },
+  "products": [
+    {
+      "_id": "65bb6de8ded8fccc503dbb27",
+      "title": "Samsung Galaxy Book",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f25",
+        "name": "laptops"
+      },
+      "price": 1499,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg",
+      "quantity": 4
+    },
+    {
+      "_id": "65bb6de8ded8fccc503dbb28",
+      "title": "Microsoft Surface Laptop 4",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f25",
+        "name": "laptops"
+      },
+      "price": 1499,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg",
+      "quantity": 2
+    },
+    {
+      "_id": "65bb6de8ded8fccc503dbb22",
+      "title": "iPhone X",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f24",
+        "name": "smartphones"
+      },
+      "price": 899,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
+      "quantity": 2
+    }
+  ],
+  "active": false,
+  "totalProducts": 8,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c22f3fbf806b27dd9ee8db"
+  },
+  "userId": {
+    "$oid": "65be9101e71d425b51e34199"
+  },
+  "products": [
+    {
+      "_id": "65bb6de8ded8fccc503dbb21",
+      "title": "iPhone 9",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f24",
+        "name": "smartphones"
+      },
+      "price": 549,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+      "quantity": 1
+    }
+  ],
+  "active": false,
+  "__v": 0,
+  "totalProducts": 1
+},
+{
+  "_id": {
+    "$oid": "65c22f7ebf806b27dd9ee911"
+  },
+  "userId": {
+    "$oid": "65be9101e71d425b51e34199"
+  },
+  "products": [
+    {
+      "_id": "65bb6de8ded8fccc503dbb22",
+      "title": "iPhone X",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f24",
+        "name": "smartphones"
+      },
+      "price": 899,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
+      "quantity": 1
+    },
+    {
+      "_id": "65bb6de8ded8fccc503dbb2c",
+      "title": "Brown Perfume",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f26",
+        "name": "fragrances"
+      },
+      "price": 40,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/12/thumbnail.jpg",
+      "quantity": 1
+    },
+    {
+      "_id": "65bb6de8ded8fccc503dbb30",
+      "title": "Hyaluronic Acid Serum",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f27",
+        "name": "skincare"
+      },
+      "price": 19,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/16/thumbnail.jpg",
+      "quantity": 1
+    },
+    {
+      "_id": "65bb6de8ded8fccc503dbb2d",
+      "title": "Fog Scent Xpressio Perfume",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f26",
+        "name": "fragrances"
+      },
+      "price": 13,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/13/thumbnail.webp",
+      "quantity": 1
+    },
+    {
+      "_id": "65bb6de8ded8fccc503dbb32",
+      "title": "Oil Free Moisturizer 100ml",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f27",
+        "name": "skincare"
+      },
+      "price": 40,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/18/thumbnail.jpg",
+      "quantity": 1
+    }
+  ],
+  "active": true,
+  "__v": 0,
+  "totalProducts": 5
+},
+{
+  "_id": {
+    "$oid": "65c3e2a7c31151a626dd7de2"
+  },
+  "userId": {
+    "$oid": "65c3e2a6c31151a626dd7dd6"
+  },
+  "products": [],
+  "active": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c3e353c31151a626dd7df5"
+  },
+  "userId": {
+    "$oid": "65c3e352c31151a626dd7df1"
+  },
+  "products": [],
+  "active": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c3e3cec31151a626dd7fdc"
+  },
+  "userId": {
+    "$oid": "65c3e3cec31151a626dd7fd6"
+  },
+  "products": [],
+  "active": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c3e4a5c31151a626dd84d9"
+  },
+  "userId": {
+    "$oid": "65c3e4a5c31151a626dd84d2"
+  },
+  "products": [],
+  "active": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c3f783c31151a626ddaa18"
+  },
+  "userId": {
+    "$oid": "65c3f783c31151a626ddaa14"
+  },
+  "products": [],
+  "active": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c4a02fded8fccc503dbbc5"
+  },
+  "userId": {
+    "$oid": "65b7aff60a6b2576cc3375f1"
+  },
+  "products": [
+    {
+      "_id": "65bb6de8ded8fccc503dbb21",
+      "title": "iPhone 9",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f24",
+        "name": "smartphones"
+      },
+      "price": 549,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+      "quantity": 2
+    },
+    {
+      "_id": "65bb6de8ded8fccc503dbb27",
+      "title": "Samsung Galaxy Book",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f25",
+        "name": "laptops"
+      },
+      "price": 1499,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg",
+      "quantity": 1
+    },
+    {
+      "_id": "65bb6de8ded8fccc503dbb4a",
+      "title": "Stiched Kurta plus trouser",
+      "category": {
+        "_id": "65bb56c612fa2d0d37ea2f2c",
+        "name": "womens-dresses"
+      },
+      "price": 80,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/42/thumbnail.jpg",
+      "quantity": 1
+    }
+  ],
+  "active": true,
+  "__v": 0,
+  "totalProducts": 4
+},
+{
+  "_id": {
+    "$oid": "65c597db52f171c3d401268d"
+  },
+  "userId": {
+    "$oid": "65c597db52f171c3d4012689"
+  },
+  "products": [],
+  "active": true,
+  "__v": 0
+}]

@@ -4,12 +4,7 @@ import UserProfile from "./UserProfile";
 import { SiteTheme } from "../App";
 
 interface UserProfileModalProps {
-    show: boolean;
-    onHide: Function;
-    userInfo: any;
-    userProfile: any;
-    setUserProfile: Function;
-    render: Function;
+    show: boolean; onHide: Function; userInfo: any; userProfile: any; setUserProfile: Function; render: Function;
 }
 
 const UserProfileModal: FunctionComponent<UserProfileModalProps> = ({ show, onHide, userInfo, userProfile, setUserProfile, render }) => {

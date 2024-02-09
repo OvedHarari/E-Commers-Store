@@ -28,7 +28,7 @@ import ProductsManagmentSearch from './components/ProductsManagmentSearch';
 import NewProduct from './components/NewProduct';
 import EditProduct from './components/EditProduct';
 const theme = { light: "light", dark: "dark", };
-export let SiteTheme = createContext(theme.dark);
+export let SiteTheme = createContext(theme.light);
 type Quantity = { [key: string]: number };
 
 function App() {
@@ -102,18 +102,18 @@ function App() {
       <ToastContainer theme={`${darkMode ? "dark" : "light"}`} />
       <div className={`App  ${darkMode && "dark"}`}>
         <Router>
-          <Navbar userInfo={userInfo} setUserInfo={setUserInfo} setDarkMode={setDarkMode} darkMode={darkMode} userProfile={userProfile} setUserProfile={setUserProfile} render={render} passwordShown={passwordShown} togglePassword={togglePassword} categories={categories} setCategories={setCategories} loading={loading} setLoading={setLoading} productsInCart={productsInCart} setProductsInCart={setProductsInCart} totalProducts={totalProducts} dataUpdated={dataUpdated} setSearchQuery={setSearchQuery} searchQuery={searchQuery} updateCartData={updateCartData} allProducts={allProducts} openRegisterModal={openRegisterModal} setOpenRegisterModal={setOpenRegisterModal} setOpenUserProfileModal={setOpenUserProfileModal} userProfileModal={userProfileModal} setOpenLoginModal={setOpenLoginModal} openLoginModal={openLoginModal} />
+          <Navbar userInfo={userInfo} setUserInfo={setUserInfo} setDarkMode={setDarkMode} darkMode={darkMode} userProfile={userProfile} setUserProfile={setUserProfile} render={render} passwordShown={passwordShown} togglePassword={togglePassword} categories={categories} totalProducts={totalProducts} setSearchQuery={setSearchQuery} searchQuery={searchQuery} updateCartData={updateCartData} allProducts={allProducts} openRegisterModal={openRegisterModal} setOpenRegisterModal={setOpenRegisterModal} setOpenUserProfileModal={setOpenUserProfileModal} userProfileModal={userProfileModal} setOpenLoginModal={setOpenLoginModal} openLoginModal={openLoginModal} />
           <Routes>
-            <Route path="/" element={<Home userInfo={userInfo} loading={loading} setLoading={setLoading} categories={categories} setCategories={setCategories} productsInCart={productsInCart} setProductsInCart={setProductsInCart} setCartData={setCartData} render={render} setTotalProducts={setTotalProducts} setAllProducts={setAllProducts} setOpenLoginModal={setOpenLoginModal} />} />
+            <Route path="/" element={<Home userInfo={userInfo} loading={loading} setLoading={setLoading} categories={categories} setTotalProducts={setTotalProducts} setOpenLoginModal={setOpenLoginModal} />} />
             <Route path="/about" element={<About setOpenContactModal={setOpenContactModal} />} />
-            <Route path="/wishlist" element={<Wishlist userInfo={userInfo} loading={loading} setLoading={setLoading} categories={categories} setCategories={setCategories} productsInCart={productsInCart} setProductsInCart={setProductsInCart} setCartData={setCartData} render={render} setTotalProducts={setTotalProducts} setAllProducts={setAllProducts} setOpenLoginModal={setOpenLoginModal} />} />
+            <Route path="/wishlist" element={<Wishlist userInfo={userInfo} loading={loading} setLoading={setLoading} setTotalProducts={setTotalProducts} setOpenLoginModal={setOpenLoginModal} />} />
             <Route path="/google/success" element={<GoogleAuth setUserInfo={setUserInfo} />} />
             <Route element={<Search allProducts={allProducts} setSearchQuery={setSearchQuery} updateCartData={updateCartData} userInfo={userInfo} />} />
-            <Route path='/Search/:key' element={<SearchResults products={allProducts} setProducts={setAllProducts} />} />
+            <Route path='/Search/:key' element={<SearchResults products={allProducts} />} />
             <Route path='/cart' element={<Cart loading={loading} setLoading={setLoading} userInfo={userInfo} cartData={cartData} setCartData={setCartData} productsInCart={productsInCart} setProductsInCart={setProductsInCart} totalProducts={totalProducts} setTotalProducts={setTotalProducts} totalPrice={totalPrice} setTotalPrice={setTotalPrice} productQuantity={productQuantity} setProductQuantity={setProductQuantity} />} />
             <Route path='/product/:category' element={<ProductsCategory loading={loading} setLoading={setLoading} userInfo={userInfo} productsInCart={productsInCart} setProductsInCart={setProductsInCart} totalProducts={totalProducts} setTotalProducts={setTotalProducts} totalPrice={totalPrice} setTotalPrice={setTotalPrice} productQuantity={productQuantity} setProductQuantity={setProductQuantity} categoryProducts={categoryProducts} setCategoryProducts={setCategoryProducts} setSearchQuery={setSearchQuery} searchQuery={searchQuery} show={show} setShow={setShow} categories={categories} setOpenLoginModal={setOpenLoginModal} />} />
-            <Route path='/products/:productId' element={<ProductPage setAllProducts={setCategoryProducts} userInfo={userInfo} allProducts={allProducts} setOpenLoginModal={setOpenLoginModal} handleaddToWishList={handleaddToWishList} handleAddToCart={handleAddToCart} wishList={wishList} setWishlist={setWishlist} setLoading={setLoading} />} />
-            <Route path='/shipping' element={<ShippingInfo loading={loading} setLoading={setLoading} userInfo={userInfo} userProfile={userProfile} setUserProfile={setUserProfile} render={render} totalProducts={totalProducts} totalPrice={totalPrice} productsInCart={productsInCart} productQuantity={productQuantity} setProductQuantity={setProductQuantity} setTotalPrice={setTotalPrice} openCreditModal={openCreditModal} setOpenCreditModal={setOpenCreditModal} />} />
+            <Route path='/products/:productId' element={<ProductPage setAllProducts={setCategoryProducts} userInfo={userInfo} setOpenLoginModal={setOpenLoginModal} handleaddToWishList={handleaddToWishList} handleAddToCart={handleAddToCart} wishList={wishList} setWishlist={setWishlist} setLoading={setLoading} />} />
+            <Route path='/shipping' element={<ShippingInfo loading={loading} setLoading={setLoading} userInfo={userInfo} userProfile={userProfile} setUserProfile={setUserProfile} render={render} totalProducts={totalProducts} totalPrice={totalPrice} productsInCart={productsInCart} productQuantity={productQuantity} openCreditModal={openCreditModal} setOpenCreditModal={setOpenCreditModal} />} />
             <Route path="/usersmanagement" element={<UsersManagement darkMode={darkMode} render={render} userProfile={userProfile} setUserProfile={setUserProfile} passwordShown={passwordShown} togglePassword={togglePassword} userInfo={userInfo} dataUpdated={dataUpdated} />} />
             <Route path='/products-managment' element={<ProductsManagment products={allProducts} setProducts={setAllProducts} userInfo={userInfo} loading={loading} setLoading={setLoading} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />} />
             <Route element={<ProductsManagmentSearch setSearchQuery={setSearchQuery} products={allProducts} />} />
@@ -121,7 +121,7 @@ function App() {
             <Route path='/editproduct/:productId' element={<EditProduct categories={categories} />} />
 
           </Routes>
-          <Footer userInfo={userInfo} setUserInfo={setUserInfo} setOpenRegisterModal={setOpenRegisterModal} setOpenUserProfileModal={setOpenUserProfileModal} setOpenLoginModal={setOpenLoginModal} openContactModal={openContactModal} setOpenContactModal={setOpenContactModal}
+          <Footer userInfo={userInfo} setOpenRegisterModal={setOpenRegisterModal} setOpenUserProfileModal={setOpenUserProfileModal} setOpenLoginModal={setOpenLoginModal} openContactModal={openContactModal} setOpenContactModal={setOpenContactModal}
           />
         </Router>
       </div>

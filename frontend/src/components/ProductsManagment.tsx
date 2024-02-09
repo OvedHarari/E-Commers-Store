@@ -1,52 +1,31 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { SiteTheme } from "../App";
 import { deleteProduct, getAllProducts } from "../services/productsService";
-// import { successMsg } from "../services/feedbackService";
-import { userInfo } from "os";
-import User from "../interfaces/User";
 import { Link } from "react-router-dom";
 import Product from "../interfaces/Product";
-// import ReactPaginate from "react-paginate";
 import Loading from "./Loading";
 import { Pagination } from "react-bootstrap";
 import { successMsg } from "../services/feedbacksService";
 import ProductsManagmentSearch from "./ProductsManagmentSearch";
-// import ProductsManagmentSearch from "./ProductsManagmentSearch";
 
-interface ProductsManagmentProps {
-    products: any;
-    setProducts: Function;
-    userInfo: any;
-    loading: any;
-    setLoading: Function;
-    searchQuery: any;
-    setSearchQuery: Function;
-
-}
+interface ProductsManagmentProps { products: any; setProducts: Function; userInfo: any; loading: any; setLoading: Function; searchQuery: any; setSearchQuery: Function; }
 
 const ProductsManagment: FunctionComponent<ProductsManagmentProps> = ({ products, setProducts, userInfo, loading, setLoading, searchQuery, setSearchQuery }) => {
     let [productsChanged, setProductsChanged] = useState<boolean>(false)
     let [data, setData] = useState([]);
     let [currentPage, setCurrentPage] = useState(0);
-
     let [totalPages, setTotalPages] = useState(0);
     let itemsPerPage = 12;
     let theme = useContext(SiteTheme);
     let darkMode = theme === "dark";
-
     let filteredProducts = products.filter((product: Product) => {
         const titleMatch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
         const categoryMatch = product.category.name.toLowerCase().includes(searchQuery.toLowerCase());
         const categoryIdMatch = (product.category._id as string).toLowerCase().includes(searchQuery.toLowerCase());
         const productIdMatch = (product._id as string).toLowerCase().includes(searchQuery.toLowerCase());
-
-        // Filter products if either title or category name matches the search query
+        // Filter products if either title or category name/_id matches the search query
         return titleMatch || categoryMatch || categoryIdMatch || productIdMatch;
     });
-
-
-    // let filteredProducts = products.filter((product: Product) => product.title.toLowerCase().includes(searchQuery.toLowerCase()));
-
     let filteredTotalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
     useEffect(() => {
@@ -63,21 +42,14 @@ const ProductsManagment: FunctionComponent<ProductsManagmentProps> = ({ products
                 setTotalPages(calculatedPages);
                 setCurrentPage(prevPage => Math.min(prevPage, Math.max(calculatedPages - 1, 0)))
                 setLoading(false);
-
-            })
-            .catch((err) => {
+            }).catch((err) => {
                 console.log(err); setLoading(false);
             });
-    }, [productsChanged, setProducts, itemsPerPage, setLoading])
-
+    }, [productsChanged, setProducts, itemsPerPage, setLoading]);
     let startIndex = currentPage * itemsPerPage;
     let endIndex = startIndex + itemsPerPage;
     let subset = filteredProducts.slice(startIndex, endIndex);
-
-    let render = () => {
-        setProductsChanged(!productsChanged)
-    }
-
+    let render = () => { setProductsChanged(!productsChanged) }
     let handleToDelete = (id: string) => {
         if (window.confirm("Are you sure?")) {
             deleteProduct(id)
@@ -88,10 +60,7 @@ const ProductsManagment: FunctionComponent<ProductsManagmentProps> = ({ products
                 .catch((err) => console.log(err));
         }
     }
-
     let handlePaginationClick = (pageNumber: number) => { setCurrentPage(pageNumber - 1) };
-
-
     let noImg = darkMode ? "/images/noImgWhite.png" : "/images/noImgBlack.png";
 
     return (
@@ -166,9 +135,6 @@ const ProductsManagment: FunctionComponent<ProductsManagmentProps> = ({ products
 
                 </div>
             ) : (<p>No products found</p>))}
-
-
-
         </div>
     )
 }

@@ -2,10 +2,7 @@ import { FunctionComponent, useEffect } from "react";
 import { getGoogleUser, getTokenDetailes } from "../services/usersService";
 import { useNavigate } from "react-router-dom";
 
-interface GoogleAuthProps {
-    setUserInfo: Function;
-
-}
+interface GoogleAuthProps { setUserInfo: Function; }
 
 const GoogleAuth: FunctionComponent<GoogleAuthProps> = ({ setUserInfo }) => {
     let navigate = useNavigate()

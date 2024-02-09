@@ -1,0 +1,56 @@
+[{
+  "_id": {
+    "$oid": "65c22f1ebf806b27dd9ee8d1"
+  },
+  "userId": {
+    "$oid": "65be9101e71d425b51e34199"
+  },
+  "name": {
+    "firstName": "Test",
+    "middleName": "",
+    "lastName": "User1"
+  },
+  "email": "test1@test.com",
+  "phone": "+972508882416",
+  "address": {
+    "country": "Israel",
+    "state": "",
+    "city": "Tel Aviv",
+    "street": "Hamagid",
+    "houseNumber": "3",
+    "floor": 2,
+    "apartment": 8,
+    "zipcode": "4485100"
+  },
+  "deliveryInstructions": "",
+  "active": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c22f72bf806b27dd9ee906"
+  },
+  "userId": {
+    "$oid": "65be9101e71d425b51e34199"
+  },
+  "name": {
+    "firstName": "Test",
+    "middleName": "",
+    "lastName": "User1"
+  },
+  "email": "test1@test.com",
+  "phone": "+972508882416",
+  "address": {
+    "country": "Israel",
+    "state": "",
+    "city": "Tel Aviv",
+    "street": "Hamagid",
+    "houseNumber": "3",
+    "floor": 2,
+    "apartment": 8,
+    "zipcode": "4485100"
+  },
+  "deliveryInstructions": "",
+  "active": false,
+  "__v": 0
+}]

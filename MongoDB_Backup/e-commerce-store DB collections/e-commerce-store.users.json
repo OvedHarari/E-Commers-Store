@@ -1,0 +1,97 @@
+[{
+  "_id": {
+    "$oid": "65b7aff60a6b2576cc3375f1"
+  },
+  "name": {
+    "firstName": "Oved",
+    "middleName": "ov",
+    "lastName": "Harari"
+  },
+  "phone": "+972508882416",
+  "email": "ovedhar@gmail.com",
+  "password": "$2a$10$0e9vBbLr.Bx2jwgW9R.gke.8ijJZz1tJppni2LTcFiKBcXBoSdfnO",
+  "image": {
+    "url": ""
+  },
+  "gender": "male",
+  "role": "admin",
+  "address": {
+    "country": "Israel",
+    "state": "",
+    "city": "Alfe Menashe",
+    "street": "Yarden",
+    "houseNumber": "13",
+    "floor": 2,
+    "apartment": 7,
+    "zipcode": "4485100"
+  },
+  "isActive": true,
+  "loginAttempts": 0,
+  "lastFailedLogin": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65be9101e71d425b51e34199"
+  },
+  "name": {
+    "firstName": "Casual",
+    "middleName": "",
+    "lastName": "User"
+  },
+  "phone": "+972508882416",
+  "email": "casual@test.com",
+  "password": "$2a$10$VvFae62F/FWzGiRDMhhmlutYqM7PCREYMcR8RMaHCYPcciVTUVVqe",
+  "image": {
+    "url": ""
+  },
+  "gender": "male",
+  "role": "casual",
+  "address": {
+    "country": "Israel",
+    "state": "",
+    "city": "Tel Aviv",
+    "street": "Hamagid",
+    "houseNumber": "3",
+    "floor": 2,
+    "apartment": 8,
+    "zipcode": "4485100"
+  },
+  "isActive": true,
+  "loginAttempts": 0,
+  "lastFailedLogin": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c597db52f171c3d4012689"
+  },
+  "name": {
+    "firstName": "Admin",
+    "middleName": "",
+    "lastName": "User"
+  },
+  "phone": "+972508882416",
+  "email": "Admin@test.com",
+  "password": "$2a$10$5pZmwtAuxA6AJDgdxUSDeeTqn6svhWQnCYFR83gyVcScbIQIk/wOu",
+  "image": {
+    "url": "",
+    "alt": ""
+  },
+  "gender": "male",
+  "role": "admin",
+  "address": {
+    "country": "Israel",
+    "state": "",
+    "city": "Tel Aviv",
+    "street": "Rotshild",
+    "houseNumber": "175",
+    "floor": 2,
+    "apartment": 7,
+    "zipcode": "4485100"
+  },
+  "isActive": true,
+  "loginAttempts": 0,
+  "lastFailedLogin": null,
+  "__v": 0
+}]

@@ -40,7 +40,6 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togg
 
     return (
         <div className="container mt-5">
-            {/* <h3 className="display-3 mt-3">Login</h3> */}
             <div className="container box-shadow col-sm mt-5 ">
                 <form className="login" onSubmit={formik.handleSubmit}>
                     <div className="form-floating mb-3">

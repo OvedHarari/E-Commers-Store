@@ -11,9 +11,7 @@ class CategoryService {
     async getCategoryById(categoryId) {
         return await CategoryRepository.getCategoryById(categoryId);
     }
-    // async getCategoryByName(categoryName) {
-    //     return await CategoryRepository.getCategoryName(categoryName);
-    // }
+
     async updateCategoryById(categoryId, newCategory) {
         return await CategoryRepository.updateCategoryById(categoryId, newCategory);
     }

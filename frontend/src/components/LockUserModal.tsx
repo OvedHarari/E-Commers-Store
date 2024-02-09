@@ -4,21 +4,9 @@ import { successMsg } from "../services/feedbacksService";
 import { SiteTheme } from "../App";
 import { updateUserProps } from "../services/usersService";
 
-interface LockUserModalProps {
-  show: boolean;
-  onHide: Function;
-  render: Function;
-  userProfile: any;
-  isActive: boolean
-}
+interface LockUserModalProps { show: boolean; onHide: Function; render: Function; userProfile: any; isActive: boolean }
 
-const LockUserModal: FunctionComponent<LockUserModalProps> = ({
-  show,
-  onHide,
-  render,
-  userProfile,
-  isActive
-}) => {
+const LockUserModal: FunctionComponent<LockUserModalProps> = ({ show, onHide, render, userProfile, isActive }) => {
   let theme = useContext(SiteTheme);
   return (
     <>

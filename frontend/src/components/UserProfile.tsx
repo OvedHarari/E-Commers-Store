@@ -5,15 +5,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { successMsg } from "../services/feedbacksService";
 
-interface UserProfileProps {
-    userInfo: any;
-    onHide: Function;
-    setUserProfile: Function;
-    userProfile: any;
-    editForm: boolean;
-    setEditForm: Function;
-    render: Function;
-}
+interface UserProfileProps { userInfo: any; onHide: Function; setUserProfile: Function; userProfile: any; editForm: boolean; setEditForm: Function; render: Function; }
+
 const UserProfile: FunctionComponent<UserProfileProps> = ({ onHide, userProfile, editForm, setEditForm, render }) => {
     let formik = useFormik({
         initialValues: {
@@ -24,7 +17,7 @@ const UserProfile: FunctionComponent<UserProfileProps> = ({ onHide, userProfile,
             name: yup.object({ firstName: yup.string().required().min(2), middleName: yup.string().min(2), lastName: yup.string().required().min(2) }),
             phone: yup.string().required().min(2), email: yup.string().required().email(),
 
-            gender: yup.string().required(), image: yup.object({ url: yup.string().min(2) }), address: yup.object({ country: yup.string().required().min(2), state: yup.string().min(2), city: yup.string().required().min(2), street: yup.string().required().min(2), houseNumber: yup.string().required().min(2), floor: yup.number().required().min(1), apartment: yup.number().required().min(1), zipcode: yup.string().min(2) }), role: yup.string().min(2)
+            gender: yup.string().required(), image: yup.object({ url: yup.string().min(2) }), address: yup.object({ country: yup.string().required().min(2), state: yup.string().min(2), city: yup.string().required().min(2), street: yup.string().required().min(2), houseNumber: yup.string().required().min(1), floor: yup.number().required().min(1), apartment: yup.number().required().min(1), zipcode: yup.string().min(2) }), role: yup.string().min(2)
         }),
         enableReinitialize: true,
         onSubmit(values: User) {
@@ -159,16 +152,6 @@ const UserProfile: FunctionComponent<UserProfileProps> = ({ onHide, userProfile,
                             <label htmlFor="floatingStreet">Street *</label>
                             {formik.touched.address?.street && formik.errors.address?.street && (<p className="text-danger">{formik.errors.address.street}</p>)}
                         </div>
-                        {/* <div className="form-floating col-6 mb-3">
-                            <input
-                                type="text" className="form-control border-secondary" id="floatingHouseNumber" placeholder="House Number"
-                                name="address.houseNumber"
-                                onChange={formik.handleChange}
-                                value={formik.values.address.houseNumber}
-                                onBlur={formik.handleBlur} disabled={editForm}></input>
-                            <label htmlFor="floatingHouseNumber">House Number *</label>
-                            {formik.touched.address?.houseNumber && formik.errors.address?.houseNumber && (<p className="text-danger">{formik.errors.address.houseNumber}</p>)}
-                        </div> */}
                         <div className="form-floating col mb-3 me-3">
                             <input
                                 type="text" className="form-control border-secondary" id="floatingHouseNumber" placeholder="House Number"

@@ -2,8 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import Product from "../interfaces/Product";
 
 interface ProductsManagmentSearchProps {
-    products: Product[];
-    setSearchQuery: Function;
+    products: Product[]; setSearchQuery: Function;
 }
 
 const ProductsManagmentSearch: FunctionComponent<ProductsManagmentSearchProps> = ({ products, setSearchQuery }) => {

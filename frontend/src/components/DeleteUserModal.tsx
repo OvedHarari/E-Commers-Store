@@ -4,30 +4,14 @@ import { successMsg } from "../services/feedbacksService";
 import { SiteTheme } from "../App";
 import { deleteUserById } from "../services/usersService";
 
-interface DeleteUserModalProps {
-  show: boolean;
-  onHide: Function;
-  render: Function;
-  userProfile: any;
-}
+interface DeleteUserModalProps { show: boolean; onHide: Function; render: Function; userProfile: any; }
 
-const DeleteUserModal: FunctionComponent<DeleteUserModalProps> = ({
-  show,
-  onHide,
-  render,
-  userProfile
-}) => {
+const DeleteUserModal: FunctionComponent<DeleteUserModalProps> = ({ show, onHide, render, userProfile }) => {
   let theme = useContext(SiteTheme);
+
   return (
     <>
-      <Modal
-        className={`${theme} set-modal`}
-        show={show}
-        onHide={() => onHide()}
-        size="sm"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
+      <Modal className={`${theme} set-modal`} show={show} onHide={() => onHide()} size="sm" aria-labelledby="contained-modal-title-vcenter" centered>
         <Modal.Header closeButton>
           <Modal.Title>User Deletion!!</Modal.Title>
         </Modal.Header>

@@ -5,14 +5,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { successMsg } from "../services/feedbacksService";
 
-interface ContactProps {
-    show: boolean;
-    onHide: Function;
-}
+interface ContactProps { show: boolean; onHide: Function; }
 
 const Contact: FunctionComponent<ContactProps> = ({ show, onHide }) => {
     let theme = useContext(SiteTheme);
-
     let formik = useFormik({
         initialValues: { name: "", email: "", phone: "", message: "" },
         validationSchema: yup.object({
@@ -22,12 +18,12 @@ const Contact: FunctionComponent<ContactProps> = ({ show, onHide }) => {
             message: yup.string()
         }),
         onSubmit: (values) => {
-            successMsg("Thank you! your mail has been sent.")
-
+            successMsg("Thank you! your mail has been sent.");
             formik.resetForm();
-            onHide()
-        },
+            onHide();
+        }
     });
+
     return (
         <>
             <Modal show={show} onHide={() => onHide()}

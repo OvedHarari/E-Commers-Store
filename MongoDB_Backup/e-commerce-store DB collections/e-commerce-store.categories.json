@@ -1,0 +1,140 @@
+[{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f24"
+  },
+  "name": "smartphones",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f25"
+  },
+  "name": "laptops",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f26"
+  },
+  "name": "fragrances",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f27"
+  },
+  "name": "skincare",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f28"
+  },
+  "name": "groceries",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f29"
+  },
+  "name": "home-decoration",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f2a"
+  },
+  "name": "furniture",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f2b"
+  },
+  "name": "tops",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f2c"
+  },
+  "name": "womens-dresses",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f2d"
+  },
+  "name": "womens-shoes",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f2e"
+  },
+  "name": "mens-shirts",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f2f"
+  },
+  "name": "mens-shoes",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f30"
+  },
+  "name": "mens-watches",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f31"
+  },
+  "name": "womens-watches",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f32"
+  },
+  "name": "womens-bags",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f33"
+  },
+  "name": "womens-jewellery",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f34"
+  },
+  "name": "sunglasses",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f35"
+  },
+  "name": "automotive",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f36"
+  },
+  "name": "motorcycle",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65bb56c612fa2d0d37ea2f37"
+  },
+  "name": "lighting",
+  "__v": 0
+}]

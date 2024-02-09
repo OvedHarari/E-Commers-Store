@@ -1,16 +1,12 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import Product from "../interfaces/Product";
 import { useNavigate } from "react-router-dom";
-import { addToCart, updateCart } from "../services/cartService";
-import { userInfo } from "os";
+import { addToCart } from "../services/cartService";
 import { currencyFormat } from "../services/currencyFormater";
 import { errorMsg, successMsg } from "../services/feedbacksService";
 
 interface SearchProps {
-    userInfo: any;
-    allProducts: Product[];
-    setSearchQuery: Function;
-    updateCartData: Function;
+    userInfo: any; allProducts: Product[]; setSearchQuery: Function; updateCartData: Function;
 }
 
 const Search: FunctionComponent<SearchProps> = ({ userInfo, allProducts, setSearchQuery, updateCartData /*updateCart*/ }) => {
@@ -42,11 +38,8 @@ const Search: FunctionComponent<SearchProps> = ({ userInfo, allProducts, setSear
         addToCart(product)
             .then((res) => {
                 successMsg(` ${product.title} added to cart`);
-                // addedToCartMsg(` ${product.name} added to cart`);
                 updateCartData(product)
-                // updateCart();
                 handleClose()
-
             })
             .catch((err) => console.log(err))
     }
@@ -69,7 +62,6 @@ const Search: FunctionComponent<SearchProps> = ({ userInfo, allProducts, setSear
             handleClose();
         }
     }
-
 
     return (
         <>
@@ -98,10 +90,7 @@ const Search: FunctionComponent<SearchProps> = ({ userInfo, allProducts, setSear
                     <div className="search-result">
                         {searchRes.map((product: Product) => (
                             <div className="result-item" key={product._id} onClick={() => { navigate(`/products/${product._id}`); handleClose() }}>
-                                {/* <div className="result-item" key={product._id} onClick={() => { navigate(`/products/${product.category}/${product.subcategory}/${product._id}`); handleClose() }}> */}
-
                                 <div className="img"><img src={product.thumbnail} alt={product.title} /></div>
-
                                 <div className="product-info mt-2 nb-0">
                                     <h5 className="product-name">{product.title}</h5>
                                     <p>Price: {currencyFormat(product.price)}</p>
@@ -116,11 +105,7 @@ const Search: FunctionComponent<SearchProps> = ({ userInfo, allProducts, setSear
                                         <button type="button" disabled className="btn search-addToCart-btn">Add To Cart</button>
                                     </div>
                                 )}
-
-
-
                             </div>
-                            // </div>
                         ))}
                     </div>
                 )}

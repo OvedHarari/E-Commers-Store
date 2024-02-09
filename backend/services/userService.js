@@ -1,6 +1,4 @@
 const UserRepository = require('../data/repositories/userRepository');
-// const User = require('../models/User');
-// const bcrypt = require("bcryptjs");
 
 class UserService {
 

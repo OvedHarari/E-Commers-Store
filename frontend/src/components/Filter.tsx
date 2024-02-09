@@ -1,69 +1,12 @@
-// Filter.tsx
 import React from "react";
 import { Offcanvas } from "react-bootstrap";
 import { currencyFormat } from "../services/currencyFormater";
 
 interface FilterProps {
-    show: boolean;
-    setShow: Function;
-    setSearchQuery: Function;
-    setSelectedTitles: React.Dispatch<React.SetStateAction<string[]>>;
-    selectedTitles: string[];
-    // setSelectedOrigins: React.Dispatch<React.SetStateAction<string[]>>;
-    // selectedOrigins: string[];
-    // setSelectedAlcohol: React.Dispatch<React.SetStateAction<string[]>>;
-    // selectedAlcohol: string[];
-    setSelectedPrice: React.Dispatch<React.SetStateAction<number[]>>;
-    selectedPrice: number[];
-    titleOptions: string[];
-    // originOptions: string[];
-    // alcoholOptions: string[];
-    priceOptions: number[];
-    handleClose: Function;
-    setPriceOptions: Function;
-    handleRangeChange: Function;
+    show: boolean; setShow: Function; setSearchQuery: Function; setSelectedTitles: React.Dispatch<React.SetStateAction<string[]>>; selectedTitles: string[]; setSelectedPrice: React.Dispatch<React.SetStateAction<number[]>>; selectedPrice: number[]; titleOptions: string[]; priceOptions: number[];
+    handleClose: Function; setPriceOptions: Function; handleRangeChange: Function;
 }
-
-const Filter: React.FC<FilterProps> = ({
-    show,
-    setShow,
-    setSearchQuery,
-    setSelectedTitles,
-    selectedTitles,
-    // setSelectedOrigins,
-    // selectedOrigins,
-    // setSelectedAlcohol,
-    // selectedAlcohol,
-    setSelectedPrice,
-    selectedPrice,
-    titleOptions,
-    // originOptions,
-    // alcoholOptions,
-    priceOptions,
-    handleClose,
-    setPriceOptions,
-    handleRangeChange
-}) => {
-    const handleFilterApply = () => {
-        // Perform actions when the filter is applied
-        setShow(false);
-    };
-
-    const handleFilterReset = () => {
-        // Reset all filter options
-        setSearchQuery("");
-        setSelectedTitles([]);
-
-        setSelectedPrice([]);
-    };
-
-    // let handleRangeChange = (index: number, newValue: number) => {
-    //     setPriceOptions((prevValues: any) => {
-    //         let newValues = [...prevValues];
-    //         newValues[index] = newValue;
-    //         return newValues;
-    //     })
-    // }
+const Filter: React.FC<FilterProps> = ({ show, setShow, setSearchQuery, setSelectedTitles, selectedTitles, setSelectedPrice, selectedPrice, titleOptions, priceOptions, handleClose, setPriceOptions, handleRangeChange }) => {
 
     return (
         <Offcanvas show={show} onHide={handleClose}>
@@ -74,7 +17,6 @@ const Filter: React.FC<FilterProps> = ({
                 <div className={`filter-modal ${show ? "show" : ""}`}>
                     <div className="filter-content">
                         <div className="filter-header">
-
                         </div>
                         <div className="filter-body">
                             <button className="btn filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#titleCollapse" aria-expanded="false" aria-controls="titleCollapse"><h5>Product Name <i className="fa-solid fa-caret-down"></i></h5>
@@ -94,17 +36,12 @@ const Filter: React.FC<FilterProps> = ({
                                                             prev.includes(option)
                                                                 ? prev.filter((v) => v !== option)
                                                                 : [...prev, option]
-                                                        )
-                                                    }
-                                                />
+                                                        )} />
                                                 <label htmlFor={`title-${option}`}>{option}</label>
-                                            </div>
-                                        ))}
-
+                                            </div>))}
                                     </div>
                                 </div>
                             </div>
-
                             <div>
                                 <button className="btn filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#priceCollapse" aria-expanded="false" aria-controls="priceCollapse">
                                     <h5>Price <i className="fa-solid fa-caret-down"></i></h5>
@@ -135,8 +72,6 @@ const Filter: React.FC<FilterProps> = ({
                             </div>
                         </div>
                         <div className="filter-footer mt-2">
-                            {/* <button className="btn btn-dark" onClick={handleFilterReset}>Reset</button> */}
-                            {/* <button className="btn btn-dark ms-2 " onClick={handleFilterApply}>Apply</button> */}
                         </div>
                     </div>
                 </div>

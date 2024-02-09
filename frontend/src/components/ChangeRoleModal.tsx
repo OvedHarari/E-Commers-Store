@@ -11,17 +11,10 @@ interface ChangeRoleModalProps {
   userProfile: any;
 }
 
-const ChangeRoleModal: FunctionComponent<ChangeRoleModalProps> = ({
-  show,
-  onHide,
-  render,
-  userProfile,
-}) => {
+const ChangeRoleModal: FunctionComponent<ChangeRoleModalProps> = ({ show, onHide, render, userProfile, }) => {
   let theme = useContext(SiteTheme);
   let [selectedRole, setSelectedRole] = useState<string>(userProfile.role)
-  const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedRole(e.target.value);
-  };
+  const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => { setSelectedRole(e.target.value); };
 
   return (
     <>

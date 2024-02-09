@@ -1,50 +1,22 @@
-import { FunctionComponent, useContext, useEffect, useState } from "react"; import Loading from "./Loading";
+import { FunctionComponent, useContext, useEffect } from "react"; import Loading from "./Loading";
 import Product from "../interfaces/Product";
 import { addToCart, getCart, reduceFromCart, removeProductFromCart } from "../services/cartService";
 import { successMsg } from "../services/feedbacksService";
 import { useNavigate } from "react-router-dom";
-// import { getAllProducts } from "../services/productsService";
 import { currencyFormat } from "../services/currencyFormater";
-// import DeliveryDetails from "./DeliveryDetails";
-// import { userInfo } from "os";
 import { SiteTheme } from "../App";
-import ShippingInfo from "./ShippingInfo";
-// import Delivery from "./Delivery";
-// import { createOrder } from "../services/ordersService";
 
 interface CartProps {
-    loading: any;
-    setLoading: Function
-    // openPaymentModal: boolean;
-    // setOpenCreditModal: Function;
-    userInfo: any;
-    cartData: any;
-    setCartData: Function;
-    productsInCart: any;
-    setProductsInCart: Function;
-    totalProducts: number;
-    setTotalProducts: Function;
-    totalPrice: number;
-    setTotalPrice: Function;
-    productQuantity: any;
-    setProductQuantity: Function;
-    // openCreditModal: boolean;
-
-
+    loading: any; setLoading: Function; userInfo: any; cartData: any; setCartData: Function; productsInCart: any; setProductsInCart: Function; totalProducts: number; setTotalProducts: Function; totalPrice: number; setTotalPrice: Function; productQuantity: any; setProductQuantity: Function;
 }
-type Quantity = { [key: string]: number };
 
 const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, userInfo, cartData, setCartData, productsInCart, setProductsInCart, totalProducts, setTotalProducts, totalPrice, setTotalPrice, productQuantity, setProductQuantity }) => {
     let navigate = useNavigate();
     let theme = useContext(SiteTheme);
-    // let [productQuantity, setProductQuantity] = useState<Quantity>({});
-
     let handleTotalPrice = () => {
         let totalPrice = currencyFormat(productsInCart.reduce((total: any, product: any) => total + (product.price * (productQuantity[product._id as string] || 0)), 0));
         setTotalPrice(totalPrice)
     }
-
-
     let handleAddToCart = (product: Product) => {
         addToCart(product)
             .then((res) => {
@@ -55,7 +27,6 @@ const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, userInfo, car
             })
             .catch((err) => console.log(err))
     }
-
     let handleReduceFromCart = (product: Product) => {
         reduceFromCart(product)
             .then((res) => {
@@ -66,30 +37,19 @@ const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, userInfo, car
             })
             .catch((err) => console.log(err))
     }
-
     let handleRemoveFromCart = (productId: string) => {
         if (productId) {
             removeProductFromCart(productId)
                 .then(() => {
                     successMsg("Item removed successfully from the cart");
-                    getCart()
-                        .then((res) => {
-                            setProductsInCart(res.data.products);
-                            setTotalProducts(res.data.totalProducts);
-                            handleTotalPrice();
-                        })
+                    getCart().then((res) => { setProductsInCart(res.data.products); setTotalProducts(res.data.totalProducts); handleTotalPrice(); })
                         .catch((err) => console.log(err))
-                })
-                .catch((err) => console.log(err))
-        } else {
-            console.log("Product ID is undefined");
-        }
-    }
-
+                }).catch((err) => console.log(err))
+        } else { console.log("Product ID is undefined"); }
+    };
     let handleQuatities = () => {
         let quantites: { [key: string]: number } = {};
         productsInCart.forEach((product: Product) => {
-            // if (product._id) { quantites[product._id] = product.stock || 0; }
             if (product._id) { quantites[product._id] = product.quantity || 0; }
             setProductQuantity(quantites);
         });
@@ -135,49 +95,32 @@ const Cart: FunctionComponent<CartProps> = ({ loading, setLoading, userInfo, car
                             </thead>
                             <tbody >
                                 {productsInCart.map((product: Product) => (
-                                    <tr
-                                        key={product._id}>
+                                    <tr key={product._id}>
                                         <td><img src={`${product.thumbnail}`} alt={`${product.title}`} style={{ width: "13rem", height: "8rem" }} /></td>
                                         <td className="text-start mt-0">{product.title}</td>
                                         <td>{product.price} &#8362;</td>
                                         <td>
                                             <button className="btn" onClick={() => handleReduceFromCart(product)}><i className="fa-solid fa-circle-minus"></i></button>
-
                                             <span>{productQuantity[product._id as string]}</span>
-
                                             <button className="btn" onClick={() => handleAddToCart(product)}><i className="fa-solid fa-circle-plus"></i></button>
                                         </td>
                                         <td>{product.price * (productQuantity[product._id as string] || 0)} &#8362;</td>
                                         <td><button className="btn" onClick={() => handleRemoveFromCart(product._id as string)}><i className="fa-solid fa-trash-can "></i> </button></td>
-                                    </tr>
-                                ))}
+                                    </tr>))};
                             </tbody>
                         </table>
                     ) : (<h4>No products were added to your shopping cart.</h4>))}
-
-
                 </div>
                 <div className="col-md-3 mx-4 orderSummary">
                     <h4 className="text-center">Order Summary</h4>
                     <hr />
-                    {/* <h6>{`You have ${totalQuantity} products in cart`}</h6> */}
-                    <h4 className="text-start"><b>Total Items:
-                        {/* {totalQuantity} */}{totalProducts}
-                    </b></h4>
+                    <h4 className="text-start"><b>Total Items:{totalProducts}</b></h4>
                     <hr />
                     <h4 className="text-start"><b>Total Price: {totalPrice}</b></h4>
                     <hr />
                     <button className="btn checkout-btn btn-info mt-5" onClick={() => navigate("/shipping")}>Proceed to checkout</button>
-
                 </div>
             </div>
-
-            {/* <ShippingInfo
-                openCreditModal={openPaymentModal}
-                setOpenCreditModal={setOpenCreditModal}
-                userInfo={userInfo}
-                cartData={cartData} 
-            /> */}
             <a className="showInMobile" href="#top">
                 <i className="fa-solid fa-arrow-up-from-bracket"></i>
             </a>

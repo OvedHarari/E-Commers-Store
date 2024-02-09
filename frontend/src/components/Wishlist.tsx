@@ -1,57 +1,20 @@
-
-
-
-import { FunctionComponent, useContext, useEffect, useState } from "react";
-import { SiteTheme } from "../App";
-import { Link, useNavigate } from "react-router-dom";
+import { FunctionComponent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { addRemoveWishList, getWishList } from "../services/wishListService";
-import { getAllProducts, getProductByCategory, getTopProducts } from "../services/productsService";
+import { getAllProducts } from "../services/productsService";
 import Product from "../interfaces/Product";
 import { successMsg } from "../services/feedbacksService";
-import { addToCart, getCart } from "../services/cartService";
-import { getAllCategories } from "../services/categoryService";
-import ProductCard from "./ProductCard";
+import { addToCart } from "../services/cartService";
 import Loading from "./Loading";
 import Category from "../interfaces/Category";
-import { number } from "yup";
 
-interface WishlistProps {
-    userInfo: any;
-    loading: any;
-    setLoading: Function;
-    categories: Category[];
-    setCategories: Function;
-    productsInCart: any;
-    setProductsInCart: Function
-    setCartData: Function;
-    render: Function;
-    setTotalProducts: Function;
-    setAllProducts: Function;
-    setOpenLoginModal: Function;
-}
+interface WishlistProps { userInfo: any; loading: any; setLoading: Function; setTotalProducts: Function; setOpenLoginModal: Function; }
 
-
-const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoading, categories, setTotalProducts, setCategories, productsInCart, setProductsInCart, setCartData, render, setAllProducts, setOpenLoginModal }) => {
-    // let theme = useContext(SiteTheme);
+const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoading, setTotalProducts, setOpenLoginModal }) => {
     let navigate = useNavigate();
     let [products, setProducts] = useState<Product[]>([]);
     let [dataUpdated, setDataUpdated] = useState<boolean>(false);
     let [wishList, setWishlist] = useState<string[]>([]);
-    let [productName, setProductName] = useState<string>("");
-
-    // let [categories, setCategories] = useState<Category[]>([]);
-    let [productsChanged, setProductsChanged] = useState<boolean>(false);
-    let [productId, setProductId] = useState<string>("");
-    let [openNewProductModal, setOpenNewProductModal] = useState<boolean>(false);
-    let [openUpdateProductModal, setOpenUpdateProductModal] =
-        useState<boolean>(false);
-    let [openDeleteProductModal, setOpenDeleteProductModal] =
-        useState<boolean>(false);
-    const getFirstThreeProducts = (categoryId: string): Product[] => {
-        const filteredProducts = products.filter((product) => product.category._id === categoryId);
-        return filteredProducts.slice(0, 3);
-    };
-
     let handleaddToWishList = (product: Product) => {
         if (wishList.includes(product._id as string)) {
             addRemoveWishList(product)
@@ -69,7 +32,6 @@ const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoad
                 .catch((err) => { console.log(err); });
         }
     };
-
     let handleAddToCart = (product: Product) => {
         addToCart(product)
             .then((res) => { setTotalProducts(res.data.totalProducts); successMsg(` ${product.title} added to cart`) }).catch((err) => console.log(err))
@@ -77,15 +39,12 @@ const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoad
 
     useEffect(() => {
         setLoading(true)
-
         getWishList(userInfo.userId)
             .then((res) => {
                 let defaultProductIds: string[] = res.data.products?.map((product: any) => product._id) || [];
                 setWishlist(defaultProductIds)
             })
             .catch((err) => console.log(err));
-
-
     }, [dataUpdated, setLoading, userInfo.userId]);
 
     useEffect(() => {
@@ -97,15 +56,11 @@ const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoad
     return (
         <div className="container">
             <h3 className="mt-3">Cart</h3>
-
             <>
-
                 <div className="container home-container ">
                     <div className=" row justify-content-center">
                         <hr className="mx-5" />
                         {loading ? (<Loading />) : (products.length ? (
-
-
                             products.map((product: Product) => (
                                 <div
                                     key={product._id}
@@ -121,9 +76,7 @@ const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoad
                                         <hr className="mt-0" />
                                         <p className="card-text price">Price: {product.price} &#8362;</p>
                                         <div className="cardIcons">
-
                                             {userInfo.email !== false ? (
-
                                                 <div className="row">
                                                     <div className="col left-icons text-start">
                                                         <button className="btn addToCart-btn-admin" onClick={() => handleAddToCart(product)} ><i className="fa-solid fa-cart-shopping"></i></button>
@@ -171,10 +124,6 @@ const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoad
                         )}
                     </div>
                 </div>
-
-
-
-
             </>
             <a className="showInMobile" href="#top">
                 <i className="fa-solid fa-arrow-up-from-bracket"></i>

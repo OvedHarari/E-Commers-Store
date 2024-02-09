@@ -53,3 +53,14 @@
 ::1 - - [08/Feb/2024:23:59:52 +0000] "POST /api/products HTTP/1.1" 400 573
 ::1 - - [09/Feb/2024:00:00:01 +0000] "POST /api/products HTTP/1.1" 400 517
 ::1 - - [09/Feb/2024:00:00:50 +0000] "POST /api/products HTTP/1.1" 400 576
+::1 - - [09/Feb/2024:02:01:15 +0000] "GET /api/products HTTP/1.1" 400 289
+::1 - - [09/Feb/2024:02:01:15 +0000] "GET /api/carts HTTP/1.1" 400 289
+::1 - - [09/Feb/2024:02:01:15 +0000] "GET /api/users/65b7aff60a6b2576cc3375f1 HTTP/1.1" 400 289
+::1 - - [09/Feb/2024:02:01:15 +0000] "GET /api/categories HTTP/1.1" 400 289
+::1 - - [09/Feb/2024:02:01:16 +0000] "GET /api/carts HTTP/1.1" 400 289
+::1 - - [09/Feb/2024:02:01:16 +0000] "GET /api/categories HTTP/1.1" 400 289
+::1 - - [09/Feb/2024:02:02:16 +0000] "GET /api/products HTTP/1.1" 400 289
+::1 - - [09/Feb/2024:02:02:16 +0000] "GET /api/categories HTTP/1.1" 400 289
+::1 - - [09/Feb/2024:02:02:16 +0000] "GET /api/wishlist HTTP/1.1" 400 289
+::1 - - [09/Feb/2024:02:02:16 +0000] "GET /api/users/65b7aff60a6b2576cc3375f1 HTTP/1.1" 400 289
+::1 - - [09/Feb/2024:02:02:16 +0000] "GET /api/carts HTTP/1.1" 400 289

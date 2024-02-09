@@ -2,23 +2,14 @@ import { FunctionComponent, useContext, useState } from "react";
 import Cards, { Focused } from "react-credit-cards-2";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { errorMsg, successMsg } from "../services/feedbacksService";
+import { successMsg } from "../services/feedbacksService";
 import { Modal } from "react-bootstrap";
 import { SiteTheme } from "../App";
 import { deactivateOrder } from "../services/ordersService";
 import { deactivateCart } from "../services/cartService";
 import { useNavigate } from "react-router-dom";
 
-interface CreditProps {
-    holderName: string;
-    cardNumber: string;
-    expiration: string;
-    cvc: string;
-    focus: string;
-    show: boolean;
-    onHide: Function;
-
-}
+interface CreditProps { holderName: string; cardNumber: string; expiration: string; cvc: string; focus: string; show: boolean; onHide: Function; }
 
 const Credit: FunctionComponent<CreditProps> = ({ show, onHide }) => {
     let theme = useContext(SiteTheme);
@@ -46,22 +37,11 @@ const Credit: FunctionComponent<CreditProps> = ({ show, onHide }) => {
             onHide();
         }
     })
-
-    let handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-        setFocus(e.target.name as Focused);
-    };
-
-
-
+    let handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => { setFocus(e.target.name as Focused); };
 
     return (
         <>
-            <Modal show={show} onHide={() => onHide()}
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-                size="lg"
-                className={`${theme}`}>
-
+            <Modal show={show} onHide={() => onHide()} aria-labelledby="contained-modal-title-vcenter" centered size="lg" className={`${theme}`}>
                 <div className="modalContent">
                     <Modal.Header closeButton>
                         <h6>Credit Card Payment</h6>
@@ -80,7 +60,6 @@ const Credit: FunctionComponent<CreditProps> = ({ show, onHide }) => {
                                         <label htmlFor="holderName">Card Holder Name</label>
                                         {formik.touched.holderName && formik.errors.holderName && (<small className="text-danger">{formik.errors.holderName}</small>)}
                                     </div>
-
                                     <div className="form-floating mb-3">
                                         <input name="cardNumber" type="text" className="form-control" id="cardNumber" placeholder="1234567890123456"
                                             value={formik.values.cardNumber}
@@ -132,13 +111,9 @@ const Credit: FunctionComponent<CreditProps> = ({ show, onHide }) => {
                     </Modal.Body>
                 </div>
             </Modal>
-
-
-
         </>
     )
 }
-
 
 export default Credit
 

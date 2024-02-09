@@ -1,37 +1,22 @@
 import { useFormik } from "formik";
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import Product from "../interfaces/Product"
 import { addNewProduct } from "../services/productsService";
 import { successMsg } from "../services/feedbacksService";
-import { getAllCategories } from "../services/categoryService";
 import Category from "../interfaces/Category";
 import transformCategories from "../interfaces/CategoryUtill";
 
-
-
-
-interface NewProductProps {
-    categories: Category[]
-}
-
+interface NewProductProps { categories: Category[] }
 
 const NewProduct: FunctionComponent<NewProductProps> = ({ categories }) => {
     const transformedCategories = transformCategories(categories);
     let navigate = useNavigate();
     let formik = useFormik({
         initialValues: {
-            title: "",
-            price: 0,
-            discountPercentage: 0,
-            category: { _id: "", name: "" },
-            brand: "",
-            description: "",
-            thumbnail: "",
-            images: [],
-            stock: 0,
-
+            title: "", price: 0, discountPercentage: 0, category: { _id: "", name: "" }, brand: "", description: "", thumbnail: "",
+            images: [], stock: 0,
         },
         validationSchema: yup.object({
             title: yup.string().required("Product name is required").min(2),
@@ -45,7 +30,6 @@ const NewProduct: FunctionComponent<NewProductProps> = ({ categories }) => {
             images: yup.array().of(yup.string()).required("Images are required"),
         }),
         onSubmit: (values) => {
-
             addNewProduct(values as Product)
                 .then((res) => {
                     navigate('/products-managment')
@@ -55,18 +39,14 @@ const NewProduct: FunctionComponent<NewProductProps> = ({ categories }) => {
         },
     });
 
-
-
     return (
         <>
             <div className="container">
-
                 <form className="mb-3" onSubmit={formik.handleSubmit}>
                     <h4>Add new product</h4>
                     <div className="row">
                         <div className="col">
                             <div className="form-floating mb-3">
-
                                 <select
                                     name="category"
                                     id="category"
@@ -87,26 +67,6 @@ const NewProduct: FunctionComponent<NewProductProps> = ({ categories }) => {
                                         </option>
                                     ))}
                                 </select>
-                                {/* <select
-                                    name="category"
-                                    id="category"
-                                    className="form-select"
-                                    value={formik.values.category._id}
-                                    onChange={(e) => {
-                                        const selectedCategory = categories.find(
-                                            (category) => category._id === e.target.value
-                                        );
-                                        formik.setFieldValue("category", selectedCategory || {});
-                                    }}
-                                    onBlur={formik.handleBlur}
-                                >
-                                    <option value="">Select category</option>
-                                    {categories.map((category) => (
-                                        <option key={category._id} value={category._id}>
-                                            {category.name}
-                                        </option>
-                                    ))}
-                                </select> */}
                                 <label htmlFor="category">Category</label>
                                 {formik.touched.category &&
                                     formik.errors.category && (
@@ -114,7 +74,6 @@ const NewProduct: FunctionComponent<NewProductProps> = ({ categories }) => {
                                             {formik.errors.category as string}
                                         </small>
                                     )}
-
                             </div>
                         </div>
                         <div className="col">
@@ -132,7 +91,6 @@ const NewProduct: FunctionComponent<NewProductProps> = ({ categories }) => {
                                 {formik.touched.title && formik.errors.title && (<small className="text-danger">{formik.errors.title}</small>)}
                             </div>
                         </div>
-
                         <div className="col">
                             <div className="col"><div className="form-floating mb-3">
                                 <input
@@ -148,7 +106,6 @@ const NewProduct: FunctionComponent<NewProductProps> = ({ categories }) => {
                                 <label htmlFor="price">Price (&#8362;)</label>
                                 {formik.touched.price && formik.errors.price && (<small className="text-danger">{formik.errors.price}</small>)}
                             </div></div>
-
                         </div>
                     </div>
                     <div className="row">

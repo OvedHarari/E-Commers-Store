@@ -1,11 +1,7 @@
 import { FunctionComponent } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
-interface AboutProps {
-    setOpenContactModal: Function;
-
-}
+interface AboutProps { setOpenContactModal: Function; }
 
 const About: FunctionComponent<AboutProps> = ({ setOpenContactModal }) => {
     return (
@@ -56,7 +52,6 @@ const About: FunctionComponent<AboutProps> = ({ setOpenContactModal }) => {
                     </Col>
                 </Row>
             </Container>
-
 
         </>);
 }

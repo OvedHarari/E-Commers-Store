@@ -3,19 +3,12 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup";
 import Product from "../interfaces/Product"
-import { addNewProduct, getProductById, updateProduct } from "../services/productsService";
+import { getProductById, updateProduct } from "../services/productsService";
 import { successMsg } from "../services/feedbacksService";
-import { getAllCategories } from "../services/categoryService";
 import Category from "../interfaces/Category";
 import transformCategories from "../interfaces/CategoryUtill";
 
-
-
-
-interface EditProductProps {
-    categories: Category[]
-}
-
+interface EditProductProps { categories: Category[]; };
 
 const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
     const transformedCategories = transformCategories(categories);
@@ -24,16 +17,7 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
     let navigate = useNavigate();
     let formik = useFormik({
         initialValues: {
-            title: product?.title,
-            price: product?.price,
-            discountPercentage: product?.discountPercentage,
-            category: { _id: product?.category._id, name: product?.category.name },
-            brand: product?.brand,
-            description: product?.description,
-            thumbnail: product?.thumbnail,
-            images: product?.images,
-            stock: product?.stock,
-
+            title: product?.title, price: product?.price, discountPercentage: product?.discountPercentage, category: { _id: product?.category._id, name: product?.category.name }, brand: product?.brand, description: product?.description, thumbnail: product?.thumbnail, images: product?.images, stock: product?.stock
         },
         enableReinitialize: true,
         validationSchema: yup.object({
@@ -48,53 +32,30 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
             images: yup.array().of(yup.string()).required("Images are required"),
         }),
         onSubmit: (values) => {
-
-            updateProduct(values as Product, productId as string)
-                .then((res) => {
-                    navigate(-1)
-                    successMsg("The Product was added successfully")
-                })
+            updateProduct(values as Product, productId as string).then((res) => { navigate(-1); successMsg("The Product was added successfully") })
                 .catch((err) => console.log(err));
         },
     });
 
-
     useEffect(() => {
         if (productId) {
-            getProductById(productId as string)
-                .then((res) => {
-                    setProduct(res.data)
-                    // setImages(res.data.images)
-
-                })
-
-                .catch((err) => { console.log(err); }
-                );
+            getProductById(productId as string).then((res) => { setProduct(res.data) }).catch((err) => { console.log(err); });
         }
     }, [productId])
     return (
         <>
             <div className="container">
-
                 <form className="mb-3" onSubmit={formik.handleSubmit}>
                     <h4>Add new product</h4>
                     <div className="row">
                         <div className="col">
                             <div className="form-floating mb-3">
-
-                                <select
-                                    name="category"
-                                    id="category"
-                                    className="form-select"
-                                    value={formik.values.category._id}
+                                <select name="category" id="category" className="form-select" value={formik.values.category._id}
                                     onChange={(e) => {
-                                        const selectedCategory = transformedCategories.find(
-                                            (category) => category._id === e.target.value
-                                        );
+                                        const selectedCategory = transformedCategories.find((category) => category._id === e.target.value);
                                         formik.setFieldValue("category", selectedCategory || {});
                                     }}
-                                    onBlur={formik.handleBlur}
-                                >
+                                    onBlur={formik.handleBlur}>
                                     <option value="">Select category</option>
                                     {transformedCategories.map((category) => (
                                         <option key={category._id} value={category._id}>
@@ -102,7 +63,6 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
                                         </option>
                                     ))}
                                 </select>
-
                                 <label htmlFor="category">Category</label>
                                 {formik.touched.category &&
                                     formik.errors.category && (
@@ -110,7 +70,6 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
                                             {formik.errors.category as string}
                                         </small>
                                     )}
-
                             </div>
                         </div>
                         <div className="col">
@@ -128,7 +87,6 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
                                 {formik.touched.title && formik.errors.title && (<small className="text-danger">{formik.errors.title}</small>)}
                             </div>
                         </div>
-
                         <div className="col">
                             <div className="col"><div className="form-floating mb-3">
                                 <input
@@ -144,7 +102,6 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
                                 <label htmlFor="price">Price (&#8362;)</label>
                                 {formik.touched.price && formik.errors.price && (<small className="text-danger">{formik.errors.price}</small>)}
                             </div></div>
-
                         </div>
                     </div>
                     <div className="row">
@@ -176,7 +133,6 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
                                     onBlur={formik.handleBlur}
                                     min="0" />
                                 <label htmlFor="stock">How mutch in stock?</label>
-
                             </div>
                         </div>
                         <div className="col">
@@ -194,8 +150,6 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
                                 {formik.touched.brand && formik.errors.brand && (<small className="text-danger">{formik.errors.brand}</small>)}
                             </div>
                         </div>
-
-
                     </div>
                     <div className="row">
                         <div className="col">
@@ -210,7 +164,6 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
                         </div>
                     </div>
                     <div className="row">
-
                         <div className="col">
                             <div className="form-floating">
                                 <textarea
@@ -226,7 +179,6 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
                                 <label htmlFor="images">Additional Image URLs (one per line)</label>
                             </div>
                         </div>
-
                     </div>
                     <button
                         type="submit"
@@ -237,9 +189,7 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
                         onClick={() => navigate(-1)}
                         className="btn btn-primary "
                     >Back</button>
-
                 </form >
-
             </div >
         </>
     )

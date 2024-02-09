@@ -1,39 +1,20 @@
-import { FunctionComponent, useContext, useEffect, useState } from "react";
+import { FunctionComponent, useContext, useState } from "react";
 import { successMsg } from "../services/feedbacksService";
 import User from "../interfaces/User";
 import { useFormik } from "formik";
 import * as yup from "yup"
-import { Navigate, useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { createShippingAddress } from "../services/ordersService";
-import { getUserById } from "../services/usersService";
 import Product from "../interfaces/Product";
 import { SiteTheme } from "../App";
 import Credit from "./Credit";
 import Order from "../interfaces/Order";
 
 
-interface ShippingInfoProps {
-    userInfo: any;
-    loading: any;
-    setLoading: Function;
-    // onHide: Function;
-    setUserProfile: Function;
-    userProfile: any;
-    render: Function;
-    totalProducts: number;
-    totalPrice: number;
-    productsInCart: any;
-    productQuantity: any;
-    setProductQuantity: Function;
-    setTotalPrice: Function;
-    openCreditModal: boolean;
-    setOpenCreditModal: Function;
-
-}
+interface ShippingInfoProps { userInfo: any; loading: any; setLoading: Function; setUserProfile: Function; userProfile: any; render: Function; totalProducts: number; totalPrice: number; productsInCart: any; productQuantity: any; openCreditModal: boolean; setOpenCreditModal: Function; }
 
 const ShippingInfo: FunctionComponent<ShippingInfoProps> = ({
-    userProfile, render, totalProducts, totalPrice, productsInCart, productQuantity, setProductQuantity, setTotalPrice, openCreditModal,
+    userProfile, render, totalProducts, totalPrice, productsInCart, productQuantity, openCreditModal,
     setOpenCreditModal
 }) => {
     const navigate = useNavigate();
@@ -59,26 +40,16 @@ const ShippingInfo: FunctionComponent<ShippingInfoProps> = ({
                 .catch((err) => console.log(err));
         },
     });
-    // useEffect(() => {
 
-    //     handleTotalPrice();
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [productsInCart])
     return (
         <div className="ship row">
             <h3 className="mt-3">Sipping Information</h3>
             <div className="w-75 col ms-1 me-3">
-                {/* <div className="col-3 w-100 text-start">
-                    <Button variant={editForm ? "success" : "secondary"} onClick={() => setEditForm(!editForm)}>
-                        Edit Sipping Address <i className="fa-solid fa-pen-to-square"></i>
-                    </Button>
-                </div> */}
                 <div className="row g-0">
                     <div className="col-md-4">
                     </div>
                     <div className="container">
                         <form className="form-floating  mt-3" onSubmit={formik.handleSubmit}>
-                            {/* <h6 className=" mt-4 text-start">General</h6> */}
                             <div className="row g-2 border rounded-4 border-secondary mt-1">
                                 <div className="form-floating col-4 mb-3 mt-3">
                                     <input type="text" className="form-control border-secondary " id="floatingFirstName" placeholder="First Nane"
@@ -127,15 +98,6 @@ const ShippingInfo: FunctionComponent<ShippingInfoProps> = ({
                                     {formik.touched.email && formik.errors.email && (<p className="text-danger">{formik.errors.email}</p>)}
                                 </div>
                             </div>
-                            {/* <h6 className="mt-4 text-start">Gander / Image</h6>
-                        <div className="row g-2 border rounded-4 border-secondary mt-1">
-                            <div className="form-floating col-4 mb-3 mt-3 ">
-
-                            </div>
-                            <div className="form-floating col-4 mb-3 mt-3">
-
-                            </div>
-                        </div> */}
                             <h6 className="mt-4 text-start">Address</h6>
                             <div className="row g-2 border rounded-4 border-secondary mt-1">
                                 <div className="form-floating col-4 mb-3 mt-3">
@@ -233,14 +195,7 @@ const ShippingInfo: FunctionComponent<ShippingInfoProps> = ({
                         </form>
                         <button className="btn btn-secondary mt-3 w-25" onClick={() => {
                             navigate(-1);
-
                         }}>Cancel & Back to Sopping Cart</button>
-                        {/* <div className="col-6">
-                        <button className="btn btn-danger mt-3" onClick={() => {
-                            navigate(-1);
-                            
-                        }}>Back to Sopping Cart</button>
-                    </div> */}
                     </div>
                 </div>
             </div>
@@ -270,13 +225,10 @@ const ShippingInfo: FunctionComponent<ShippingInfoProps> = ({
                         ))}
                     </tbody>
                 </table>
-                {/* <h6>{`You have ${totalQuantity} products in cart`}</h6> */}
                 <h4 className="text-start ms-5"><b>Total Items : {totalProducts}
                 </b></h4>
                 <hr />
                 <h4 className="text-start ms-5"><b>Total Price : {totalPrice}</b></h4>
-                {/* <button className="btn checkout-btn btn-info mt-2" onClick={() => navigate("/shipping")}>Proceed to checkout</button> */}
-
             </div>
             <Credit
                 show={openCreditModal}

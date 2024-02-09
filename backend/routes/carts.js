@@ -1,5 +1,4 @@
 const express = require("express");
-// const Cart = require("../models/Cart");
 const auth = require("../middlewares/auth");
 const joi = require("joi");
 const _ = require("lodash");
@@ -11,15 +10,9 @@ const productSchema = joi.object({
     title: joi.string().required().min(2),
     price: joi.number().required(),
     category: joi.object({ _id: joi.string().required(), name: joi.string().required() }).required(),
-    // description: joi.string().required().min(2),
     thumbnail: joi.string().required().min(2),
     quantity: joi.number(),
-    // __v: joi.number()
 });
-
-
-// add product to cart - product details in body
-// const mongoose = require('mongoose');
 
 // add product to cart - product details in body
 router.post("/", auth, async (req, res) => {
@@ -96,18 +89,6 @@ router.get("/", auth, async (req, res) => {
         res.status(400).send(error);
     }
 });
-// router.get("/", auth, async (req, res) => {
-//     try {
-//         let cart = await cartService.getCartByUserId(req.payload._id);
-//         if (!cart)
-//             return res.status(404).send("No active cart available for this user");
-
-//         res.status(200).send(cart.products)
-
-//     } catch (error) {
-//         res.status(400).send(error);
-//     }
-// });
 
 
 // Remove product from cart
@@ -140,17 +121,6 @@ router.delete("/:_id", auth, async (req, res) => {
     }
 });
 
-
-// router.delete("/:_id", auth, async (req, res) => {
-//     try {
-//         let cart = await cartService.removeFromCart(req.payload._id, req.params._id);
-//         if (!cart) return res.status(404).send("No active cart found for this user");
-//         res.status(200).send("Product deleted successfully from the cart")
-
-//     } catch (error) {
-//         res.status(400).send(error);
-//     }
-// });
 
 
 

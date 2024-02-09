@@ -19,7 +19,6 @@ export function getProductByCategory(category: string) {
 }
 export function getProductsByCategoryId(categoryId: string) {
   return axios.get(`${api}/categories/${categoryId}`)
-  // return axios.get(`${api}/${category}`, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } })
 }
 export function addNewProduct(newProduct: Product) {
   return axios.post(api, newProduct, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } });

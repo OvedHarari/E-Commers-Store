@@ -14,8 +14,6 @@ interface RegisterProps {
     setOpenLoginModal: Function;
 }
 const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown, togglePassword, onHide, setOpenLoginModal }) => {
-    let navigate = useNavigate();
-
     let formik = useFormik({
         initialValues: {
             name: { firstName: "", middleName: "", lastName: "", }, phone: "", email: "", password: "", gender: "", image: { url: "", alt: "" },
@@ -189,17 +187,6 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
                         <label htmlFor="floatingStreet">Street *</label>
                         {formik.touched.address?.street && formik.errors.address?.street && (<p className="text-danger">{formik.errors.address.street}</p>)}
                     </div>
-                    {/* <div className="form-floating col-6 mb-3">
-                        <input
-                            type="text" className="form-control border-secondary" id="floatingHouseNumber" placeholder="House Number"
-                            name="address.houseNumber"
-                            onChange={formik.handleChange}
-                            value={formik.values.address.houseNumber}
-                            onBlur={formik.handleBlur} ></input>
-                        <label htmlFor="floatingHouseNumber">House Number *</label>
-                        {formik.touched.address?.houseNumber && formik.errors.address?.houseNumber && (<p className="text-danger">{formik.errors.address.houseNumber}</p>)}
-                    </div> */}
-                    {/* </div> */}
                     <div className="form-floating col mb-3 me-3">
                         <input
                             type="text" className="form-control border-secondary" id="floatingHouseNumber" placeholder="House Number"
@@ -243,16 +230,6 @@ const Register: FunctionComponent<RegisterProps> = ({ setUserInfo, passwordShown
                         <label htmlFor="floatingZipCode">Zip Code</label>
                         {formik.touched.address?.zipcode && formik.errors.address?.zipcode && (<p className="text-danger">{formik.errors.address.zipcode}</p>)}
                     </div>
-                    {/* <div className="form-check ms-3 text-start fw-bold">
-                        <input className="form-check-input" type="checkbox" id="roleCheckbox" name="role"
-                            checked={formik.values.role === "business"}
-                            onChange={(e) => { formik.setFieldValue("role", e.target.checked ? "business" : "user"); }}
-                            onBlur={formik.handleBlur} />
-                        <label className="form-check-label " htmlFor="roleCheckbox">
-                            Register as Business !!!
-                        </label>
-                        {formik.touched.role && formik.errors.role && (<p className="text-danger">{formik.errors.role}</p>)}
-                    </div> */}
                 </div>
                 <button className="btn btn-secondary w-100 mt-3" type="submit" disabled={!formik.isValid || !formik.dirty}>Register</button>
             </form >

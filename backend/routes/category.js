@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const joi = require("joi");
 const _ = require("lodash")
-// const Category = require("../models/Category");
 const categoryService = require("../services/categoryService")
 const auth = require("../middlewares/auth");
 
@@ -10,7 +9,6 @@ const auth = require("../middlewares/auth");
 const categorySchema = joi.object({
     name: joi.string().required().min(2).max(32)
 });
-
 
 
 //GET all Categories
@@ -36,16 +34,6 @@ router.get("/:_id", auth, async (req, res) => {
     }
 });
 
-// Get all categories from the same category
-// router.get("/categories/:category", async (req, res) => {
-//     try {
-//         const categories = await Category.find({ category: req.params.category });
-//         if (!categories) return res.status(404).send("No categories found");
-//         res.status(200).send(categories);
-//     } catch (error) {
-//         res.status(400).send(error);
-//     }
-// })
 
 //Add category by admin only
 router.post("/", auth, async (req, res) => {
@@ -125,12 +113,7 @@ router.post("/add-multiple", auth, async (req, res) => {
         if (!Array.isArray(categoriesToAdd)) {
             return res.status(400).send(`Invalid input format. send an array of category objects to add:
          {
-  "categories": [
-    {
-      "name": ""
-      }
-  ]
-    }`);
+  "categories": [{"name": ""}  ]}`);
         }
 
         const validationResults = categoriesToAdd.map(category =>

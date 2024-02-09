@@ -9,14 +9,7 @@ import LockUserModal from "./LockUserModal";
 import ChangeRoleModal from "./ChangeRoleModal";
 
 interface UsersManagementProps {
-  darkMode: any;
-  render: Function;
-  userInfo: any;
-  userProfile: any;
-  setUserProfile: Function;
-  passwordShown: boolean;
-  togglePassword: Function;
-  dataUpdated: boolean;
+  darkMode: any; render: Function; userInfo: any; userProfile: any; setUserProfile: Function; passwordShown: boolean; togglePassword: Function; dataUpdated: boolean;
 }
 const UsersManagement: FunctionComponent<UsersManagementProps> = ({ darkMode, render, userInfo, userProfile, setUserProfile, passwordShown, togglePassword, dataUpdated }) => {
   let theme = useContext(SiteTheme)
@@ -33,7 +26,6 @@ const UsersManagement: FunctionComponent<UsersManagementProps> = ({ darkMode, re
 
   return <>
     <div className={`container mt-3 bCard ${theme}`}>
-
       <h5 className="display-4 mb-5">Manage site users</h5>
       <div className="mt-3">
         <table className={`table table-hover rounded ${darkMode ? "table-dark" : "table-secondary"}`} >

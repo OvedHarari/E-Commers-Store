@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import Register from "./Register";
 import { SiteTheme } from "../App";
 
@@ -9,6 +9,7 @@ interface RegisterModalProps {
 
 const RegisterModal: FunctionComponent<RegisterModalProps> = ({ show, onHide, setUserInfo, passwordShown, togglePassword, setOpenLoginModal }) => {
     let theme = useContext(SiteTheme);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let [editForm, setEditForm] = useState<boolean>(true);
 
     return (<div

@@ -12,6 +12,7 @@
     --color-blue: #bdd8eb;
     --color-dark: #25282d;
     --color-btnInfo: #5e8fe6cc;
+    --color-btnInfo-hover: #4B699D;
 
 }
 
@@ -24,6 +25,7 @@
     --color-blue: #8eb3d099;
     --color-dark: #25282d;
     --color-btnInfo: #618edc;
+    --color-btnInfo-hover: #36507d;
 
 }
 
@@ -40,7 +42,14 @@
     font-family: "Signika Negative", sans-serif;
 
     .btn-info {
+
         background-color: var(--color-btnInfo);
+
+        .btn-info:hover {
+            background-color: var(--color-btnInfo-hover)
+        }
+
+
     }
 }
 

@@ -169,7 +169,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({ setDarkMode, darkMode, userInf
                                         <button
                                             className="btn shopping-cart-btn"
                                             onClick={() => {
-                                                userInfo.userId ? navigate("/cart") : setOpenRegisterModal(true);
+                                                userInfo.userId ? navigate("/cart") : setOpenLoginModal(true);
                                             }}>
                                             <i className="fa-solid fa-cart-shopping"></i>
                                             <div className="position-relative">
@@ -182,7 +182,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({ setDarkMode, darkMode, userInf
                                         <button
                                             className="btn shopping-cart-btn"
                                             onClick={() => {
-                                                userInfo.userId ? navigate("/cart") : setOpenRegisterModal(true);
+                                                userInfo.userId ? navigate("/cart") : setOpenLoginModal(true);
                                             }}>
                                             <i className="fa-solid fa-cart-shopping"></i>
                                             <div className="position-relative">

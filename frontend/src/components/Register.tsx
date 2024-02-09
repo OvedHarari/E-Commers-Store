@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { FunctionComponent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { addUser, getTokenDetailes } from "../services/usersService";
 import { errorMsg, successMsg } from "../services/feedbacksService";

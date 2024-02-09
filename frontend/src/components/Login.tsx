@@ -1,13 +1,12 @@
 import { useFormik } from "formik";
 import { FunctionComponent } from "react";
 import * as yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getTokenDetailes, userValidation } from "../services/usersService";
 import { errorMsg, successMsg } from "../services/feedbacksService";
 
 interface LoginProps { setUserInfo: Function; passwordShown: boolean; togglePassword: Function; onHide: Function; setOpenRegisterModal: Function; }
 const Login: FunctionComponent<LoginProps> = ({ setUserInfo, passwordShown, togglePassword, onHide, setOpenRegisterModal }) => {
-    let navigate = useNavigate();
     const handleGoogleLogin = () => { window.location.href = `${process.env.REACT_APP_API}/google-auth/auth/google` };
 
     let formik = useFormik({

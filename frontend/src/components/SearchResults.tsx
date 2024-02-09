@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 import Product from "../interfaces/Product";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SiteTheme } from "../App";
 import { currencyFormat } from "../services/currencyFormater";
 

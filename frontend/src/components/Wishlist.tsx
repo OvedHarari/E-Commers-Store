@@ -13,6 +13,7 @@ interface WishlistProps { userInfo: any; loading: any; setLoading: Function; set
 const Wishlist: FunctionComponent<WishlistProps> = ({ userInfo, loading, setLoading, setTotalProducts, setOpenLoginModal }) => {
     let navigate = useNavigate();
     let [products, setProducts] = useState<Product[]>([]);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let [dataUpdated, setDataUpdated] = useState<boolean>(false);
     let [wishList, setWishlist] = useState<string[]>([]);
     let handleaddToWishList = (product: Product) => {

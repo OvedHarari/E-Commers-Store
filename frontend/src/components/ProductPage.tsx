@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../services/productsService";
 import Product from "../interfaces/Product";

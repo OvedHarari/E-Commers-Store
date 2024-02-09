@@ -38,8 +38,10 @@ const ProductsCategory: FunctionComponent<ProductsCategoryProps> = ({ categoryPr
     let theme = useContext(SiteTheme);
     let darkMode = theme === "dark";
     let navigate = useNavigate();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let [productsChanged, setProductsChanged] = useState<boolean>(false);
     let [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let [data, setData] = useState<Product[]>([]);
     const [selectedTitles, setSelectedTitles] = useState<string[]>([]);
     const [selectedPrice, setSelectedPrice] = useState<number[]>([]);

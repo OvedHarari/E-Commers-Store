@@ -43,7 +43,7 @@ const NewProduct: FunctionComponent<NewProductProps> = ({ categories }) => {
         <>
             <div className="container">
                 <form className="mb-3" onSubmit={formik.handleSubmit}>
-                    <h4>Add new product</h4>
+                    <h4 className="mt-5 mb-5">Add new product</h4>
                     <div className="row">
                         <div className="col">
                             <div className="form-floating mb-3">
@@ -190,13 +190,13 @@ const NewProduct: FunctionComponent<NewProductProps> = ({ categories }) => {
                     </div>
                     <button
                         type="submit"
-                        className="btn btn-info w-50 my-3 me-5"
+                        className="btn btn-info w-50 my-3 me-5 mt-5"
                         disabled={!formik.isValid || !formik.dirty}>Add</button>
                     <button
                         type="button"
                         onClick={() => navigate(-1)}
-                        className="btn btn-primary "
-                    >Back</button>
+                        className="btn btn-info my-3 me-5 mt-5"
+                    >Go Back</button>
 
                 </form >
 

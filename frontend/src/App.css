@@ -12,6 +12,7 @@
   --color-blue: #bdd8eb;
   --color-dark: #25282d;
   --color-btnInfo: #5e8fe6cc;
+  --color-btnInfo-hover: #4B699D;
 }
 
 .dark {
@@ -22,6 +23,7 @@
   --color-blue: #8eb3d099;
   --color-dark: #25282d;
   --color-btnInfo: #618edc;
+  --color-btnInfo-hover: #36507d;
 }
 
 .App {
@@ -38,6 +40,9 @@
 }
 .App .btn-info {
   background-color: var(--color-btnInfo);
+}
+.App .btn-info .btn-info:hover {
+  background-color: var(--color-btnInfo-hover);
 }
 
 .container-fluid {
@@ -604,6 +609,6 @@ table i {
   background-color: var(--color-primary);
   color: var(--color-title);
 }
-.contact .btn-info {
-  background-color: var(--color-btnInfo);
+.contact .btn-info:hover {
+  background-color: var(--color-btnInfo-hover);
 }/*# sourceMappingURL=App.css.map */

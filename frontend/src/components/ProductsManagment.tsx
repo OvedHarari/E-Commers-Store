@@ -12,6 +12,7 @@ interface ProductsManagmentProps { products: any; setProducts: Function; userInf
 
 const ProductsManagment: FunctionComponent<ProductsManagmentProps> = ({ products, setProducts, userInfo, loading, setLoading, searchQuery, setSearchQuery }) => {
     let [productsChanged, setProductsChanged] = useState<boolean>(false)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let [data, setData] = useState([]);
     let [currentPage, setCurrentPage] = useState(0);
     let [totalPages, setTotalPages] = useState(0);

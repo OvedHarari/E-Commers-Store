@@ -16,6 +16,7 @@ interface HomeProps { userInfo: any; loading: any; setLoading: Function; categor
 const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, categories, setTotalProducts, setOpenLoginModal }) => {
     let navigate = useNavigate();
     let [products, setProducts] = useState<Product[]>([]);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let [dataUpdated, setDataUpdated] = useState<boolean>(false);
     let [wishList, setWishlist] = useState<string[]>([]);
     const getFirstThreeProducts = (categoryId: string): Product[] => { const filteredProducts = products.filter((product) => product.category._id === categoryId); return filteredProducts.slice(0, 3); };

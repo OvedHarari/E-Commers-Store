@@ -3,6 +3,7 @@ const router = express.Router();
 const joi = require("joi");
 const _ = require("lodash")
 const categoryService = require("../services/categoryService")
+const productService = require("../services/productService")
 const auth = require("../middlewares/auth");
 
 
@@ -47,13 +48,15 @@ router.post("/", auth, async (req, res) => {
         if (error) return res.status(400).send(error);
 
         //check if category exist by name price and category
-        let category = await categoryService.getCategoryByName({ name: req.body.name });
+        let category = await categoryService.getCategoryByName(req.body.name);
         if (category) return res.status(400).send("Category already exist");
 
         //Add the new category and save
         // category = req.body;
-        categoryService.saveCategory(req.body);
-        category = categoryService.getCategoryByName({ name: req.body.name });
+        category = categoryService.saveCategory(req.body);
+        // categoryService.getCategoryByName({ name: req.body.name });
+
+        console.log(category);
 
         //return response
         res.status(201).send(`Category "${category.name}" was added successfully.`);
@@ -64,25 +67,47 @@ router.post("/", auth, async (req, res) => {
 })
 
 //Update category by _id if admin only
-router.put("/:_id", auth, async (req, res) => {
 
+router.put("/:categoryId", auth, async (req, res) => {
     try {
-        if (req.payload.role != "admin")
-            return res.status(400).send("Only Admin is alloud to add categories")
-        //joi validation
+        if (req.payload.role !== "admin") {
+            return res.status(400).send("Only Admin is allowed to update categories");
+        }
+
+        // Joi validation
         const { error } = categorySchema.validate(req.body);
         if (error) return res.status(400).send(error);
 
-        //check if category exist by name price and category
-        let category = await categoryService.updateCategoryById({ _id: req.params._id }, req.body);
-        if (!category) return res.status(400).send(`Category: "${category.name}" does not exist !!`);
+        const category = await categoryService.getCategoryById(req.params.categoryId);
 
-        //return response
-        res.status(200).send(`Category "${category.name}" was updated successfully.`);
+        // Update the category itself
+        const updatedCategory = await categoryService.updateCategoryById(req.params.categoryId, req.body);
+
+        if (!updatedCategory) {
+            return res.status(400).send(`Category: "${req.body.name}" does not exist !!`);
+        }
+        // Find existing products with the specified category name
+        const existingProducts = await productService.getProductByCategoryName(category.name);
+
+        if (!existingProducts || existingProducts.length === 0) {
+            return res.status(400).send(`Category: "${category.name}" does not exist or there are no products in this category.`);
+        }
+
+        // Update category name for each existing product
+        const updatedProducts = existingProducts.map(product => {
+            product.category.name = updatedCategory.name; // assuming 'newCategoryName' is the updated category name
+            return productService.saveProduct(product);
+        });
+
+        await Promise.all(updatedProducts);
+
+        res.status(200).send(`Category "${updatedCategory.name}" and associated products were updated successfully.`);
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send(error.message);
     }
-})
+});
+
+
 
 //Delete category by _id only if admin only
 router.delete("/:_id", auth, async (req, res) => {

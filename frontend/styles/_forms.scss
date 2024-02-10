@@ -42,6 +42,36 @@
     }
 }
 
+
+.edit-form {
+
+    .form-control,
+    .form-select {
+        background-color: var(--color-modal);
+        color: var(--color-title);
+    }
+
+    .form-control:not(:placeholder-shown)~label::after,
+    .form-control~label::after {
+        background-color: var(--color-secondary);
+    }
+
+    .form-control:not(:placeholder-shown)~label,
+    .form-control:placeholder-shown~label {
+        color: var(--color-title);
+    }
+
+    .form-select:not(:placeholder-shown)~label::after,
+    .form-select~label::after {
+        background-color: var(--color-secondary);
+    }
+
+    .form-select:not(:placeholder-shown)~label,
+    .form-select:placeholder-shown~label {
+        color: var(--color-title);
+    }
+}
+
 .elementry {
     background-color: #FEE8CE;
     color: black;

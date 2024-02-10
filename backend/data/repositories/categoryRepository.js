@@ -29,6 +29,7 @@ class CategoryRepository {
     //save Category
     async saveCategory(category) {
         const newCategory = new Category(category);
+        console.log(newCategory);
         return await newCategory.save();
     }
     //Add multiple Categories

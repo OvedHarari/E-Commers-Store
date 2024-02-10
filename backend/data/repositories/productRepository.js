@@ -10,9 +10,13 @@ class ProductRepository {
     async getTopProducts(limit) {
         return await Product.find({}).sort({ reting: -1 }).limit(limit);
     }
-    // get Product by email
+    // get Product by name
     async getProductByName(productName) {
         return await Product.findOne({ title: productName });
+    }
+    // get Product by category
+    async getProductByCategoryName(categoryName) {
+        return await Product.find({ 'category.name': categoryName });
     }
     // get Product by _id
     async getProductById(productId) {

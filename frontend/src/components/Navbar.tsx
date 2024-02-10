@@ -137,11 +137,14 @@ const Navbar: FunctionComponent<NavbarProps> = ({ setDarkMode, darkMode, userInf
                                                                 Users Management
                                                             </NavDropdown.Item>
                                                             <NavDropdown className="btn btn-outline mt-1" id="product-management" title="Products Management">
-                                                                <NavDropdown.Item className="btn btn-outline mt-1" href="/products-managment">
-                                                                    Find \ Edit \ Delete Products
+                                                                <NavDropdown.Item className="btn btn-outline mt-1" href="/editcategory">
+                                                                    Change Category Name
                                                                 </NavDropdown.Item>
                                                                 <NavDropdown.Item className="btn btn-outline mt-1" href="/newcategory">
                                                                     Add New Category
+                                                                </NavDropdown.Item>
+                                                                <NavDropdown.Item className="btn btn-outline mt-1" href="/products-managment">
+                                                                    Edit \ Delete PRODUCTS
                                                                 </NavDropdown.Item>
                                                                 <NavDropdown.Item className="btn btn-outline mt-1" href="/newproduct">
                                                                     Add New Product

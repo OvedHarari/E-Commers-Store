@@ -60,7 +60,9 @@ router.get("/:productId", async (req, res) => {
 // Get all products from the same category
 router.get("/categories/:category", async (req, res) => {
     try {
-        const products = await Product.find({ 'category.name': req.params.category });
+
+        const products = await productService.getProductByCategoryName(req.params.category);
+        // const products = await Product.find({ 'category.name': req.params.category });
         if (!products) return res.status(404).send("No products found");
         res.status(200).send(products);
     } catch (error) {

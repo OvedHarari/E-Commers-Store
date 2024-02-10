@@ -105,6 +105,40 @@
   color: var(--color-title);
 }
 
+.edit-form .form-control,
+.edit-form .form-select {
+  background-color: var(--color-modal);
+  color: var(--color-title);
+}
+.edit-form .form-control:not(:-moz-placeholder-shown) ~ label::after {
+  background-color: var(--color-secondary);
+}
+.edit-form .form-control:not(:placeholder-shown) ~ label::after,
+.edit-form .form-control ~ label::after {
+  background-color: var(--color-secondary);
+}
+.edit-form .form-control:not(:-moz-placeholder-shown) ~ label, .edit-form .form-control:-moz-placeholder-shown ~ label {
+  color: var(--color-title);
+}
+.edit-form .form-control:not(:placeholder-shown) ~ label,
+.edit-form .form-control:placeholder-shown ~ label {
+  color: var(--color-title);
+}
+.edit-form .form-select:not(:-moz-placeholder-shown) ~ label::after {
+  background-color: var(--color-secondary);
+}
+.edit-form .form-select:not(:placeholder-shown) ~ label::after,
+.edit-form .form-select ~ label::after {
+  background-color: var(--color-secondary);
+}
+.edit-form .form-select:not(:-moz-placeholder-shown) ~ label, .edit-form .form-select:-moz-placeholder-shown ~ label {
+  color: var(--color-title);
+}
+.edit-form .form-select:not(:placeholder-shown) ~ label,
+.edit-form .form-select:placeholder-shown ~ label {
+  color: var(--color-title);
+}
+
 .elementry {
   background-color: #FEE8CE;
   color: black;

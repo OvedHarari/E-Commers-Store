@@ -27,6 +27,8 @@ import ProductsManagment from './components/ProductsManagment';
 import ProductsManagmentSearch from './components/ProductsManagmentSearch';
 import NewProduct from './components/NewProduct';
 import EditProduct from './components/EditProduct';
+import NewCategory from './components/NewCategory';
+import EditCategory from './components/EditCategory';
 const theme = { light: "light", dark: "dark", };
 export let SiteTheme = createContext(theme.light);
 type Quantity = { [key: string]: number };
@@ -118,7 +120,9 @@ function App() {
             <Route path='/products-managment' element={<ProductsManagment products={allProducts} setProducts={setAllProducts} userInfo={userInfo} loading={loading} setLoading={setLoading} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />} />
             <Route element={<ProductsManagmentSearch setSearchQuery={setSearchQuery} products={allProducts} />} />
             <Route path="/newproduct" element={<NewProduct categories={categories} />} />
+            <Route path="/newcategory" element={<NewCategory />} />
             <Route path='/editproduct/:productId' element={<EditProduct categories={categories} />} />
+            <Route path='/editcategory' element={<EditCategory categories={categories} />} />
 
           </Routes>
           <Footer userInfo={userInfo} setOpenRegisterModal={setOpenRegisterModal} setOpenUserProfileModal={setOpenUserProfileModal} setOpenLoginModal={setOpenLoginModal} openContactModal={openContactModal} setOpenContactModal={setOpenContactModal}

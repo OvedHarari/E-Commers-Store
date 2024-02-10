@@ -46,7 +46,7 @@ const EditProduct: FunctionComponent<EditProductProps> = ({ categories }) => {
         <>
             <div className="container">
                 <form className="mb-3" onSubmit={formik.handleSubmit}>
-                    <h4 className="mt-5 mb-5">Edit {product?.title}</h4>
+                    <h4 className="mt-5 mb-5">Edit Product - " {product?.title} "</h4>
                     <div className="row">
                         <div className="col">
                             <div className="form-floating mb-3">

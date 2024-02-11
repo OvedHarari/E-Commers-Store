@@ -37,11 +37,13 @@ On this site, users can navigate freely and need to register and log in to be ab
 
 1. All Casual users functionality is available.
 2. Update\delete\ create new products
-3. Additional Admin tab - to manage all existing users.
-4. Update Users Details
-5. Changing users role (casual/ Admin).
-6. Block user from accessing the platform.
-7. Delete Users.
+3. Create new Category.
+4. Change Category Name.
+5. Additional Admin tab - to manage all existing users.
+6. Update Users Details
+7. Changing users role (casual/ Admin).
+8. Block user from accessing the platform.
+9. Delete Users.
 
 ## Getting Started:
 

@@ -89,19 +89,19 @@ router.put("/:categoryId", auth, async (req, res) => {
         // Find existing products with the specified category name
         const existingProducts = await productService.getProductByCategoryName(category.name);
 
-        if (!existingProducts || existingProducts.length === 0) {
-            return res.status(400).send(`Category: "${category.name}" does not exist or there are no products in this category.`);
-        }
 
         // Update category name for each existing product
-        const updatedProducts = existingProducts.map(product => {
-            product.category.name = updatedCategory.name; // assuming 'newCategoryName' is the updated category name
-            return productService.saveProduct(product);
-        });
+        if (existingProducts) {
+            const updatedProducts = existingProducts.map(product => {
+                product.category.name = updatedCategory.name;
+                return productService.saveProduct(product);
+            });
 
-        await Promise.all(updatedProducts);
+            await Promise.all(updatedProducts);
 
-        res.status(200).send(`Category "${updatedCategory.name}" and associated products were updated successfully.`);
+            res.status(200).send(`Category "${updatedCategory.name}" and associated products were updated successfully.`);
+        }
+        else { res.status(200).send(`Category "${updatedCategory.name}" and associated products were updated successfully.`); }
     } catch (error) {
         res.status(400).send(error.message);
     }

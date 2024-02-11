@@ -12,7 +12,5 @@ export function addNewCategory(newCategory: Category) {
 }
 
 export function updateCategoryById(categoryId: string, categoryName: string) {
-    console.log(categoryName);
-
     return axios.put(`${api}/${categoryId}`, { name: categoryName }, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } });
 }

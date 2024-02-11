@@ -20,7 +20,7 @@ class CategoryRepository {
     }
     // update Category
     async updateCategoryById(categoryId, newCategory) {
-        return await Category.findOneAndUpdate({ _id: categoryId }, newCategory);
+        return await Category.findOneAndUpdate({ _id: categoryId }, newCategory, { new: true });
     }
     // delete Category
     async deleteCategoryById(categoryId) {
@@ -29,7 +29,6 @@ class CategoryRepository {
     //save Category
     async saveCategory(category) {
         const newCategory = new Category(category);
-        console.log(newCategory);
         return await newCategory.save();
     }
     //Add multiple Categories

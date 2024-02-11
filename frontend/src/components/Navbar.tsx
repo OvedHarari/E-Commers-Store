@@ -84,7 +84,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({ setDarkMode, darkMode, userInf
                                         }
                                     }}
                                 >
-                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                    <i className="fa-solid fa-magnifying-glass" ></i>
                                 </button>
                             )}
                         </div>

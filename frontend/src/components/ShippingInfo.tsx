@@ -19,6 +19,7 @@ const ShippingInfo: FunctionComponent<ShippingInfoProps> = ({
 }) => {
     const navigate = useNavigate();
     let theme = useContext(SiteTheme);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let [orderDetails, setOrderDetails] = useState<Order[]>([])
     let formik = useFormik({
         initialValues: {

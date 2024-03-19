@@ -61,6 +61,9 @@ const Home: FunctionComponent<HomeProps> = ({ userInfo, loading, setLoading, cat
     return (
         <>
             <div className="container">
+                <h1 className="categoryTitle mt-2 mb-2 display-1">All-In <i className="fa-solid fa-anchor-circle-exclamation"></i>  Products</h1>
+                <br />
+
                 {loading ? (<Loading />) : (categories.map(category => (
                     <div
                         key={category._id}

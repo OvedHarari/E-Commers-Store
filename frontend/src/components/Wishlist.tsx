@@ -6,7 +6,6 @@ import Product from "../interfaces/Product";
 import { successMsg } from "../services/feedbacksService";
 import { addToCart } from "../services/cartService";
 import Loading from "./Loading";
-import Category from "../interfaces/Category";
 
 interface WishlistProps { userInfo: any; loading: any; setLoading: Function; setTotalProducts: Function; setOpenLoginModal: Function; }
 
